@@ -1,16 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
-import { Products } from './features/product-list/products';
-import Navbar from './features/navbar/navbar';
+import home from './pages/Home'
+import Login from './features/auth/components/login';
+import SignUp from './features/auth/components/signup';
 function App() {
   return (
-    <div className="App">
-      <Navbar/>
-      <Products/>
-    </div>
-  );
+    <>
+      <Login/>
+    </>
+  )
 }
 
-export default App;
+export default App
