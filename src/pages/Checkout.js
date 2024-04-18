@@ -195,7 +195,7 @@ function Checkout() {
                                 <div className=" flex items-center  mb-5 mt-5 justify-center gap-x-6">
                             <button
                                 type="submit"
-                                className="rounded-md lg:w-36   text-black px-3 py-2 text-sm font-semibold text-white shadow-sm min-w-fit  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className="rounded-md lg:w-36   text-black px-3 py-2 text-sm font-semibold shadow-sm min-w-fit  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
                                 Reset
                             </button>
