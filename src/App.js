@@ -3,10 +3,11 @@ import home from './pages/Home'
 import Login from './features/auth/components/login';
 import SignUp from './features/auth/components/signup';
 import CartPage from './pages/CartPage';
+import Checkout from './pages/Checkout';
 function App() {
   return (
     <>
-      <CartPage/>
+      <Checkout/>
     </>
   )
 }
