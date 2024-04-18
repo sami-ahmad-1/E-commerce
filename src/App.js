@@ -1,16 +1,21 @@
 import React from 'react';
-import home from './pages/Home'
+import Home from './pages/Home'
 import Login from './features/auth/components/login';
 import SignUp from './features/auth/components/signup';
+import Navbar from '../src/features/navbar/navbar'
 import CartPage from './pages/CartPage';
 import Checkout from './pages/Checkout';
-import ProductDetailPage from './pages/ProductDetailPage';
+import Product from '../src/features/product/Component/productsList'
+import ProductDetail from '../src/features/product/Component/productDetail'
+
 function App() {
   return (
     <>
-    <Checkout/>
+    <Navbar/>
+    <Product/>
     </>
   )
 }
 
 export default App
+
