@@ -7,12 +7,13 @@ import CartPage from './pages/CartPage';
 import Checkout from './pages/Checkout';
 import Product from '../src/features/product/Component/productsList'
 import ProductDetail from '../src/features/product/Component/productDetail'
-
+import productsAPI from './features/product/productsAPI';
 function App() {
   return (
     <>
     <Navbar/>
     <Product/>
+    <productsAPI/>
     </>
   )
 }
