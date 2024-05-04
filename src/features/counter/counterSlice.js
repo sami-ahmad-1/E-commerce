@@ -5,6 +5,7 @@ const initialState = {
   value: 0,
   status: 'idle',
 };
+
 export const incrementAsync = createAsyncThunk(
   'counter/fetchCount',
   async (amount) => {

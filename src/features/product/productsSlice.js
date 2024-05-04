@@ -3,38 +3,82 @@ import { fetchAllProducts } from './productsAPI';
 
 const initialState = {
   products:[],
-  status: 'idle',
-};
+  status: ''
+}
+
 export const fetchAllProductsAsync = createAsyncThunk(
   'product/fetchAllProducts',
   async () => {
-    const response = await fetchAllProducts();
-    return response.data;
+    const response = await fetchAllProducts()
+    console.log('Response is : ',response)
+    return response.data
   }
-);
+)
 
 export const productSlice = createSlice({
-  name: 'product',
+  name: 'producfgdgdfgt',
   initialState,
-  reducers: {
-    increment: (state) => {
-      state.value += 1;
-    }
-  },
+  reducers: { },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllProductsAsync.pending, (state) => {
-        state.status = 'loading';
+        console.log(state)
+        state.status = 'loading';       
       })
       .addCase(fetchAllProductsAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.products = action.payload;
       });
   },
-});
+})
 
-export const { increment } = productSlice.actions;
-
-export const selectAllProducts = ((state) => state.product.products)
+export const selectAllProducts = ((kuchbhi) => kuchbhi.product.products)
 
 export default productSlice.reducer;
+
+
+
+
+
+// import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+// import { fetchAllProducts } from './productsAPI';
+
+// const initialState = {
+//   products:[],
+//   // status: 'idle'
+// }
+// export const fetchAllProductsAsync = createAsyncThunk(
+//   'product/fetchAllProducts',
+//   async () => {
+//     const response = await fetchAllProducts();
+//     return response.data
+//   }
+// )
+
+// export const productSlice = createSlice({
+//   name: 'product',
+//   initialState,
+//   reducers: {
+//     increment: (state) => {
+//       state.value += 1;
+//     }
+//   },
+//   extraReducers: (builder) => {
+//     builder
+//       .addCase(fetchAllProductsAsync.pending, (state) => {
+//         state.status = 'loading';
+//       })
+//       .addCase(fetchAllProductsAsync.fulfilled, (state, action) => {
+//         state.status = 'idle';
+//         state.products = action.payload;
+//       });
+//   },
+// })
+
+// export const { increment } = productSlice.actions;
+
+// export const selectAllProducts = ((state) => state.product.products)
+
+// export default productSlice.reducer;
+
+
