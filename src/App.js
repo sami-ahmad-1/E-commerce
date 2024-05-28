@@ -13,7 +13,7 @@ function App() {
     <>
     <Navbar/>
     <Product/>
-    <productsAPI/>
+    <productsAPI/> 
     </>
   )
 }
