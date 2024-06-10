@@ -1854,87 +1854,6 @@
   ],
   "cart": [
     {
-      "id": 5,
-      "title": "Huawei P30",
-      "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
-      "price": 499,
-      "discountPercentage": 10.58,
-      "rating": 4.09,
-      "stock": 32,
-      "brand": "Huawei",
-      "category": "smartphones",
-      "thumbnail": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg",
-      "images": [
-        "https://cdn.dummyjson.com/product-images/5/1.jpg",
-        "https://cdn.dummyjson.com/product-images/5/2.jpg",
-        "https://cdn.dummyjson.com/product-images/5/3.jpg"
-      ],
-      "quantity": 1,
-      "userId": 1
-    },
-    {
-      "id": 10,
-      "title": "HP Pavilion 15-DK1056WM",
-      "description": "HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen Core i5, 8GB, 256GB SSD, GTX 1650 4GB, Windows 10",
-      "price": 1099,
-      "discountPercentage": 6.18,
-      "rating": 4.43,
-      "stock": 89,
-      "brand": "HP Pavilion",
-      "category": "laptops",
-      "thumbnail": "https://cdn.dummyjson.com/product-images/10/thumbnail.jpeg",
-      "images": [
-        "https://cdn.dummyjson.com/product-images/10/1.jpg",
-        "https://cdn.dummyjson.com/product-images/10/2.jpg",
-        "https://cdn.dummyjson.com/product-images/10/3.jpg",
-        "https://cdn.dummyjson.com/product-images/10/thumbnail.jpeg"
-      ],
-      "quantity": 1,
-      "userId": 1
-    },
-    {
-      "id": 90,
-      "title": "Cycle Bike Glow",
-      "description": "Universal fitment and easy to install no special wires, can be easily installed and removed. Fits most standard tyre air stem valves of road, mountain bicycles, motocycles and cars.Bright led will turn on w",
-      "price": 35,
-      "discountPercentage": 11.08,
-      "rating": 4.1,
-      "stock": 63,
-      "brand": "Neon LED Light",
-      "category": "automotive",
-      "thumbnail": "https://cdn.dummyjson.com/product-images/90/thumbnail.jpg",
-      "images": [
-        "https://cdn.dummyjson.com/product-images/90/1.jpg",
-        "https://cdn.dummyjson.com/product-images/90/2.jpg",
-        "https://cdn.dummyjson.com/product-images/90/3.jpg",
-        "https://cdn.dummyjson.com/product-images/90/4.jpg",
-        "https://cdn.dummyjson.com/product-images/90/thumbnail.jpg"
-      ],
-      "quantity": 1,
-      "userId": 1
-    },
-    {
-      "id": 59,
-      "title": "Spring and summershoes",
-      "description": "Comfortable stretch cloth, lightweight body; ,rubber sole, anti-skid wear;",
-      "price": 20,
-      "discountPercentage": 8.71,
-      "rating": 4.33,
-      "stock": 137,
-      "brand": "Sneakers",
-      "category": "mens-shoes",
-      "thumbnail": "https://cdn.dummyjson.com/product-images/59/thumbnail.jpg",
-      "images": [
-        "https://cdn.dummyjson.com/product-images/59/1.jpg",
-        "https://cdn.dummyjson.com/product-images/59/2.jpg",
-        "https://cdn.dummyjson.com/product-images/59/3.jpg",
-        "https://cdn.dummyjson.com/product-images/59/4.jpg",
-        "https://cdn.dummyjson.com/product-images/59/thumbnail.jpg"
-      ],
-      "quantity": 1,
-      "userId": 1
-    },
-    {
       "id": 1,
       "title": "iPhone 9",
       "description": "An apple mobile which is nothing like apple",
@@ -1954,6 +1873,65 @@
       ],
       "quantity": 1,
       "userId": 2
+    },
+    {
+      "id": 7,
+      "title": "Samsung Galaxy Book",
+      "description": "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched",
+      "price": 1499,
+      "discountPercentage": 4.15,
+      "rating": 4.25,
+      "stock": 50,
+      "brand": "Samsung",
+      "category": "laptops",
+      "thumbnail": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg",
+      "images": [
+        "https://cdn.dummyjson.com/product-images/7/1.jpg",
+        "https://cdn.dummyjson.com/product-images/7/2.jpg",
+        "https://cdn.dummyjson.com/product-images/7/3.jpg",
+        "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+      ],
+      "quantity": 3,
+      "userId": 1
+    },
+    {
+      "id": 77,
+      "title": "Rose Ring",
+      "description": "Brand: The Greetings Flower Colour: RedRing Colour: GoldenSize: Adjustable",
+      "price": 100,
+      "discountPercentage": 3.22,
+      "rating": 4.21,
+      "stock": 149,
+      "brand": "Copenhagen Luxe",
+      "category": "womens-jewellery",
+      "thumbnail": "https://cdn.dummyjson.com/product-images/77/thumbnail.jpg",
+      "images": [
+        "https://cdn.dummyjson.com/product-images/77/1.jpg",
+        "https://cdn.dummyjson.com/product-images/77/2.jpg",
+        "https://cdn.dummyjson.com/product-images/77/3.jpg",
+        "https://cdn.dummyjson.com/product-images/77/thumbnail.jpg"
+      ],
+      "quantity": 4,
+      "userId": 1
+    },
+    {
+      "id": 5,
+      "title": "Huawei P30",
+      "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
+      "price": 499,
+      "discountPercentage": 10.58,
+      "rating": 4.09,
+      "stock": 32,
+      "brand": "Huawei",
+      "category": "smartphones",
+      "thumbnail": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg",
+      "images": [
+        "https://cdn.dummyjson.com/product-images/5/1.jpg",
+        "https://cdn.dummyjson.com/product-images/5/2.jpg",
+        "https://cdn.dummyjson.com/product-images/5/3.jpg"
+      ],
+      "quantity": 1,
+      "userId": 1
     }
   ]
 }

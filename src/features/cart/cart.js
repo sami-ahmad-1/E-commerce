@@ -1,10 +1,10 @@
 import Navbar from '../navbar/navbar'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { cartItemsSlice } from './cartSlice'
 import { useEffect, useState } from 'react'
 import { selectLoggedInUser } from '../auth/authSlice'
-
+import { RemoveProductAsync , updateItemAsync } from './cartSlice'
 // const cartItems = [
 //   {
 //     id: 1,
@@ -32,6 +32,7 @@ import { selectLoggedInUser } from '../auth/authSlice'
 
 
 export default function Cart() {
+  const dispatch = useDispatch()
   const user = useSelector(selectLoggedInUser)
   console.log('user', user)
   const cartItems = useSelector(cartItemsSlice)
@@ -39,9 +40,21 @@ export default function Cart() {
   console.log('Cart Items are : ', cartItems)
 
   cartItems.map(val => console.log(val.price))
-  const totalPrice = cartItems.reduce((acc,obj) => { return acc + obj.price} ,0)
+  const totalPrice = cartItems.reduce((acc, obj) => { return acc + obj.price }, 0)
   const totalItems = cartItems.length
-  console.log('first' , totalPrice)
+  console.log('first', totalPrice)
+
+  const handleQuantity = (e,product) => {
+    e.preventDefault()
+    console.log(e.target.value , product)
+    console.log('CartItem are',{...product , quantity: +e.target.value })
+    dispatch(updateItemAsync({...product , quantity: +e.target.value }))
+  }
+
+  const handleRemove = (e , productId) => {
+    e.preventDefault()
+    dispatch(RemoveProductAsync(productId))
+  }
   return (
     <>
       <Navbar />
@@ -71,13 +84,23 @@ export default function Cart() {
                         </div>
                         <p className="mt-1 text-sm text-gray-500">{product.color}</p>
                       </div>
-                      <div className="flex flex-1 items-end justify-between text-sm">
-                        <p className="text-gray-500">Qty {product.quantity}</p>
 
+                      <div className="flex flex-1 items-end justify-between text-sm">
+                        <div>
+                          <label className="text-gray-500">Qty </label>
+                          <select value={product.quantity} onClick={(e) => handleQuantity(e , product)}> 
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </div>
                         <div className="flex">
                           <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
+                            onClick={(e) => handleRemove(e, product)}
                           >
                             Remove
                           </button>
@@ -89,7 +112,7 @@ export default function Cart() {
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-200   py-6 sm:px-6">
+          <div className="border-t border-gray-200   py-6 sm:px-6 mt-5">
             <div className="flex justify-between text-base font-medium text-gray-900">
               <p>Subtotal</p>
               <p >₹{totalPrice}</p>
@@ -99,14 +122,16 @@ export default function Cart() {
               <p >{totalItems}</p>
             </div>
             <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-            <div className="mt-6">
-              <a
-                href="#"
-                className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 lg:w-[20%] "
-              >
-                Checkout
-              </a>
-            </div>
+            <Link to='/checkout'>
+              <div className="mt-6">
+                <p
+                  href="#"
+                  className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 lg:w-[20%] "
+                >
+                  Checkout
+                </p>
+              </div>
+            </Link>
             <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
               <p>
                 or{' '}

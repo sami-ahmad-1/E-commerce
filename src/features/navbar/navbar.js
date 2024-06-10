@@ -3,6 +3,9 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { cartItemsSlice } from '../cart/cartSlice'
+import { selectLoggedInUser } from '../auth/authSlice'
 
 
 const user = {
@@ -34,6 +37,14 @@ function classNames(...classes) {
 }
 
 function Navbar() {
+    const LoggedInuser = useSelector(selectLoggedInUser)
+    const cartItems = useSelector(cartItemsSlice)
+
+    // if (LoggedInuser) {
+    //     const totalItems = cartItems.length
+    //     return totalItems
+    //     console.log(totalItems)
+    // }
 
     return (
         <>
@@ -46,12 +57,12 @@ function Navbar() {
                                     <div className="flex items-center">
                                         <div className="flex-shrink-0">
                                             <Link to='/'>
-                                            <img
-                                                className="h-8 w-8"
-                                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                                                alt="Your Company"
+                                                <img
+                                                    className="h-8 w-8"
+                                                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                                                    alt="Your Company"
 
-                                            />
+                                                />
                                             </Link>
                                         </div>
                                         <div className="hidden md:block">
@@ -89,7 +100,7 @@ function Navbar() {
                                                     <ShoppingCartIcon className="h-6 w-6 " aria-hidden="true" />
 
                                                     <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-red-600/10 ">
-                                                        {/* {user && ItemsInCart} */}
+                                                        {/* {LoggedInuser && cartItems.length} */}
                                                     </span>
                                                 </button>
                                             </Link>
