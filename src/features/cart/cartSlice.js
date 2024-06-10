@@ -1,20 +1,30 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchCount } from './cartAPI';
+import { CartAPI , fetchProductDetailAPI } from './cartAPI';
 
 const initialState = {
   value: 0,
-  status: 'idle',
+  items : null
 };
-export const incrementAsync = createAsyncThunk(
-  'counter/fetchCount',
-  async (amount) => {
-    const response = await fetchCount(amount);
+
+export const AddToCart = createAsyncThunk(
+  'cart/addTocart',
+  async (CartData) => {
+    console.log(CartData)
+    const response = await CartAPI(CartData);
+    return response.data;
+  }
+);
+
+export const fetchProductByUserId = createAsyncThunk(
+  'products/fetchProductDetail',
+  async (UserId) => {
+    const response = await fetchProductDetailAPI(UserId);  
     return response.data;
   }
 );
 
 export const CartSlice = createSlice({
-  name: 'counter',
+  name: 'cart',
   initialState,
   reducers: {
     increment: (state) => {
@@ -23,18 +33,25 @@ export const CartSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(incrementAsync.pending, (state) => {
+      .addCase(AddToCart.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(incrementAsync.fulfilled, (state, action) => {
+      .addCase(AddToCart.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.value += action.payload;
-      });
+        state.items += action.payload;
+      })
+      .addCase(fetchProductByUserId.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchProductByUserId.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.items = action.payload;
+        // console.log('State updated with product detail:', state.productDetail); // Add logging here
+      })
   },
 });
 
-export const { increment } = CartSlice.actions;
 
-export const selectCount = (state) => state.counter.value;
+export const cartItemsSlice = (state) => state.cart.items;
 
 export default CartSlice.reducer;
