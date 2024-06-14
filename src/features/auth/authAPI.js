@@ -28,6 +28,7 @@ export function checkUser(LoginInfo) {
     if (data.length) {
       if (data[0].password===password) {
         resolve({ data : data[0]})
+        // sessionStorage.setItem(email, password)
       } else {
         reject({message:'Password is incorrect'})
       }
@@ -37,3 +38,21 @@ export function checkUser(LoginInfo) {
   }
   )
 }
+
+
+export function userAddressAPI(data) {  
+  return new Promise(async (resolve) => {
+    const response = await fetch(`http://localhost:8080/users/${data.id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      },
+    })
+    const dataResponse = response.json()
+    resolve({ dataResponse })
+  }
+  )
+}
+
+

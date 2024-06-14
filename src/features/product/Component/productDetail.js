@@ -27,7 +27,9 @@ export default function ProductDetail() {
   console.log(user)
   const handleClick = (e) => {
     e.preventDefault()
-    dispatch(AddToCart({...prod, quantity: 1, userId: user.id }))
+    const newItem = {...prod ,  quantity: 1, userId: user.id }
+    delete newItem['id']
+    dispatch(AddToCart(newItem))
   }
 
 

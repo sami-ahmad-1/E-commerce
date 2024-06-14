@@ -4,62 +4,36 @@ import { useDispatch, useSelector } from 'react-redux'
 import { cartItemsSlice } from './cartSlice'
 import { useEffect, useState } from 'react'
 import { selectLoggedInUser } from '../auth/authSlice'
-import { RemoveProductAsync , updateItemAsync } from './cartSlice'
-// const cartItems = [
-//   {
-//     id: 1,
-//     name: 'Throwback Hip Bag',
-//     href: '#',
-//     color: 'Salmon',
-//     price: '$90.00',
-//     quantity: 1,
-//     imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-//     imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
-//   },
-//   {
-//     id: 2,
-//     name: 'Medium Stuff Satchel',
-//     href: '#',
-//     color: 'Blue',
-//     price: '$32.00',
-//     quantity: 1,
-//     imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-//     imageAlt:
-//       'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-//   },
-//   // More products...
-// ]
+import { RemoveProductAsync, updateItemAsync } from './cartSlice'
 
 
 export default function Cart() {
   const dispatch = useDispatch()
-  const user = useSelector(selectLoggedInUser)
-  console.log('user', user)
   const cartItems = useSelector(cartItemsSlice)
 
-  console.log('Cart Items are : ', cartItems)
+  console.log('Cart Items are : ', cartItems.length)
 
   cartItems.map(val => console.log(val.price))
-  const totalPrice = cartItems.reduce((acc, obj) => { return acc + obj.price }, 0)
-  const totalItems = cartItems.length
+  const totalPrice = cartItems.reduce((acc, obj) => { return acc + obj.price * obj.quantity }, 0)
+  const totalItems = cartItems.reduce((acc, obj) => { return acc + obj.quantity }, 0)
   console.log('first', totalPrice)
 
-  const handleQuantity = (e,product) => {
-    e.preventDefault()
-    console.log(e.target.value , product)
-    console.log('CartItem are',{...product , quantity: +e.target.value })
-    dispatch(updateItemAsync({...product , quantity: +e.target.value }))
+  const handleQuantity = (e, product) => {
+    // e.preventDefault()
+    console.log('First', e.target.value, product)
+    console.log('CartItem are', { ...product, quantity: +e.target.value })
+    dispatch(updateItemAsync({ ...product, quantity: +e.target.value }))
   }
 
-  const handleRemove = (e , productId) => {
+  const handleRemove = (e, product) => {
     e.preventDefault()
-    dispatch(RemoveProductAsync(productId))
+    dispatch(RemoveProductAsync(product))
   }
   return (
     <>
       <Navbar />
-      {cartItems &&
-        <div className='px-40'>
+      {cartItems.length >= 1 ?
+        <div className='px-60'>
 
           <div className="mt-8">
             <div className="flow-root">
@@ -80,7 +54,7 @@ export default function Cart() {
                           <h3>
                             <a href={product.href}>{product.title}</a>
                           </h3>
-                          <p className="ml-4">₹{product.price}</p>
+                          <p className="ml-4">₹{product.price * product.quantity}</p>
                         </div>
                         <p className="mt-1 text-sm text-gray-500">{product.color}</p>
                       </div>
@@ -88,7 +62,7 @@ export default function Cart() {
                       <div className="flex flex-1 items-end justify-between text-sm">
                         <div>
                           <label className="text-gray-500">Qty </label>
-                          <select value={product.quantity} onClick={(e) => handleQuantity(e , product)}> 
+                          <select onClick={(e) => handleQuantity(e, product)} >
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -148,6 +122,26 @@ export default function Cart() {
             </div>
           </div>
 
+        </div>
+
+        : <div>
+          <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+            <div className="text-center">              
+              <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">Your Cart is Empty </h1>              
+              <div className="mt-10 flex items-center justify-center gap-x-6">
+                <Link to='/'>
+                <div                  
+                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Go back home
+                </div>
+                </Link>
+                {/* <a href="#" className="text-sm font-semibold text-gray-900">
+                  Contact support <span aria-hidden="true">&rarr;</span>
+                </a> */}
+              </div>
+            </div>
+          </main>
         </div>
       }
     </>

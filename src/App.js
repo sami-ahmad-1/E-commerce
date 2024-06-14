@@ -9,6 +9,10 @@ import Product from '../src/features/product/Component/productsList'
 import ProductDetail from '../src/features/product/Component/productDetail'
 import productsAPI from './features/product/productsAPI';
 import Protected from './features/auth/components/Protected';
+import OrderSuccessPage from './pages/orderSuccessPage';
+import Order from './features/order/order';
+import PageNotFound from './pages/404';
+import UserOrderPage from './pages/UserOrderPage';
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -38,6 +42,10 @@ const router = createBrowserRouter([
     element: <Checkout></Checkout>
   },
   {
+    path: "/order",
+    element: <Order></Order>
+  },
+  {
     path: `/productdetail/:id`,
     element: <ProductDetail></ProductDetail>
   },
@@ -46,8 +54,20 @@ const router = createBrowserRouter([
     element: <CartPage></CartPage>
   },
   {
+    path: "/orderplaced",
+    element: <OrderSuccessPage></OrderSuccessPage>
+  },
+  {
+    path: "/userorder",
+    element: <UserOrderPage></UserOrderPage>
+  },
+  {
     path: "/",
     element: <Product></Product>
+  },
+  {
+    path: "*",
+    element: <PageNotFound></PageNotFound>
   },
 ])
 
