@@ -90,7 +90,7 @@ function Navbar() {
                                     <div className="hidden md:block">
                                         <div className="ml-4 flex items-center md:ml-6">
                                             <Link to="/cartpage">
-                                                <button
+                                                <div
                                                     type="button"
                                                     className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                                                 >
@@ -102,7 +102,7 @@ function Navbar() {
                                                     <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-red-600/10 ">
                                                         {/* {LoggedInuser && cartItems.length} */}
                                                     </span>
-                                                </button>
+                                                </div>
                                             </Link>
 
                                             {/* Profile dropdown */}

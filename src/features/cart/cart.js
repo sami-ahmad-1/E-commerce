@@ -2,8 +2,6 @@ import Navbar from '../navbar/navbar'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { cartItemsSlice } from './cartSlice'
-import { useEffect, useState } from 'react'
-import { selectLoggedInUser } from '../auth/authSlice'
 import { RemoveProductAsync, updateItemAsync } from './cartSlice'
 
 
@@ -11,12 +9,12 @@ export default function Cart() {
   const dispatch = useDispatch()
   const cartItems = useSelector(cartItemsSlice)
 
-  console.log('Cart Items are : ', cartItems.length)
+  // console.log('Cart Items are : ', cartItems.length)
 
-  cartItems.map(val => console.log(val.price))
+  // cartItems.map(val => console.log(val.price))
   const totalPrice = cartItems.reduce((acc, obj) => { return acc + obj.price * obj.quantity }, 0)
   const totalItems = cartItems.reduce((acc, obj) => { return acc + obj.quantity }, 0)
-  console.log('first', totalPrice)
+  // console.log('first', totalPrice)
 
   const handleQuantity = (e, product) => {
     // e.preventDefault()

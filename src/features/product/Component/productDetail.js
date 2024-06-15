@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
-import { RadioGroup } from '@headlessui/react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProductDetail } from '../productsSlice'
@@ -26,7 +25,7 @@ export default function ProductDetail() {
   const user = useSelector(selectLoggedInUser)
   console.log(user)
   const handleClick = (e) => {
-    e.preventDefault()
+    e.preventDefault() ;
     const newItem = {...prod ,  quantity: 1, userId: user.id }
     delete newItem['id']
     dispatch(AddToCart(newItem))
