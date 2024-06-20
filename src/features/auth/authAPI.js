@@ -55,4 +55,11 @@ export function userAddressAPI(data) {
   )
 }
 
-
+export function DeleteUserAddress(userId) {  
+  return new Promise(async (resolve) => {
+    const response = await fetch(`http://localhost:8080/users/${userId}`, {method: 'DELETE'})
+    const dataResponse = response.json()
+    resolve({ dataResponse })
+  }
+  )
+} 

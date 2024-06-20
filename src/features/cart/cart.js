@@ -8,16 +8,12 @@ import { RemoveProductAsync, updateItemAsync } from './cartSlice'
 export default function Cart() {
   const dispatch = useDispatch()
   const cartItems = useSelector(cartItemsSlice)
-
-  // console.log('Cart Items are : ', cartItems.length)
-
-  // cartItems.map(val => console.log(val.price))
+    
   const totalPrice = cartItems.reduce((acc, obj) => { return acc + obj.price * obj.quantity }, 0)
   const totalItems = cartItems.reduce((acc, obj) => { return acc + obj.quantity }, 0)
-  // console.log('first', totalPrice)
 
   const handleQuantity = (e, product) => {
-    // e.preventDefault()
+    e.preventDefault()
     console.log('First', e.target.value, product)
     console.log('CartItem are', { ...product, quantity: +e.target.value })
     dispatch(updateItemAsync({ ...product, quantity: +e.target.value }))

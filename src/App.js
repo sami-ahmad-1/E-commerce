@@ -12,12 +12,16 @@ import Protected from './features/auth/components/Protected';
 import OrderSuccessPage from './pages/orderSuccessPage';
 import Order from './features/order/order';
 import PageNotFound from './pages/404';
+
+import UserProfilePage from './pages/UserProfilePage';
 import UserOrderPage from './pages/UserOrderPage';
 
 import { useEffect } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductByUserId } from './features/cart/cartSlice';
 import { selectLoggedInUser } from './features/auth/authSlice';
+import { fetchLoggedInUserAsync } from './features/user/userSlice';
 
 import * as ReactDOM from "react-dom/client";
 import {
@@ -58,6 +62,10 @@ const router = createBrowserRouter([
     element: <OrderSuccessPage></OrderSuccessPage>
   },
   {
+    path: "/profile",
+    element: <UserProfilePage/>
+  },
+  {
     path: "/userorder",
     element: <UserOrderPage></UserOrderPage>
   },
@@ -79,12 +87,12 @@ function App() {
   useEffect(()=>{
     if(user){
       dispatch(fetchProductByUserId(user.id))
+      dispatch(fetchLoggedInUserAsync(user.id))
     }
   })
   
   return (
-    <>
-      {/* <Navbar /> */}
+    <>      
       <RouterProvider router={router} />
     </>
   )

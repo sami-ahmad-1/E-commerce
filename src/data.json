@@ -1846,21 +1846,12 @@
       "password": "1",
       "addresses": [
         {
-          "name": "MD SAMI AHMAD",
-          "email": "",
-          "address": "LOHSINGHNA",
-          "city": "HAZARIBAGH",
-          "State": "JHARKHAND",
-          "pincode": "825301",
-          "phone": "9142629077"
-        },
-        {
-          "name": "MD SAMI AHMAD",
-          "address": "NEW AREA",
-          "city": "HAZARIBAGH ",
-          "State": "JHARKHAND ",
-          "pincode": "825301",
-          "phone": "9142629077"
+          "name": "sdfsd",
+          "address": "sdf",
+          "city": "sdf",
+          "State": "sdf",
+          "pincode": "sdf",
+          "phone": "sdf"
         }
       ],
       "id": 1
@@ -1980,46 +1971,23 @@
       "id": 11
     },
     {
-      "title": "iPhone 9",
-      "description": "An apple mobile which is nothing like apple",
-      "price": 549,
-      "discountPercentage": 12.96,
-      "rating": 4.69,
-      "stock": 94,
-      "brand": "Apple",
+      "title": "Huawei P30",
+      "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
+      "price": 499,
+      "discountPercentage": 10.58,
+      "rating": 4.09,
+      "stock": 32,
+      "brand": "Huawei",
       "category": "smartphones",
-      "thumbnail": "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
+      "thumbnail": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg",
       "images": [
-        "https://cdn.dummyjson.com/product-images/1/1.jpg",
-        "https://cdn.dummyjson.com/product-images/1/2.jpg",
-        "https://cdn.dummyjson.com/product-images/1/3.jpg",
-        "https://cdn.dummyjson.com/product-images/1/4.jpg",
-        "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
+        "https://cdn.dummyjson.com/product-images/5/1.jpg",
+        "https://cdn.dummyjson.com/product-images/5/2.jpg",
+        "https://cdn.dummyjson.com/product-images/5/3.jpg"
       ],
-      "quantity": 1,
+      "quantity": 5,
       "userId": 1,
       "id": 12
-    },
-    {
-      "title": "Infinix INBOOK",
-      "description": "Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 Grey – 1 Year Warranty",
-      "price": 1099,
-      "discountPercentage": 11.83,
-      "rating": 4.54,
-      "stock": 96,
-      "brand": "Infinix",
-      "category": "laptops",
-      "thumbnail": "https://cdn.dummyjson.com/product-images/9/thumbnail.jpg",
-      "images": [
-        "https://cdn.dummyjson.com/product-images/9/1.jpg",
-        "https://cdn.dummyjson.com/product-images/9/2.png",
-        "https://cdn.dummyjson.com/product-images/9/3.png",
-        "https://cdn.dummyjson.com/product-images/9/4.jpg",
-        "https://cdn.dummyjson.com/product-images/9/thumbnail.jpg"
-      ],
-      "quantity": 4,
-      "userId": 1,
-      "id": 14
     }
   ],
   "orders": [
@@ -2064,6 +2032,7 @@
       "totalPrice": 1749,
       "totalItems": 1,
       "paymentMethod": "",
+      "status": "pendinfg",
       "id": 1
     },
     {
@@ -2286,6 +2255,139 @@
       "totalItems": 1,
       "paymentMethod": "",
       "id": 4
+    },
+    {
+      "cartItems": [
+        {
+          "title": "iPhone 9",
+          "description": "An apple mobile which is nothing like apple",
+          "price": 549,
+          "discountPercentage": 12.96,
+          "rating": 4.69,
+          "stock": 94,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/1/1.jpg",
+            "https://cdn.dummyjson.com/product-images/1/2.jpg",
+            "https://cdn.dummyjson.com/product-images/1/3.jpg",
+            "https://cdn.dummyjson.com/product-images/1/4.jpg",
+            "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
+          ],
+          "quantity": 5,
+          "userId": 1,
+          "id": 12
+        },
+        {
+          "title": "Infinix INBOOK",
+          "description": "Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 Grey – 1 Year Warranty",
+          "price": 1099,
+          "discountPercentage": 11.83,
+          "rating": 4.54,
+          "stock": 96,
+          "brand": "Infinix",
+          "category": "laptops",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/9/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/9/1.jpg",
+            "https://cdn.dummyjson.com/product-images/9/2.png",
+            "https://cdn.dummyjson.com/product-images/9/3.png",
+            "https://cdn.dummyjson.com/product-images/9/4.jpg",
+            "https://cdn.dummyjson.com/product-images/9/thumbnail.jpg"
+          ],
+          "quantity": 5,
+          "userId": 1,
+          "id": 14
+        }
+      ],
+      "user": {
+        "email": "sami@gmail.com",
+        "password": "1",
+        "addresses": [
+          {
+            "name": "MD SAMI AHMAD",
+            "email": "",
+            "address": "LOHSINGHNA",
+            "city": "HAZARIBAGH",
+            "State": "JHARKHAND",
+            "pincode": "825301",
+            "phone": "9142629077"
+          },
+          {
+            "name": "MD SAMI AHMAD",
+            "address": "NEW AREA",
+            "city": "HAZARIBAGH ",
+            "State": "JHARKHAND ",
+            "pincode": "825301",
+            "phone": "9142629077"
+          }
+        ],
+        "id": 1
+      },
+      "totalPrice": 8240,
+      "totalItems": 10,
+      "paymentMethod": "",
+      "id": 5
+    },
+    {
+      "cartItems": [
+        {
+          "title": "Huawei P30",
+          "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
+          "price": 499,
+          "discountPercentage": 10.58,
+          "rating": 4.09,
+          "stock": 32,
+          "brand": "Huawei",
+          "category": "smartphones",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/5/1.jpg",
+            "https://cdn.dummyjson.com/product-images/5/2.jpg",
+            "https://cdn.dummyjson.com/product-images/5/3.jpg"
+          ],
+          "quantity": 5,
+          "userId": 1,
+          "id": 12
+        }
+      ],
+      "user": {
+        "email": "sami@gmail.com",
+        "password": "1",
+        "addresses": [
+          {
+            "name": "MD SAMI AHMAD",
+            "email": "",
+            "address": "LOHSINGHNA",
+            "city": "HAZARIBAGH",
+            "State": "JHARKHAND",
+            "pincode": "825301",
+            "phone": "9142629077"
+          },
+          {
+            "name": "MD SAMI AHMAD",
+            "address": "NEW AREA",
+            "city": "HAZARIBAGH ",
+            "State": "JHARKHAND ",
+            "pincode": "825301",
+            "phone": "9142629077"
+          },
+          {
+            "name": "ROHAN",
+            "address": "MOUNTAIN",
+            "city": "JAMMU",
+            "State": "JAMMU & KASHMIR",
+            "pincode": "1010101",
+            "phone": "9142453899"
+          }
+        ],
+        "id": 1
+      },
+      "totalPrice": 2495,
+      "totalItems": 5,
+      "paymentMethod": "cash",
+      "id": 6
     }
   ]
 }

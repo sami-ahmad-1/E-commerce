@@ -4,24 +4,24 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RemoveProductAsync, updateItemAsync, cartItemsSlice } from '../features/cart/cartSlice'
 import { useForm } from 'react-hook-form'
-import { selectLoggedInUser ,userAddress } from '../features/auth/authSlice'
+import { selectLoggedInUser, userAddress } from '../features/auth/authSlice'
 import { OrderAsync } from '../features/order/orderSlice'
 
 
 function Checkout() {
     const dispatch = useDispatch()
     const cartItems = useSelector(cartItemsSlice)
-    const user = useSelector(selectLoggedInUser)  
-    console.log("Logged in user is ",user)      
-    const [userAddress2  , setUserAddress2] = useState('')    
-    const [paymentMethod  , setPaymentMethod] = useState('')
-    const { register,reset, handleSubmit, formState: { errors } } = useForm()
+    const user = useSelector(selectLoggedInUser)
+    console.log("Logged in user is ", user)
+    const [userAddress2, setUserAddress2] = useState('')
+    const [paymentMethod, setPaymentMethod] = useState('')
+    const { register, reset, handleSubmit, formState: { errors } } = useForm()
 
     const totalPrice = cartItems.reduce((acc, obj) => { return acc + obj.price * obj.quantity }, 0)
     const totalItems = cartItems.reduce((acc, obj) => { return acc + obj.quantity }, 0)
 
     const handleQuantity = (e, product) => {
-        e.preventDefault()                
+        e.preventDefault()
         dispatch(updateItemAsync({ ...product, quantity: +e.target.value }))
     }
 
@@ -30,7 +30,8 @@ function Checkout() {
         dispatch(RemoveProductAsync(product))
     }
 
-    const handleAddress = (AddressIndex) => {
+    const handleAddress = (e,AddressIndex) => {
+        e.preventDefault()
         setUserAddress2(user.addresses[AddressIndex])
     }
     const handlePayment = (e) => {
@@ -39,7 +40,7 @@ function Checkout() {
 
     const handleOrder = (e) => {
         e.preventDefault()
-        const order = {cartItems , user , totalPrice , totalItems , userAddress , paymentMethod}
+        const order = { cartItems, user, totalPrice, totalItems, userAddress, paymentMethod }
         dispatch(OrderAsync(order))
     }
 
@@ -50,8 +51,8 @@ function Checkout() {
 
                 {/* INPUT FORM */}
                 <form className='lg:px-25  px-10 ' onSubmit={handleSubmit((data) => {
-                       dispatch(userAddress({...user , addresses:[...user.addresses,data]}));
-                       reset()
+                    dispatch(userAddress({ ...user, addresses: [...user.addresses, data] }))
+                    reset()
                 })}>
                     <div className="space-y-12 lg:py-12 py-4 mt-10" >
                         <div className="border-b border-gray-900/10 pb-12">
@@ -76,7 +77,7 @@ function Checkout() {
                                         />
                                     </div>
                                     {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
-                                </div>                            
+                                </div>
 
 
                                 <div className="col-span-full">
@@ -187,35 +188,36 @@ function Checkout() {
                             <div className="mt-1 space-y-10">
                                 <fieldset>
                                     <legend className="text-sm  leading-6 text-gray-900">Choose from existing Address</legend>
-                                    {  user.addresses.length >=1 &&
-                                    <div className="mt-6 space-y-6">
-                                        <ul role="list" className="divide-y divide-gray-100 bg-gray-300">
-                                            {user.addresses.map((person,index) => (
-                                                <li key={index} className="flex  justify-between gap-x-6 py-5">
-                                                    <div className="flex items-center gap-x-3  text-m">
-                                                        <input
-                                                            id="payment-cash"
-                                                            name="push-notifications"
-                                                            type="radio"
-                                                            onClick={() => handleAddress(index)}                                                            
-                                                            className="h-4 w-4 border-gray-300  text-indigo-600 focus:ring-indigo-600"
-                                                        />
-                                                        <label htmlFor="push-everything" className="block text-sm font-medium leading-6 text-gray-900">
-                                                            {person.phone}
-                                                        </label>
-                                                        <div className="flex min-w-0 gap-x-4">
-                                                            <div className="min-w-0 flex-auto ">
-                                                                <p className="text-sm font-semibold leading-6 text-gray-900">{person.name}</p>
-                                                                <p className="mt-1 truncate text-xs leading-5 text-gray-500">{person.city}</p>
-                                                                <p className="mt-1 truncate text-xs leading-5 text-gray-500">{person.State}</p>
+                                    {user.addresses.length >= 1 &&
+                                        <div className="mt-6 space-y-6">
+                                            <ul role="list" className="divide-y divide-gray-100 bg-gray-300">
+                                                {user.addresses.map((person, index) => (
+                                                    <li key={index} className="flex  justify-between gap-x-6 py-5">
+                                                        <div className="flex items-center gap-x-3 ">
+                                                            <input
+                                                                id="address"
+                                                                name="push-notifications"
+                                                                type="radio"
+                                                                value="address"
+                                                                onClick={(e) => handleAddress(e, index)}
+                                                                className="h-4 w-4 border-gray-300  text-indigo-600 focus:ring-indigo-600"
+                                                            />
+                                                            <label htmlFor="push-everything" className="block text-sm font-medium leading-6 text-gray-900">
+                                                                {person.phone}
+                                                            </label>
+                                                            <div className="flex min-w-0 gap-x-4">
+                                                                <div className="min-w-0 flex-auto ">
+                                                                    <p className="text-sm font-semibold leading-6 text-gray-900">{person.name}</p>
+                                                                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">{person.city}</p>
+                                                                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">{person.State}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>                                             
-                                                    </div>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                     }
+                                                        </div>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    }
                                 </fieldset>
                                 <fieldset>
                                     <legend className="text-2xl font-semibold leading-6 text-gray-900">Payment Mode</legend>
@@ -226,8 +228,8 @@ function Checkout() {
                                                 name="push-notifications"
                                                 type="radio"
                                                 onClick={handlePayment}
-                                                checked={paymentMethod ==='cash'}
-                                                value = 'cash'
+                                                checked={paymentMethod === 'cash'}
+                                                value='cash'
                                                 className="h-4 w-4 border-gray-300  text-indigo-600 focus:ring-indigo-600"
                                             />
                                             <label htmlFor="push-everything" className="block text-sm font-medium leading-6 text-gray-900">
@@ -240,8 +242,8 @@ function Checkout() {
                                                 name="push-notifications"
                                                 type="radio"
                                                 onClick={handlePayment}
-                                                checked={paymentMethod ==='card'}
-                                                value = 'card'
+                                                checked={paymentMethod === 'card'}
+                                                value='card'
                                                 className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                             />
                                             <label htmlFor="push-email" className="block text-sm font-medium leading-6 text-gray-900">
@@ -250,7 +252,7 @@ function Checkout() {
                                         </div>
                                     </div>
                                 </fieldset>
-                            </div>    
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -324,14 +326,14 @@ function Checkout() {
                                 <Link to='/checkout'>
                                     <div className="mt-6">
                                         <Link to='/orderplaced'>
-                                        <div                                            
-                                            className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 lg:w-full "
-                                            onClick={(e) => handleOrder(e)}
-                                        >
-                                            Order Now
-                                        </div>      
+                                            <div
+                                                className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 lg:w-full "
+                                                onClick={(e) => handleOrder(e)}
+                                            >
+                                                Order Now
+                                            </div>
                                         </Link>
-                                    </div>  
+                                    </div>
                                 </Link>
                                 <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                                     <p>

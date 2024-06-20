@@ -1,12 +1,12 @@
 import React, { Profiler, useEffect } from 'react'
 import { selectLoggedInUser } from '../../auth/authSlice'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchuserOrdersAsync, selectUserInfo } from '../userSlice'
+import { fetchuserOrdersAsync, selectUserOrders } from '../userSlice'
 
-export default function UserProfile() {
+export default function UserOrders() {
   const dispatch = useDispatch()
   const user = useSelector(selectLoggedInUser)
-  const orders = useSelector(selectUserInfo)  
+  const orders = useSelector(selectUserOrders)
 
   useEffect(() => {
     dispatch(fetchuserOrdersAsync(user.id))
@@ -74,6 +74,7 @@ export default function UserProfile() {
 
       )}
     </div>
+
   )
 }
 

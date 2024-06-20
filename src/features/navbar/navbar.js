@@ -21,11 +21,11 @@ const navigation = [
     { name: 'Calendar', href: '#', current: false },
     { name: 'Reports', href: '#', current: false },
 ]
-const userNavigation = [
-    { name: 'Your Profile', Link: '/userprofile' },
-    { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '#' },
-]
+// const userNavigation = [
+//     { name: 'Your Profile', Link: '/profile' },
+//     { name: 'Settings', href: '' },
+//     { name: 'Sign out', href: '#' },
+// ]
 
 const items = [
     { id: 1, title: 'Back End Developer', department: 'Engineering', type: 'Full-time', location: 'Remote' },
@@ -124,11 +124,17 @@ function Navbar() {
                                                     leaveTo="transform opacity-0 scale-95"
                                                 >
                                                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                                        <Link to='/userorder'>
-                                                            <p className='block px-4 py-2 text-sm text-gray-700'>Your Profile</p>
+                                                        <Link to='/profile'>
+                                                            <p className='block px-4 py-2 text-sm text-gray-700'>My Profile</p>
                                                         </Link>
-                                                        <Link to='/userprofile'>
-                                                            <p className='block px-4 py-2 text-sm text-gray-700'>Your Profile</p>
+                                                        <Link to='/userorder'>
+                                                            <p className='block px-4 py-2 text-sm text-gray-700'>My Orders</p>
+                                                        </Link>
+                                                        <Link to=''>
+                                                            <p className='block px-4 py-2 text-sm text-gray-700'>Sign Out</p>
+                                                        </Link>
+                                                        <Link to='/login'>
+                                                            <p className='block px-4 py-2 text-sm text-gray-700'>Login</p>
                                                         </Link>
                                                     </Menu.Items>
                                                 </Transition>
@@ -188,7 +194,7 @@ function Navbar() {
                                             </span>
                                         </button>
                                     </div>
-                                    <div className="mt-3 space-y-1 px-2">
+                                    {/* <div className="mt-3 space-y-1 px-2">
                                         {userNavigation.map((item) => (
                                             <Disclosure.Button
                                                 key={item.name}
@@ -199,7 +205,7 @@ function Navbar() {
                                                 {item.name}
                                             </Disclosure.Button>
                                         ))}
-                                    </div>
+                                    </div> */}
                                 </div>
                             </Disclosure.Panel>
                         </>
