@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchProductDetail } from '../productsSlice'
-import { selectProductDetail } from '../productsSlice'
+import { fetchProductDetail ,selectProductDetail} from '../../product/productsSlice'
 import { AddToCart } from '../../cart/cartSlice'
 import { selectLoggedInUser } from '../../auth/authSlice'
 import Navbar from '../../navbar/navbar'
@@ -12,7 +11,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function ProductDetail() {
+export default function AdminProductDetail() {
   const params = useParams()
   const dispatch = useDispatch()
 
@@ -20,11 +19,13 @@ export default function ProductDetail() {
 
   const arr = []
   arr.push(prod)
+  // console.log(arr[0].images)
+
   const user = useSelector(selectLoggedInUser)
   console.log(user)
   const handleClick = (e) => {
-    e.preventDefault();
-    const newItem = { ...prod, quantity: 1, userId: user.id }
+    e.preventDefault() ;
+    const newItem = {...prod ,  quantity: 1, userId: user.id }
     delete newItem['id']
     dispatch(AddToCart(newItem))
   }
@@ -33,6 +34,7 @@ export default function ProductDetail() {
   useEffect(() => {
     dispatch(fetchProductDetail(params.id))
   }, [dispatch, params.id])
+
 
   return (
     <>
@@ -233,7 +235,7 @@ export default function ProductDetail() {
             </div>
           </div>
         </div>
-      }
+      } 
     </>
   )
 }

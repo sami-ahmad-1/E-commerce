@@ -54,6 +54,7 @@ export const counterSlice = createSlice({
       .addCase(checkLoginUser.fulfilled, (state, action) => {
         state.status = 'idle';
         state.loggedInUser = action.payload;
+        localStorage.setItem("replace", "true");
       })
       .addCase(checkLoginUser.rejected, (state, action) => {
         state.status = 'idle';

@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 
 function UserProfile() {
   const dispatch = useDispatch()
-  const userArr = useSelector(selectUserInfo)
+  const userArr = useSelector(selectUserInfo)  
   const user = userArr[0]
 
   const handleDelete = (e, index) => {
@@ -22,7 +22,8 @@ function UserProfile() {
       {user ?
         <div>
           <p className='text-4xl'>{user.name ? user.name : "New User"}</p>
-          <p className='text-2xl mt-7 text-red-700'>{user.email}</p>
+          <p className='text-2xl mt-7 text-red-700'>Email : {user.email}</p>
+          {user.role==='admin' &&  <p className='text-2xl mt-2 text-green-700'>User :{user.role}</p>}
           <div className='px-24'>
             <ul role="list" className="divide-y divide-gray-100">
               {user.addresses.map((data, index) => (

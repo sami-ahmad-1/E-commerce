@@ -32,3 +32,21 @@ export function fetchProductDetailAPI(id) {
   }
   )
 }
+
+
+export function addNewProductAsync(prodInfo) {
+  return new Promise(async(resolve,reject) =>{  
+    const response = await fetch('http://localhost:8080/products' ,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      },
+      body: JSON.stringify(prodInfo)
+    })
+    const data = response.json()
+    console.log('Promise data',data)
+  
+    resolve({data})    
+  }
+  )
+}

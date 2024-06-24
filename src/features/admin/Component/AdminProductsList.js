@@ -5,8 +5,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAllProducts } from '../productsAPI';
-import { fetchAllProductsAsync, selectAllProducts, fetchAllProductsbyFilter } from '../productsSlice';
+import { fetchAllProductsAsync, selectAllProducts, fetchAllProductsbyFilter } from '../../product/productsSlice';
 import Navbar from '../../navbar/navbar';
 import { Link } from 'react-router-dom';
 
@@ -441,128 +440,53 @@ function Pagination(props) {
   )
 }
 
-function Card(props) {  
+function Card(props) {
+  console.log(' Product Array at Home Page:', props.products)
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl lg:max-w-7xl lg:px-8">
+      <div className="mx-auto max-w-2xl lg:max-w-7xl lg:px-8">        
         <div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
           {props.products.slice(props.page * 10, (props.page + 1) * 10).map((product) => (
-            <Link to={`/productdetail/${product.id}`} key={product.id}>
-              <div key={product.id} className="group relative">
-                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                  <img
-                    src={product.thumbnail}
-                    alt={product.imageAlt}
-                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                  />
-                </div>
-                <div className="mt-4 flex justify-between">
-                  <div>
-                    <h3 className="text-sm text-gray-700">
-                      <a href={product.href}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {product.title}
-                      </a>
-                    </h3>
-                    <p className="mt-1 text-sm text-gray-500">{product.rating}</p>
+            <div>
+              <Link to={`/productdetail/${product.id}`} key={product.id}>
+                <div key={product.id} className="group relative">
+                  <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                    <img
+                      src={product.thumbnail}
+                      alt={product.imageAlt}
+                      className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                    />
                   </div>
-                  <div>
-                    <p className="text-sm font-medium  text-gray-900">${Math.round(product.price - (product.price * (product.discountPercentage / 100)))}</p>
-                    <p className="text-sm font-medium line-through text-gray-400">${product.price}</p>
+                  <div className="mt-4 flex justify-between">
+                    <div>
+                      <h3 className="text-sm text-gray-700">
+                        <a href={product.href}>
+                          <span aria-hidden="true" className="absolute inset-0 " />
+                          <div className="text-2l">{product.title}</div>
+                        </a>
+                      </h3>
+                      <p className="mt-1 text-sm text-gray-500">{product.rating}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium  text-gray-900">${Math.round(product.price - (product.price * (product.discountPercentage / 100)))}</p>
+                      <p className="text-sm font-medium line-through text-gray-400">${product.price}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+              <Link to={`/admin/productdetail/${product.id}`}>
+                <button className=" mt-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  Edit Product
+                </button>
+              </Link>
+            </div>
           ))}
         </div>
+
       </div>
     </div>
   )
 }
-
-
-
-
-function Products() {
-  const dispatch = useDispatch();
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-  const [filter, setFilter] = useState({})
-  const products = useSelector(selectAllProducts)
-  const [page, setPage] = useState(0)
-  const totalProduct = products.length
-  const totalPage = Math.floor((totalProduct / 10) + 1)
-
-  const handleFilter = (e, section, option) => {
-    const newFilter = { ...filter, [section.id]: option.value }
-    setFilter(newFilter)
-    dispatch(fetchAllProductsbyFilter(newFilter))
-  };
-
-  const handleSort = (e, option) => {
-    const newFilter = { ...filter, _sort: option.sort, _order: option.order }
-    setFilter(newFilter)
-    dispatch(fetchAllProductsbyFilter(newFilter))
-  }
-
-  const handlePagination = (selectedPage) => {
-    if (selectedPage >= 0 && selectedPage <= totalPage) {
-      setPage(selectedPage)
-    }
-  }
-
-
-  useEffect(() => {
-    dispatch(fetchAllProductsAsync())
-  }, [])
-
-  return (
-    <div>
-      <Navbar />
-      <div className="bg-white">
-        <div>
-          <MobileFilter setMobileFiltersOpen={setMobileFiltersOpen} handleFilter={handleFilter} mobileFiltersOpen={mobileFiltersOpen} />
-
-          <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 ">
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
-              <SortButton handleSort={handleSort} setMobileFiltersOpen={setMobileFiltersOpen} />
-            </div>
-
-            <section aria-labelledby="products-heading" className="pb-24 pt-6">
-              <h2 id="products-heading" className="sr-only">
-                Products
-              </h2>
-
-              <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-                {/* Filters */}
-                <form className="hidden lg:block">
-                  <h3 className="sr-only">Categories</h3>
-                  <DesktopFilter setMobileFiltersOpen={setMobileFiltersOpen} handleFilter={handleFilter} setPage={setPage} />
-                </form>
-
-                {/* Product grid */}
-                <div className="lg:col-span-3">
-                  <Card products={products} page={page} />
-                  <Pagination handlePagination={handlePagination} page={page} totalPage={totalPage} totalProduct={totalProduct} />
-                </div>
-
-              </div>
-            </section>
-          </main>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default Products
-
-
-
-
-
-
-
 
 function SortButton(props) {
   return (
@@ -625,6 +549,84 @@ function SortButton(props) {
       </button>
     </div>
   )
+}
+
+
+
+
+export default function AdminProducts() {
+  const dispatch = useDispatch();
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const [filter, setFilter] = useState({})
+  const products = useSelector(selectAllProducts)
+  console.log('Products in Home Page', products)
+  const [page, setPage] = useState(0)    // 3
+  const totalProduct = products.length    //100
+  const totalPage = (Math.floor(totalProduct / 10)  )+1     // 10
+
+  const handleFilter = (e, section, option) => {
+    const newFilter = { ...filter, [section.id]: option.value }
+    setFilter(newFilter)
+    dispatch(fetchAllProductsbyFilter(newFilter))
+  };
+
+  const handleSort = (e, option) => {
+    const newFilter = { ...filter, _sort: option.sort, _order: option.order }
+    setFilter(newFilter)
+    dispatch(fetchAllProductsbyFilter(newFilter))
+  }
+  const handlePagination = (selectedPage) => {
+    if (selectedPage >= 0 && selectedPage <= totalPage) {
+      setPage(selectedPage)
+    }
+  }
+
+
+
+  useEffect(() => {
+    dispatch(fetchAllProductsAsync())
+  }, [])
+
+  return (
+    <div>
+      <Navbar />
+      <div className="bg-white">
+        <div>
+          <MobileFilter setMobileFiltersOpen={setMobileFiltersOpen} handleFilter={handleFilter} mobileFiltersOpen={mobileFiltersOpen} />
+          <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 ">
+              <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
+              <SortButton handleSort={handleSort} setMobileFiltersOpen={setMobileFiltersOpen} />
+            </div>
+            <section aria-labelledby="products-heading" className="pb-24 pt-6">
+              <h2 id="products-heading" className="sr-only">
+                Products
+              </h2>
+              <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+                {/* Filters */}
+                <form className="hidden lg:block">
+                  <h3 className="sr-only">Categories</h3>
+                  <DesktopFilter setMobileFiltersOpen={setMobileFiltersOpen} handleFilter={handleFilter} setPage={setPage} />
+                </form>
+
+                {/* Product grid */}
+                <div className="lg:col-span-3">
+                  <Link to='/admin/productform'>
+                    <button className=" mx-8 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                      Add Product
+                    </button>
+                  </Link>
+                  <Card products={products} page={page} />
+                  <Pagination handlePagination={handlePagination} page={page} totalPage={totalPage} totalProduct={totalProduct} />
+                </div>
+
+              </div>
+            </section>
+          </main>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 

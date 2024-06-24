@@ -1838,22 +1838,67 @@
         "https://cdn.dummyjson.com/product-images/100/3.jpg",
         "https://cdn.dummyjson.com/product-images/100/thumbnail.jpg"
       ]
+    },
+    {
+      "title": "qq",
+      "description": "qq",
+      "price": "44",
+      "discountPercentage": "3",
+      "rating": "3",
+      "stock": "32",
+      "brand": "Canon",
+      "Category": "Electronics",
+      "thumbnailURL": "https://www.bhphotovideo.com/images/images2500x2500/canon_1263c005_eos_80d_dslr_camera_1225876.jpg",
+      "images": [
+        "https://www.bhphotovideo.com/images/images2500x2500/canon_1263c005_eos_80d_dslr_camera_1225876.jpg",
+        "https://www.bhphotovideo.com/images/images2500x2500/canon_1263c005_eos_80d_dslr_camera_1225876.jpg",
+        "https://www.bhphotovideo.com/images/images2500x2500/canon_1263c005_eos_80d_dslr_camera_1225876.jpg",
+        "https://www.bhphotovideo.com/images/images2500x2500/canon_1263c005_eos_80d_dslr_camera_1225876.jpg"
+      ],
+      "id": 101
+    },
+    {
+      "title": "I Phone",
+      "description": "...................",
+      "price": "4566",
+      "discountPercentage": "3",
+      "rating": "4",
+      "stock": "100",
+      "brand": "Apple",
+      "Category": "Electronics",
+      "thumbnailURL": "https://cdn.mobilesyrup.com/wp-content/uploads/2022/11/iphone-15-pro-black-scaled.jpg",
+      "images": [
+        "https://cdn.mobilesyrup.com/wp-content/uploads/2022/11/iphone-15-pro-black-scaled.jpg",
+        "https://cdn.mobilesyrup.com/wp-content/uploads/2022/11/iphone-15-pro-black-scaled.jpg",
+        "https://cdn.mobilesyrup.com/wp-content/uploads/2022/11/iphone-15-pro-black-scaled.jpg",
+        "https://cdn.mobilesyrup.com/wp-content/uploads/2022/11/iphone-15-pro-black-scaled.jpg"
+      ],
+      "id": 102
+    },
+    {
+      "title": "dfgdfgd",
+      "description": "dfg",
+      "price": "55",
+      "discountPercentage": "5",
+      "rating": "54",
+      "stock": "45",
+      "brand": "fdq",
+      "Category": "dfgdg",
+      "thumbnailURL": "dfgd",
+      "images": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "id": 103
     }
   ],
   "users": [
     {
       "email": "sami@gmail.com",
       "password": "1",
-      "addresses": [
-        {
-          "name": "sdfsd",
-          "address": "sdf",
-          "city": "sdf",
-          "State": "sdf",
-          "pincode": "sdf",
-          "phone": "sdf"
-        }
-      ],
+      "addresses": [],
       "id": 1
     },
     {
@@ -1870,6 +1915,13 @@
         }
       ],
       "id": 2
+    },
+    {
+      "email": "ahmad@gmail.com",
+      "password": "1",
+      "addresses": [],
+      "role": "admin",
+      "id": 3
     }
   ],
   "cart": [
@@ -1988,6 +2040,26 @@
       "quantity": 5,
       "userId": 1,
       "id": 12
+    },
+    {
+      "title": "Leather Strap Skeleton Watch",
+      "description": "Leather Strap Skeleton Watch for Men - Stylish and Latest Design",
+      "price": 46,
+      "discountPercentage": 10.2,
+      "rating": 4.98,
+      "stock": 61,
+      "brand": "Strap Skeleton",
+      "category": "mens-watches",
+      "thumbnail": "https://cdn.dummyjson.com/product-images/64/thumbnail.jpg",
+      "images": [
+        "https://cdn.dummyjson.com/product-images/64/1.jpg",
+        "https://cdn.dummyjson.com/product-images/64/2.webp",
+        "https://cdn.dummyjson.com/product-images/64/3.jpg",
+        "https://cdn.dummyjson.com/product-images/64/thumbnail.jpg"
+      ],
+      "quantity": 1,
+      "userId": 1,
+      "id": 15
     }
   ],
   "orders": [
