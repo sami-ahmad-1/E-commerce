@@ -41,36 +41,14 @@ export default function ProductDetail() {
         <div>
           <div className="bg-white ">
             <div className="pt-6">
-
-              {/* Image gallery */}
               <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8" >
-                <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
-                  <img
-                    src={prod.thumbnail}
-                    className="h-full w-full object-cover object-center"
-                  />
-                  {/* <h1 className='bg-red-400'>{prod.title}</h1> */}
-                </div>
-                <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-                  <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
+                {prod.images.map((val, index) =>
+                  <div key={index} className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
                     <img
-                      // src={prod.images[1]}                    
+                      src={val}
                       className="h-full w-full object-cover object-center"
                     />
-                  </div>
-                  <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-                    <img
-                      // src={}
-                      className="h-full w-full object-cover object-center"
-                    />
-                  </div>
-                </div>
-                <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
-                  <img
-                    // src={prod.images[3]}
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
+                  </div>)}
               </div>
 
               <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16" >
@@ -81,7 +59,7 @@ export default function ProductDetail() {
                 {/* Options */}
                 <div className="mt-4 lg:row-span-3 lg:mt-0">
                   <h2 className="sr-only">Product information</h2>
-                  <p className="text-3xl tracking-tight text-gray-900"> ₹{prod.price}</p>
+                  <p className="text-3xl tracking-tight text-gray-900"> ${prod.price}</p>
 
                   {/* Reviews */}
                   <div className="mt-6">

@@ -1,6 +1,5 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import { useDispatch } from 'react-redux'
 import { addNewProduct } from '../../product/productsSlice'
 export default function AdminProductForm() {

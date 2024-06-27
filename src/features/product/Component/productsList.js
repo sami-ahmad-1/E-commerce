@@ -418,7 +418,7 @@ function Pagination(props) {
               return (
                 <span
                   key={i}
-                  className={`relative z-10 inline-flex items-center  ${props.page == i ? 'bg-indigo-600' : 'bg-white text-black'} bg-indigo-600 px-4 py-2 text-sm font-semibold  focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer`}
+                  className={`relative z-10 inline-flex items-center  ${props.page ===i ? 'bg-indigo-600' : 'bg-white text-black'} bg-indigo-600 px-4 py-2 text-sm font-semibold  focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer`}
                   onClick={() => props.handlePagination(i)}
                 >
                   {i + 1}
@@ -517,11 +517,10 @@ function Products() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar/>
       <div className="bg-white">
         <div>
           <MobileFilter setMobileFiltersOpen={setMobileFiltersOpen} handleFilter={handleFilter} mobileFiltersOpen={mobileFiltersOpen} />
-
           <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 ">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
@@ -626,5 +625,3 @@ function SortButton(props) {
     </div>
   )
 }
-
-
