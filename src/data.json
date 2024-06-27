@@ -6025,6 +6025,24 @@
         "https://cdn.mos.cms.futurecdn.net/2amTeNbLHjD8kMj7f96MfZ.jpg"
       ],
       "id": 101
+    },
+    {
+      "title": "Camera",
+      "description": "Nice Camera",
+      "price": "449",
+      "discountPercentage": "8",
+      "rating": "5",
+      "stock": "40",
+      "brand": "Canon",
+      "Category": "Electronics",
+      "thumbnail": "https://www.goodfreephotos.com/albums/business-and-technology/canon-camera-t2i.jpg",
+      "images": [
+        "https://www.goodfreephotos.com/albums/business-and-technology/canon-camera-t2i.jpg",
+        "https://www.goodfreephotos.com/albums/business-and-technology/canon-camera-t2i.jpg",
+        "https://www.goodfreephotos.com/albums/business-and-technology/canon-camera-t2i.jpg",
+        "https://www.goodfreephotos.com/albums/business-and-technology/canon-camera-t2i.jpg"
+      ],
+      "id": 102
     }
   ],
   "users": [
