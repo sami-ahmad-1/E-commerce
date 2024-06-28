@@ -28,7 +28,8 @@ export function checkUser(LoginInfo) {
     if (data.length) {
       if (data[0].password===password) {
         resolve({ data : data[0]})
-        // sessionStorage.setItem(email, password)
+        localStorage.setItem('token', email)
+        window.localStorage.setItem('isLoggedIn', 'true')
       } else {
         reject({message:'Password is incorrect'})
       }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Fragment } from 'react'
+import { StarIcon } from '@heroicons/react/20/solid'
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
@@ -418,7 +419,7 @@ function Pagination(props) {
               return (
                 <span
                   key={i}
-                  className={`relative z-10 inline-flex items-center  ${props.page ===i ? 'bg-indigo-600' : 'bg-white text-black'} bg-indigo-600 px-4 py-2 text-sm font-semibold  focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer`}
+                  className={`relative z-10 inline-flex items-center  ${props.page === i ? 'bg-indigo-600' : 'bg-white text-black'} bg-indigo-600 px-4 py-2 text-sm font-semibold  focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer`}
                   onClick={() => props.handlePagination(i)}
                 >
                   {i + 1}
@@ -441,7 +442,7 @@ function Pagination(props) {
   )
 }
 
-function Card(props) {  
+function Card(props) {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl lg:max-w-7xl lg:px-8">
@@ -460,11 +461,25 @@ function Card(props) {
                   <div>
                     <h3 className="text-sm text-gray-700">
                       <a href={product.href}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {product.title}
+                        <span aria-hidden="true" className="absolute inset-0 " />
+                       <p className='text-base font-medium  text-gray-900'>{product.title}</p> 
                       </a>
                     </h3>
-                    <p className="mt-1 text-sm text-gray-500">{product.rating}</p>
+                    <div className='flex'>
+                      <p className="mt-1 text-sm text-gray-500">{product.rating}</p>
+                      <div className="flex items-center ml-4">
+                        {[0, 1, 2, 3, 4].map((rating) => (
+                          <StarIcon
+                            key={rating}
+                            className={classNames(        
+                              `${product.rating}` > rating ? 'text-yellow-500' : 'text-gray-200',
+                              'h-5 w-5 flex-shrink-0'
+                            )}
+                            aria-hidden="true"
+                          />
+                        ))}
+                      </div>
+                    </div>
                   </div>
                   <div>
                     <p className="text-sm font-medium  text-gray-900">${Math.round(product.price - (product.price * (product.discountPercentage / 100)))}</p>
@@ -517,7 +532,7 @@ function Products() {
 
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <div className="bg-white">
         <div>
           <MobileFilter setMobileFiltersOpen={setMobileFiltersOpen} handleFilter={handleFilter} mobileFiltersOpen={mobileFiltersOpen} />

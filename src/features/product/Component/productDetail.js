@@ -39,16 +39,16 @@ export default function ProductDetail() {
       <Navbar />
       {prod &&
         <div>
-          <div className="bg-white ">
+          <div>
             <div className="pt-6">
               <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8" >
-                {/* { prod && prod.images.map((val, index) =>
+                { prod.images && prod.images.map((val, index) =>
                   <div key={index} className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
                     <img
                       src={val}
                       className="h-full w-full object-cover object-center"
                     />
-                  </div>)} */}
+                  </div>)}
               </div>
 
               <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16" >
@@ -69,9 +69,8 @@ export default function ProductDetail() {
                         {[0, 1, 2, 3, 4].map((rating) => (
                           <StarIcon
                             key={rating}
-                            className={classNames(
-                              // reviews.average > rating ? 'text-gray-900' : 'text-gray-200',
-                              `${prod.rating}` > rating ? 'text-gray-900' : 'text-gray-200',
+                            className={classNames(                            
+                              `${prod.rating}` > rating ? 'text-yellow-500' : 'text-gray-200',
                               'h-5 w-5 flex-shrink-0'
                             )}
                             aria-hidden="true"
