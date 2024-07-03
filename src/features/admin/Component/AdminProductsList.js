@@ -442,59 +442,62 @@ function Pagination(props) {
 }
 
 function Card(props) {
-  console.log(' Product Array at Home Page:', props.products)
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl lg:max-w-7xl lg:px-8">        
-        <div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-        {props.products.slice(props.page * 10, (props.page + 1) * 10).map((product) => (
-            <Link to={`/productdetail/${product.id}`} key={product.id}>
-              <div key={product.id} className="group relative">
-                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                  <img
-                    src={product.thumbnail}
-                    alt={product.imageAlt}
-                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                  />
-                </div>
-                <div className="mt-4 flex justify-between">
-                  <div>
-                    <h3 className="text-sm text-gray-700">
-                      <a href={product.href}>
-                        <span aria-hidden="true" className="absolute inset-0 " />
-                       <p className='text-base font-medium  text-gray-900'>{product.title}</p> 
-                      </a>
-                    </h3>
-                    <div className='flex'>
-                      <p className="mt-1 text-sm text-gray-500">{product.rating}</p>
-                      <div className="flex items-center ml-4">
-                        {[0, 1, 2, 3, 4].map((rating) => (
-                          <StarIcon
-                            key={rating}
-                            className={classNames(        
-                              `${product.rating}` > rating ? 'text-yellow-500' : 'text-gray-200',
-                              'h-5 w-5 flex-shrink-0'
-                            )}
-                            aria-hidden="true"
-                          />
-                        ))}
+      <div className="mx-auto max-w-2xl lg:max-w-7xl lg:px-8">
+        <div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8 ">
+          {props.products.slice(props.page * 10, (props.page + 1) * 10).map((product) => (
+            <>
+              <Link to={`/productdetail/${product.id}`} >
+                <div key={product.id} className="group relative ">
+                  <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 ">
+                    <img
+                      src={product.thumbnail}
+                      alt={product.imageAlt}
+                      className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                    />
+                  </div>
+                  <div className="mt-4 flex justify-between">
+                    <div>
+                      <h3 className="text-sm text-gray-700">
+                        <a href={product.href}>
+                          <span aria-hidden="true" className="absolute inset-0 " />
+                          <p className='text-base font-medium  text-gray-900'>{product.title}</p>
+                        </a>
+                      </h3>
+                      <div className='flex'>
+                        <p className="mt-1 text-sm text-gray-500">{product.rating}</p>
+                        <div className="flex items-center ml-4">
+                          {[0, 1, 2, 3, 4].map((rating) => (
+                            <StarIcon
+                              key={rating}
+                              className={classNames(
+                                `${product.rating}` > rating ? 'text-yellow-500' : 'text-gray-200',
+                                'h-5 w-5 flex-shrink-0'
+                              )}
+                              aria-hidden="true"
+                            />
+                          ))}
+                        </div>
                       </div>
                     </div>
+                    <div>
+                      <p className="text-sm font-medium  text-gray-900">${Math.round(product.price - (product.price * (product.discountPercentage / 100)))}</p>
+                      <p className="text-sm font-medium line-through text-gray-400">${product.price}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm font-medium  text-gray-900">${Math.round(product.price - (product.price * (product.discountPercentage / 100)))}</p>
-                    <p className="text-sm font-medium line-through text-gray-400">${product.price}</p>
-                  </div>
-                </div>
-              </div>
-            </Link>
+                  <button onClick={() => alert(product.id)} className='bg-red-500 px-5 py-2 mt-5'>Edit</button>
+                </div >
+              </Link>
+            </>
           ))}
         </div>
-
       </div>
-    </div>
+    </div >
   )
 }
+
+
 
 function SortButton(props) {
   return (
@@ -570,7 +573,7 @@ export default function AdminProducts() {
   console.log('Products in Home Page', products)
   const [page, setPage] = useState(0)    // 3
   const totalProduct = products.length    //100
-  const totalPage = (Math.floor(totalProduct / 10)  )+1     // 10
+  const totalPage = (Math.floor(totalProduct / 10)) + 1     // 10
 
   const handleFilter = (e, section, option) => {
     const newFilter = { ...filter, [section.id]: option.value }
@@ -622,6 +625,11 @@ export default function AdminProducts() {
                   <Link to='/admin/productform'>
                     <button className=" mx-8 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                       Add Product
+                    </button>
+                  </Link>
+                  <Link to='/admin/adminorderpage'>
+                    <button className=" mx-8 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                      Order Page
                     </button>
                   </Link>
                   <Card products={products} page={page} />

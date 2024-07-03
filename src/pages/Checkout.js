@@ -35,6 +35,7 @@ function Checkout() {
         setUserAddress2(user.addresses[AddressIndex])
     }
     const handlePayment = (e) => {
+        e.preventDefault()
         setPaymentMethod(e.target.value)
     }
 
