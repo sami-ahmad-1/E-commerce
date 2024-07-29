@@ -14,7 +14,6 @@ function UserAddressAdd() {
       <form className='lg:px-25  px-10 bg-gray-100 ' onSubmit={handleSubmit((data) => {
         dispatch(userAddress({ ...user, addresses: [...user.addresses, data] })) 
         console.log(data)
-
         reset()
       })}>
         <div className="  mt-10" >
