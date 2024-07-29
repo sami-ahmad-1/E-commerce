@@ -19,28 +19,28 @@ function UserProfile() {
 
   console.log('Logged in user', user)
   const handleDelete = (e, index) => {
-    e.preventDefault()
-    const newUser = { ...user[0], addresses: [...user[0].addresses] };
-    newUser.addresses.splice(index, 1);
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(updateUserInfoAsync(newUser));
-        setShowAddressForm(false)
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your Address has been deleted.",
-          icon: "success"
-        });
-      }
-    });
+    // e.preventDefault()
+    // const newUser = { ...user[0], addresses: [...user[0].addresses] };
+    // newUser.addresses.splice(index, 1);
+    // Swal.fire({
+    //   title: "Are you sure?",
+    //   text: "You won't be able to revert this!",
+    //   icon: "warning",
+    //   showCancelButton: true,
+    //   confirmButtonColor: "#3085d6",
+    //   cancelButtonColor: "#d33",
+    //   confirmButtonText: "Yes, delete it!"
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     dispatch(updateUserInfoAsync(newUser));
+    //     setShowAddressForm(false)
+    //     Swal.fire({
+    //       title: "Deleted!",
+    //       text: "Your Address has been deleted.",
+    //       icon: "success"
+    //     });
+    //   }
+    // });
   }
 
 

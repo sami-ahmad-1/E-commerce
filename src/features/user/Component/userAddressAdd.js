@@ -12,10 +12,7 @@ function UserAddressAdd() {
   return (
     <div >
       <form className='lg:px-25  px-10 bg-gray-100 ' onSubmit={handleSubmit((data) => {
-        // const newUser = { ...user, addresses: [...user.addresses , data] };
-        // newUser.addresses.push(data)
-        // dispatch(updateUserInfoAsync(newUser))
-        dispatch(userAddress(data))      
+        dispatch(userAddress({ ...user, addresses: [...user.addresses, data] })) 
         console.log(data)
 
         reset()
