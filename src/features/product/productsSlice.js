@@ -3,7 +3,7 @@ import { fetchAllProducts, fetchAllProductsbyFilterAPI, fetchProductDetailAPI , 
 
 const initialState = {
   products: [],
-  productDetail: [],
+  productDetail: null,
   status: 'idle'  
 }
 
@@ -66,7 +66,7 @@ export const productSlice = createSlice({
       })
       .addCase(fetchProductDetail.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.productDetail = action.payload;  
+        state.productDetail = action.payload 
       })
       .addCase(addNewProduct.pending, (state) => {
         state.status = 'loading';

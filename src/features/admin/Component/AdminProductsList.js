@@ -7,8 +7,8 @@ import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllProductsAsync, selectAllProducts, fetchAllProductsbyFilter } from '../../product/productsSlice';
-import Navbar from '../../navbar/navbar';
 import { Link } from 'react-router-dom';
+import { discountedPrice } from '../../../app/Constants';
 
 const sortOptions = [
   { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
@@ -482,11 +482,12 @@ function Card(props) {
                       </div>
                     </div>
                     <div>
-                      <p className="text-sm font-medium  text-gray-900">${Math.round(product.price - (product.price * (product.discountPercentage / 100)))}</p>
+                      <p className="text-sm font-medium  text-gray-900">${discountedPrice(product)}</p>
+                      {/* <p className="text-sm font-medium  text-gray-900">${Math.round(product.price - (product.price * (product.discountPercentage / 100)))}</p> */}
                       <p className="text-sm font-medium line-through text-gray-400">${product.price}</p>
                     </div>
                   </div>
-                  <button onClick={() => alert(product.id)} className='bg-red-500 px-5 py-2 mt-5'>Edit</button>
+                  {/* <Button onClick={() => alert(product.id)} className='px-5 py-2 mt-5'>Edit</Button> */}
                 </div >
               </Link>
             </>
@@ -496,7 +497,6 @@ function Card(props) {
     </div >
   )
 }
-
 
 
 function SortButton(props) {
@@ -592,7 +592,7 @@ export default function AdminProducts() {
     }
   }
 
-
+  
 
   useEffect(() => {
     dispatch(fetchAllProductsAsync())
@@ -600,8 +600,7 @@ export default function AdminProducts() {
 
   return (
     <div>
-      <Navbar />
-      <div className="bg-white">
+      <div className="bg-white py-14">
         <div>
           <MobileFilter setMobileFiltersOpen={setMobileFiltersOpen} handleFilter={handleFilter} mobileFiltersOpen={mobileFiltersOpen} />
           <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -635,7 +634,6 @@ export default function AdminProducts() {
                   <Card products={products} page={page} />
                   <Pagination handlePagination={handlePagination} page={page} totalPage={totalPage} totalProduct={totalProduct} />
                 </div>
-
               </div>
             </section>
           </main>

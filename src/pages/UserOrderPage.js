@@ -5,8 +5,8 @@ import Navbar from '../features/navbar/navbar'
 function UserOrderPage() {
   return (
     <div>
-        <Navbar/>
-        <UserOrder/>
+      <Navbar />
+      <UserOrder />
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -39,19 +39,21 @@ function classNames(...classes) {
 function Navbar() {
     const LoggedInuser = useSelector(selectLoggedInUser)
     const cartItems = useSelector(cartItemsSlice)
+    const [cartItemsLength, setCartItemsLength] = useState('')
 
-    // if (LoggedInuser) {
-    //     const totalItems = cartItems.length
-    //     return totalItems
-    //     console.log(totalItems)
-    // }
-
+    useEffect(() => {
+        if (LoggedInuser != null) {
+            if (cartItems) {
+                setCartItemsLength(cartItems.length);
+            }
+        }
+    }, [cartItems]);
     return (
         <>
             <div className="min-h-full ">
                 <Disclosure as="nav" className="bg-gray-800">
                     {({ open }) => (
-                        <>                            
+                        <>
                             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                                 <div className="flex h-16 items-center justify-between">
                                     <div className="flex items-center">
@@ -65,7 +67,7 @@ function Navbar() {
                                                 />
                                             </Link>
                                         </div>
-                                        <div className="hidden md:block">
+                                        {/* <div className="hidden md:block">
                                             <div className="ml-10 flex items-baseline space-x-4">
 
                                                 {navigation.map((item) => (
@@ -85,7 +87,7 @@ function Navbar() {
                                                 ))}
 
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className="hidden md:block">
                                         <div className="ml-4 flex items-center md:ml-6">
@@ -100,7 +102,7 @@ function Navbar() {
                                                     <ShoppingCartIcon className="h-6 w-6 " aria-hidden="true" />
 
                                                     <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-red-600/10 ">
-                                                        {/* {LoggedInuser && cartItems.length} */}
+                                                        {cartItemsLength}
                                                     </span>
                                                 </div>
                                             </Link>
@@ -130,11 +132,11 @@ function Navbar() {
                                                         <Link to='/userorder'>
                                                             <p className='block px-4 py-2 text-sm text-gray-700'>My Orders</p>
                                                         </Link>
-                                                        <Link to=''>
-                                                            <p className='block px-4 py-2 text-sm text-gray-700'>Sign Out</p>
-                                                        </Link>
                                                         <Link to='/login'>
                                                             <p className='block px-4 py-2 text-sm text-gray-700'>Login</p>
+                                                        </Link>
+                                                        <Link to='/logout'>
+                                                            <p className='block px-4 py-2 text-sm text-gray-700'>Sign Out</p>
                                                         </Link>
                                                     </Menu.Items>
                                                 </Transition>
@@ -212,7 +214,7 @@ function Navbar() {
                     )}
                 </Disclosure>
                 <main>
-                    <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">{/* Your content */}</div>
+                    <div className="mx-auto max-w-7xl  sm:px-6 lg:px-8">{/* Your content */}</div>
                 </main>
             </div >
         </>

@@ -2,9 +2,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {fetchLoggedInUserOrders , fetchLoggedInUser ,updateUserInfoAPI} from './userAPI'
 
 const initialState = {
-  userOrders: '' ,
-  status: 'idle',
-  userInfo: null 
+  userOrders: null ,
+  userInfo: null,
+  status: 'idle'
 };
 
 export const fetchuserOrdersAsync = createAsyncThunk(
@@ -58,7 +58,7 @@ export const userSlice = createSlice({
       })
       .addCase(updateUserInfoAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.userInfo = action.payload
+        state.userInfo += action.payload
       })
 
   },

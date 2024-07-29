@@ -43,7 +43,8 @@ export function checkUser(LoginInfo) {
 
 export function userAddressAPI(data) {  
   return new Promise(async (resolve) => {
-    const response = await fetch(`http://localhost:8080/users/${data.id}`, {
+    const response = await fetch(`http://localhost:8080/users/1`, {
+    // const response = await fetch(`http://localhost:8080/users/${data.id}`, {
       method: 'PATCH',
       body: JSON.stringify(data),
       headers: {
@@ -61,6 +62,15 @@ export function DeleteUserAddress(userId) {
     const response = await fetch(`http://localhost:8080/users/${userId}`, {method: 'DELETE'})
     const dataResponse = response.json()
     resolve({ dataResponse })
+  }
+  )
+} 
+
+
+
+export function SignOut(userId) {  
+  return new Promise(async (resolve) => {
+    resolve({ data : "User Logged Out" })
   }
   )
 } 

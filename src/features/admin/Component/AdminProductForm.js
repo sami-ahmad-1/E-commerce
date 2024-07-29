@@ -8,7 +8,7 @@ export default function AdminProductForm() {
 
 
   return (
-    <div className='lg:py-16 md:py-10 '>
+    <div className='px-5  md:py-10  '>    
       <div className=' md:px-20 lg:px-36'>
         <form onSubmit={handleSubmit((data) => {
           const prodData = { ...data }
@@ -48,6 +48,7 @@ export default function AdminProductForm() {
                   </label>
                   <div className="mt-2">
                     <textarea
+                    placeholder='Product description...'
                       id="about"
                       {...register('description', { required: 'Product Title is required' })}
                       rows={3}
@@ -75,7 +76,6 @@ export default function AdminProductForm() {
                 </div>
               </div>
             </div>
-
             <div className="sm:col-span-4">
               <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
                 Discount Percentage

@@ -1,9 +1,10 @@
 import React from 'react';
 import HomePage from './pages/HomePage'
 import Login from './features/auth/components/login';
+import Logout from './features/auth/components/Logout';
 import SignUp from './features/auth/components/signup';
 import CartPage from './pages/CartPage';
-import Checkout from './pages/Checkout';
+import CheckoutPage from './pages/CheckoutPage';
 import ProductDetail from '../src/features/product/Component/productDetail'
 import OrderSuccessPage from './pages/orderSuccessPage';
 import Order from './features/order/order';
@@ -39,24 +40,28 @@ const router = createBrowserRouter([
     element: <Login></Login>,
   },
   {
+    path: "/logout",
+    element: <Logout></Logout>,
+  },
+  {
     path: "/signup",
     element: <SignUp></SignUp>,
   },
   {
     path: "/",
-    element:<><AdminHomePage/></>
+    element: <><AdminHomePage /></>
   },
   {
     path: `/productdetail/:id`,
-    element: <ProductDetail/>
+    element: <AdminProductDetailPage />
   },
   {
     path: "/admin/homepage",
-    element:<ProtectedAdmin> <AdminHomePage/></ProtectedAdmin>
+    element: <ProtectedAdmin> <AdminHomePage /></ProtectedAdmin>
   },
   {
     path: "/admin/productform",
-    element:<AdminProductFormPage/>
+    element: <AdminProductFormPage />
   },
   {
     path: `/admin/productdetail/:id`,
@@ -64,7 +69,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin/adminorderpage",
-    element:<AdminOrdersPage/>
+    element: <AdminOrdersPage />
   },
   {
     path: "/order",
@@ -75,8 +80,8 @@ const router = createBrowserRouter([
     element: <CartPage></CartPage>
   },
   {
-    path: "/checkout",
-    element: <Checkout></Checkout>
+    path: "/Checkoutpage",
+    element: <CheckoutPage></CheckoutPage>
   },
   {
     path: "/orderplaced",
@@ -84,7 +89,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/profile",
-    element: <UserProfilePage/>
+    element: <UserProfilePage />
   },
   {
     path: "/userorder",
@@ -99,17 +104,17 @@ const router = createBrowserRouter([
 function App() {
   const dispatch = useDispatch()
   const user = useSelector(selectLoggedInUser)
-  console.log('Logged in user is  : ' , user)
+  console.log('Logged in user is  : ', user)
 
-  useEffect(()=>{
-    if(user){
+  useEffect(() => {
+    if (user) {
       dispatch(fetchProductByUserId(user.id))
       dispatch(fetchLoggedInUserAsync(user.id))
     }
-  })
-  
+  },[])
+
   return (
-    <>      
+    <>
       <RouterProvider router={router} />
     </>
   )

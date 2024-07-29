@@ -6,7 +6,12 @@ import { fetchProductDetail } from '../productsSlice'
 import { selectProductDetail } from '../productsSlice'
 import { AddToCart } from '../../cart/cartSlice'
 import { selectLoggedInUser } from '../../auth/authSlice'
-import Navbar from '../../navbar/navbar'
+import { discountedPrice } from '../../../app/Constants'
+
+import { Slide } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css'
+
+import Swal from 'sweetalert2'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -22,11 +27,35 @@ export default function ProductDetail() {
   arr.push(prod)
   const user = useSelector(selectLoggedInUser)
   console.log(user)
+
   const handleClick = (e) => {
+    if(user != null){  
+      const newItem = { ...prod, quantity: 1, userId: user.id }
+      delete newItem['id']
+      dispatch(AddToCart(newItem))
+    }else{
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please Login to Add Product to Cart",
+      });
+    }
     e.preventDefault();
-    const newItem = { ...prod, quantity: 1, userId: user.id }
-    delete newItem['id']
-    dispatch(AddToCart(newItem))
+
+  }
+
+  const spanStyle = {
+    padding: '20px',
+    background: '#efefef',
+    color: '#000000'
+  }
+
+  const divStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundSize: 'cover',
+    height: '400px'
   }
 
 
@@ -36,20 +65,29 @@ export default function ProductDetail() {
 
   return (
     <>
-      <Navbar />
       {prod &&
-        <div>
+        <div >
           <div>
             <div className="pt-6">
-              <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8" >
-                {prod.images && prod.images.map((val, index) =>
-                  <div key={index} className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
-                    <img
-                      src={val}
-                      className="h-full w-full object-cover object-center"
-                    />
-                  </div>)}
+              <div className=" ] mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8 max-sm:hidden  " >              
+                    {prod.images && prod.images.map((val, index) =>
+                      <div key={index} className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
+                        <img
+                          src={val}
+                          className="h-full w-full object-cover object-center"
+                        />
+                      </div>)}                                
               </div>
+                <div className="slide-container lg:hidden">
+                  <Slide>
+                    {prod.images && prod.images.map((slideImage, index) => (
+                      <div key={index}>
+                        <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage})` }}>
+                        </div>
+                      </div>
+                    ))}
+                  </Slide>
+                </div>
 
               <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16" >
                 <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
@@ -59,7 +97,7 @@ export default function ProductDetail() {
                 {/* Options */}
                 <div className="mt-4 lg:row-span-3 lg:mt-0">
                   <h2 className="sr-only">Product information</h2>
-                  <p className="text-3xl tracking-tight text-gray-900"> ${prod.price}</p>
+                  <p className="text-3xl tracking-tight text-gray-900"> ${discountedPrice(prod)}</p>
 
                   {/* Reviews */}
                   <div className="mt-6">
@@ -75,7 +113,7 @@ export default function ProductDetail() {
                             )}
                             aria-hidden="true"
                           />
-))}
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -203,7 +241,7 @@ export default function ProductDetail() {
 
 
             </div>
-          </div>
+          </div>  
         </div>
       }
     </>

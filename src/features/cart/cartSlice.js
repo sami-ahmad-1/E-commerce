@@ -2,8 +2,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { CartAPI , fetchProductDetailAPI, RemoveProductAPI , updateCart} from './cartAPI';
 
 const initialState = {
-  value: 0,
-  items : null
+  value: 0,  
+  productDetail:null,
+  items : []
 };
 
 export const AddToCart = createAsyncThunk(
@@ -28,7 +29,6 @@ export const RemoveProductAsync = createAsyncThunk(
   'products/RemoveProductAsync',
   async (product) => {
     const response = await RemoveProductAPI(product.id);  
-    console.log("Product Id from Slice",product.id)
     return response.data;
   }
 )
@@ -37,7 +37,6 @@ export const RemoveProductAsync = createAsyncThunk(
 export const updateItemAsync = createAsyncThunk(
   'cart/updateItemAsync',
   async (update) => {
-    // console.log(CartData)
     const response = await updateCart(update);
     return response.data;
   }
@@ -59,23 +58,21 @@ export const CartSlice = createSlice({
       })
       .addCase(AddToCart.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.items += action.payload;
+        state.cartItems.push(action.payload)
       })
       .addCase(fetchProductByUserId.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(fetchProductByUserId.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.items = action.payload;
-        // console.log('State updated with product detail:', state.productDetail); // Add logging here
+        state.items = action.payload;            
+        // state.items.push(action.payload) 
       })
       .addCase(RemoveProductAsync.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(RemoveProductAsync.fulfilled, (state, action) => {
         const index = state.items.findIndex( el => el.id===action.payload.id)
-        console.log('action.payload',action.payload)
-        console.log('index :' ,index)
         state.items.splice(index,1)
       })
       .addCase(updateItemAsync.pending, (state) => {
@@ -83,14 +80,13 @@ export const CartSlice = createSlice({
       })
       .addCase(updateItemAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        const index = state.items.findIndex(item => item.id===action.payload.id)
-        console.log('index  Quantity:' ,index)    
+        const index = state.items.findIndex(item => item.id===action.payload.id)          
         state.items[index] = action.payload;
       })
   }
 });
 
-
 export const cartItemsSlice = (state) => state.cart.items;
-
+export const productDetailSlice = (state) => state.cart.productDetail;
 export default CartSlice.reducer;
+

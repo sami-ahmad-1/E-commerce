@@ -6,9 +6,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAllProducts } from '../productsAPI';
 import { fetchAllProductsAsync, selectAllProducts, fetchAllProductsbyFilter } from '../productsSlice';
-import Navbar from '../../navbar/navbar';
 import { Link } from 'react-router-dom';
 
 const sortOptions = [
@@ -532,7 +530,7 @@ function Products() {
 
   return (
     <div>
-      <Navbar />
+
       <div className="bg-white">
         <div>
           <MobileFilter setMobileFiltersOpen={setMobileFiltersOpen} handleFilter={handleFilter} mobileFiltersOpen={mobileFiltersOpen} />

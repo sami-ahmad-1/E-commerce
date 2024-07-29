@@ -2,8 +2,6 @@ export function fetchAllProducts() {
   return new Promise(async(resolve,reject) =>{  
     const response = await fetch('http://localhost:8080/products')
     const data = response.json()
-    console.log('Promise data',data)
-  
     resolve({data})    
   }
   )
@@ -11,7 +9,6 @@ export function fetchAllProducts() {
 
 export function fetchAllProductsbyFilterAPI(filter) {  
   let queryString = ''
-  // filter ={category : "laptop"}
   for (let key in filter){
     queryString+= `${key}=${filter[key]}&`;
   }

@@ -2,32 +2,64 @@ import { useEffect, useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchProductDetail ,selectProductDetail} from '../../product/productsSlice'
+import { fetchProductDetail } from '../../product/productsSlice'
+import { selectProductDetail } from '../../product/productsSlice'
 import { AddToCart } from '../../cart/cartSlice'
 import { selectLoggedInUser } from '../../auth/authSlice'
-import Navbar from '../../navbar/navbar'
+import { discountedPrice } from '../../../app/Constants'
+import { cartItemsSlice } from '../../cart/cartSlice'
+
+import { Slide } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css'
+
+import Swal from 'sweetalert2'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function AdminProductDetail() {
+export default function ProductDetail() {
   const params = useParams()
   const dispatch = useDispatch()
 
   const prod = useSelector(selectProductDetail)
 
-  const arr = []
-  arr.push(prod)
-  // console.log(arr[0].images)
-
+  console.log('Product' , prod)
   const user = useSelector(selectLoggedInUser)
-  console.log(user)
+  console.log('Logged in User :',user)
+  const cartItems = useSelector(cartItemsSlice)
+  console.log('Cart Items are : ',cartItems)  
+  
   const handleClick = (e) => {
-    e.preventDefault() ;
-    const newItem = {...prod ,  quantity: 1, userId: user.id }
-    delete newItem['id']
-    dispatch(AddToCart(newItem))
+    e.preventDefault()
+    if (user != null) {
+      const newItem = { ...prod, quantity: 1, userId: user.id }
+      delete newItem['id']
+      console.log('newItem',newItem)
+      const newCartList = [cartItems , newItem]
+      console.log(newCartList)
+      dispatch(AddToCart(newItem))
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please Login to Add Product to Cart",
+      });
+    }    
+  }
+
+  const spanStyle = {
+    padding: '20px',
+    background: '#efefef',
+    color: '#000000'
+  }
+
+  const divStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundSize: 'cover',
+    height: '400px'
   }
 
 
@@ -35,44 +67,30 @@ export default function AdminProductDetail() {
     dispatch(fetchProductDetail(params.id))
   }, [dispatch, params.id])
 
-
   return (
     <>
-      <Navbar />
       {prod &&
-        <div>
-          <div className="bg-white ">
+        <div >
+          <div>
             <div className="pt-6">
-
-              {/* Image gallery */}
-              <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8" >
-                <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
-                  <img
-                    src={prod.thumbnail}
-                    className="h-full w-full object-cover object-center"
-                  />
-                  {/* <h1 className='bg-red-400'>{prod.title}</h1> */}
-                </div>
-                <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-                  <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
+              <div className=" ] mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8 max-sm:hidden  " >
+                {prod.images && prod.images.map((val, index) =>( 
+                  <div key={index} className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
                     <img
-                      // src={prod.images[1]}                    
+                      src={val}
                       className="h-full w-full object-cover object-center"
                     />
-                  </div>
-                  <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-                    <img
-                      // src={}
-                      className="h-full w-full object-cover object-center"
-                    />
-                  </div>
-                </div>
-                <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
-                  <img
-                    // src={prod.images[3]}
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
+                  </div>))}
+              </div>
+              <div className="slide-container lg:hidden">
+                <Slide>
+                  {prod.images && prod.images.map((slideImage, index) => (
+                    <div key={index}>
+                      <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage})` }}>
+                      </div>
+                    </div>
+                  ))}
+                </Slide>
               </div>
 
               <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16" >
@@ -83,7 +101,7 @@ export default function AdminProductDetail() {
                 {/* Options */}
                 <div className="mt-4 lg:row-span-3 lg:mt-0">
                   <h2 className="sr-only">Product information</h2>
-                  <p className="text-3xl tracking-tight text-gray-900"> ₹{prod.price}</p>
+                  <p className="text-3xl tracking-tight text-gray-900"> ${discountedPrice(prod)}</p>
 
                   {/* Reviews */}
                   <div className="mt-6">
@@ -94,56 +112,22 @@ export default function AdminProductDetail() {
                           <StarIcon
                             key={rating}
                             className={classNames(
-                              // reviews.average > rating ? 'text-gray-900' : 'text-gray-200',
-                              `${prod.rating}` > rating ? 'text-gray-900' : 'text-gray-200',
+                              `${prod.rating}` > rating ? 'text-yellow-500' : 'text-gray-200',
                               'h-5 w-5 flex-shrink-0'
                             )}
                             aria-hidden="true"
                           />
                         ))}
                       </div>
-                      {/* <p className="sr-only">{reviews.average} out of 5 stars</p>
-                          <a href={reviews.href} className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                            {reviews.totalCount} reviews
-                          </a> */}
+                      <p className='text-xl px-4'> {prod.rating}</p>
                     </div>
                   </div>
-
                   <form className="mt-10">
                     {/* Colors */}
                     <div>
                       <h3 className="text-sm font-medium text-gray-900">Color</h3>
                       <>
-                        {/* <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
-                          <RadioGroup.Label className="sr-only">Choose a color</RadioGroup.Label>
-                          <div className="flex items-center space-x-3">
-                            {product.colors.map((color) => (
-                              <RadioGroup.Option
-                                key={color.name}
-                                value={color}
-                                className={({ active, checked }) =>
-                                  classNames(
-                                    color.selectedClass,
-                                    active && checked ? 'ring ring-offset-1' : '',
-                                    !active && checked ? 'ring-2' : '',
-                                    'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none'
-                                  )
-                                }
-                              >
-                                <RadioGroup.Label as="span" className="sr-only">
-                                  {color.name}
-                                </RadioGroup.Label>
-                                <span
-                                  aria-hidden="true"
-                                  className={classNames(
-                                    color.class,
-                                    'h-8 w-8 rounded-full border border-black border-opacity-10'
-                                  )}
-                                />
-                              </RadioGroup.Option>
-                            ))}
-                          </div>
-                        </RadioGroup> */}
+                        {/* Lorem. */}
                       </>
                     </div>
 
@@ -156,64 +140,14 @@ export default function AdminProductDetail() {
                         </a>
                       </div>
                       <>
-                        {/* <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
-                          <RadioGroup.Label className="sr-only">Choose a size</RadioGroup.Label>
-                          <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                            {product.sizes.map((size) => (
-                              <RadioGroup.Option
-                                key={size.name}
-                                value={size}
-                                disabled={!size.inStock}
-                                className={({ active }) =>
-                                  classNames(
-                                    size.inStock
-                                      ? 'cursor-pointer bg-white text-gray-900 shadow-sm'
-                                      : 'cursor-not-allowed bg-gray-50 text-gray-200',
-                                    active ? 'ring-2 ring-indigo-500' : '',
-                                    'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6'
-                                  )
-                                }
-                              >
-                                {({ active, checked }) => (
-                                  <>
-                                    <RadioGroup.Label as="span">{size.name}</RadioGroup.Label>
-                                    {size.inStock ? (
-                                      <span
-                                        className={classNames(
-                                          active ? 'border' : 'border-2',
-                                          checked ? 'border-indigo-500' : 'border-transparent',
-                                          'pointer-events-none absolute -inset-px rounded-md'
-                                        )}
-                                        aria-hidden="true"
-                                      />
-                                    ) : (
-                                      <span
-                                        aria-hidden="true"
-                                        className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
-                                      >
-                                        <svg
-                                          className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
-                                          viewBox="0 0 100 100"
-                                          preserveAspectRatio="none"
-                                          stroke="currentColor"
-                                        >
-                                          <line x1={0} y1={100} x2={100} y2={0} vectorEffect="non-scaling-stroke" />
-                                        </svg>
-                                      </span>
-                                    )}
-                                  </>
-                                )}
-                              </RadioGroup.Option>
-                            ))}
-                          </div>
-                        </RadioGroup> */}
+                        {/* Lorem, ipsum. */}
                       </>
                     </div>
 
                     <button
                       type="submit"
                       className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                      onClick={handleClick}
+                      onClick={ (e) => handleClick(e)}
                     >
                       Add to bag
                     </button>
@@ -225,17 +159,46 @@ export default function AdminProductDetail() {
                   <div>
                     <h3 className="sr-only">Description</h3>
                     <div className="space-y-6">
-                      <p className="text-base text-gray-900">{prod.description}</p>
+                      <p className="text-xl text-gray-900">{prod.description}</p>
+                      <p className='text-xl'><strong>Brand</strong> : {prod.brand}</p>
+                      <p className='text-xl'><strong>Warranty Information</strong> : {prod.warrantyInformation}</p>
+                      <p className='text-xl'><strong>Shipping Information</strong> : {prod.shippingInformation}</p>
+                      <p className='text-xl'><strong>Availability Status </strong> : {prod.availabilityStatus}</p>
+                      <p className='text-xl'><strong> Return Policy </strong> : {prod.returnPolicy}</p>
+                    </div>
+                    <div className="mt-5">
+                      {prod && prod.reviews.map((data, index) => (
+                        <div key={index} className="border-2 border-gray-300 rounded-lg p-4 mb-3 shadow-sm">
+                          <div className="flex items-center mb-2 justify-between">
+                            <div className='flex '>
+                              {[0, 1, 2, 3, 4].map((rating) => (
+                                <StarIcon
+                                  key={rating}
+                                  className={classNames(
+                                    data.rating > rating ? 'text-yellow-500' : 'text-gray-200',
+                                    'h-5 w-5 flex-shrink-0'
+                                  )}
+                                  aria-hidden="true"
+                                />
+                              ))}
+                            </div>
+                            <span className="ml-2 text-gray-500 text-sm"><strong>{data.date.slice(0, 10)}</strong></span>
+                          </div>
+                          <p className="text-gray-700 mb-2">{data.comment}</p>
+                          <div className="border-t border-gray-200 pt-2">
+                            <p className="text-gray-800 font-semibold">{data.reviewerName}</p>
+                            <p className="text-gray-500 text-sm">{data.reviewerEmail}</p>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
               </div>
-
-
             </div>
           </div>
         </div>
-      } 
+      }
     </>
   )
 }

@@ -1,24 +1,24 @@
 import React, { useState } from 'react'
-import Navbar from '../features/navbar/navbar'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RemoveProductAsync, updateItemAsync, cartItemsSlice } from '../features/cart/cartSlice'
+import { RemoveProductAsync, updateItemAsync, cartItemsSlice } from '../cart/cartSlice'
 import { useForm } from 'react-hook-form'
-import { selectLoggedInUser, userAddress } from '../features/auth/authSlice'
-import { OrderAsync } from '../features/order/orderSlice'
+import { selectLoggedInUser, userAddress } from '../auth/authSlice'
+import { OrderAsync } from '../order/orderSlice'
+import { discountedPrice } from '../../app/Constants'
+import Swal from 'sweetalert2'
 
 
 function Checkout() {
     const dispatch = useDispatch()
     const cartItems = useSelector(cartItemsSlice)
     const user = useSelector(selectLoggedInUser)
-    console.log("Logged in user is ", user)
-    const [userAddress2, setUserAddress2] = useState('')
+    const [deliveryAddress, setdeliveryAddress] = useState('')
     const [paymentMethod, setPaymentMethod] = useState('')
     const { register, reset, handleSubmit, formState: { errors } } = useForm()
-
-    const totalPrice = cartItems.reduce((acc, obj) => { return acc + obj.price * obj.quantity }, 0)
-    const totalItems = cartItems.reduce((acc, obj) => { return acc + obj.quantity }, 0)
+     
+    const totalPrice = cartItems.reduce((acc, obj) => { return acc + discountedPrice(obj) * obj.quantity }, 0)
+    const totalItems = cartItems.length
 
     const handleQuantity = (e, product) => {
         e.preventDefault()
@@ -26,40 +26,77 @@ function Checkout() {
     }
 
     const handleRemove = (e, product) => {
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            dispatch(RemoveProductAsync(product))
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success"
+            });
+          }
+        });
         e.preventDefault()
-        dispatch(RemoveProductAsync(product))
+      }
+
+    const handleAddress = (e) => {
+        setdeliveryAddress(user.addresses[e.target.value])
     }
 
-    const handleAddress = (e,AddressIndex) => {
-        e.preventDefault()
-        setUserAddress2(user.addresses[AddressIndex])
-    }
     const handlePayment = (e) => {
-        e.preventDefault()
         setPaymentMethod(e.target.value)
     }
 
     const handleOrder = (e) => {
         e.preventDefault()
-        const order = { cartItems, user, totalPrice, totalItems, userAddress, paymentMethod }
-        dispatch(OrderAsync(order))
+        const order = { cartItems, user, totalPrice, totalItems, deliveryAddress, paymentMethod, status: 'pending' }
+        console.log(cartItems , deliveryAddress , paymentMethod)
+        
+        if( !cartItems){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Your Cart is Empty",                
+              });
+              
+        }else if( !deliveryAddress){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Please select delivery address",                
+              });
+        }else if( !paymentMethod){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Paease select payment method",                
+              });
+        }
+        else{                    
+            dispatch(OrderAsync(order))
+        }
     }
 
     return (
         <>
-            <Navbar />
-            <div className='grid grid-cols-1 lg:grid-cols-2 lg:px-40'>
-
+            <div className='grid grid-cols-1 lg:grid-cols-2 lg:px-40 '>
                 {/* INPUT FORM */}
-                <form className='lg:px-25  px-10 ' onSubmit={handleSubmit((data) => {
+                <form className='lg:px-25  px-10 bg-gray-100 ' onSubmit={handleSubmit((data) => {
                     dispatch(userAddress({ ...user, addresses: [...user.addresses, data] }))
                     reset()
                 })}>
-                    <div className="space-y-12 lg:py-12 py-4 mt-10" >
+                    <div className="  mt-10" >
                         <div className="border-b border-gray-900/10 pb-12">
                             <h2 className="text-3xl font-semibold leading-7 text-gray-900">Profile</h2>
                         </div>
-
                         <div className="border-b border-gray-900/10 pb-1"  >
 
                             <div className="mt-1 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -80,7 +117,6 @@ function Checkout() {
                                     {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
                                 </div>
 
-
                                 <div className="col-span-full">
                                     <label htmlFor="street-address" className="block text-sm font-medium leading-6 text-gray-900">
                                         Street address
@@ -92,7 +128,7 @@ function Checkout() {
                                             id="street-address"
                                             required
                                             autoComplete="street-address"
-                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            className="block w-full rounded-md border-0  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         />
                                     </div>
                                     {errors.address && <p className='text-red-500'>{errors.address.message}</p>}
@@ -155,14 +191,14 @@ function Checkout() {
                                     <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900">
                                         Phone
                                     </label>
-                                    <div className="mt-2">
+                                    <div className="mt-2 ">
                                         <input
                                             type="tel"
                                             {...register('phone', { required: 'phone Number is required' })}
                                             id="phone"
                                             required
                                             autoComplete="address-level2"
-                                            className="block w-[100%] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         />
                                     </div>
                                 </div>
@@ -184,75 +220,86 @@ function Checkout() {
                             </div>
                         </div>
 
-                        <div className="border-b border-gray-900/10 pb-12">
+                        <div className="border-b border-gray-900/10 pb-12 lg:mt-7 lg:mb-7">
                             <h2 className=" font-semibold leading-7 text-2xl text-gray-900">Address</h2>
                             <div className="mt-1 space-y-10">
-                                <fieldset>
-                                    <legend className="text-sm  leading-6 text-gray-900">Choose from existing Address</legend>
-                                    {user.addresses.length >= 1 &&
-                                        <div className="mt-6 space-y-6">
-                                            <ul role="list" className="divide-y divide-gray-100 bg-gray-300">
-                                                {user.addresses.map((person, index) => (
-                                                    <li key={index} className="flex  justify-between gap-x-6 py-5">
-                                                        <div className="flex items-center gap-x-3 ">
-                                                            <input
-                                                                id="address"
-                                                                name="push-notifications"
-                                                                type="radio"
-                                                                value="address"
-                                                                onClick={(e) => handleAddress(e, index)}
-                                                                className="h-4 w-4 border-gray-300  text-indigo-600 focus:ring-indigo-600"
-                                                            />
-                                                            <label htmlFor="push-everything" className="block text-sm font-medium leading-6 text-gray-900">
-                                                                {person.phone}
-                                                            </label>
-                                                            <div className="flex min-w-0 gap-x-4">
-                                                                <div className="min-w-0 flex-auto ">
-                                                                    <p className="text-sm font-semibold leading-6 text-gray-900">{person.name}</p>
-                                                                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">{person.city}</p>
-                                                                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">{person.State}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    }
-                                </fieldset>
-                                <fieldset>
-                                    <legend className="text-2xl font-semibold leading-6 text-gray-900">Payment Mode</legend>
-                                    <div className="mt-6 space-y-6">
-                                        <div className="flex items-center gap-x-3 text-m">
+                                {user.addresses.map((address, index) => (
+                                    <li
+                                        key={index}
+                                        className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200"
+                                    >
+                                        <div className="flex gap-x-4">
                                             <input
-                                                id="payment-cash"
-                                                name="push-notifications"
+                                                onChange={(e) => handleAddress(e)}
+                                                name="address"
                                                 type="radio"
-                                                onClick={handlePayment}
-                                                checked={paymentMethod === 'cash'}
-                                                value='cash'
-                                                className="h-4 w-4 border-gray-300  text-indigo-600 focus:ring-indigo-600"
-                                            />
-                                            <label htmlFor="push-everything" className="block text-sm font-medium leading-6 text-gray-900">
-                                                Cash
-                                            </label>
-                                        </div>
-                                        <div className="flex items-center gap-x-3">
-                                            <input
-                                                id="payment-card"
-                                                name="push-notifications"
-                                                type="radio"
-                                                onClick={handlePayment}
-                                                checked={paymentMethod === 'card'}
-                                                value='card'
+                                                value={index}
                                                 className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                             />
-                                            <label htmlFor="push-email" className="block text-sm font-medium leading-6 text-gray-900">
-                                                Card
-                                            </label>
+                                            <div className="min-w-0 flex-auto">
+                                                <p className="text-sm font-semibold leading-6 text-gray-900">
+                                                    {address.name}
+                                                </p>
+                                                <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                                                    {address.street}
+                                                </p>
+                                                <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                                                    {address.pinCode}
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </fieldset>
+                                        <div className="hidden sm:flex sm:flex-col sm:items-end">
+                                            <p className="text-sm leading-6 text-gray-900">
+                                                Phone: {address.phone}
+                                            </p>
+                                            <p className="text-sm leading-6 text-gray-500">
+                                                {address.city}
+                                            </p>
+                                        </div>
+                                    </li>
+                                ))}
+
+                                <div className="mt-10 space-y-10">
+                                    <fieldset>
+                                        <h2 className=" font-semibold leading-7 text-2xl text-gray-900">   Payment Methods</h2>                          
+                                        <div className="mt-6 space-y-6">
+                                            <div className="flex items-center gap-x-3">
+                                                <input
+                                                    id="cash"
+                                                    // name="payments"
+                                                    onChange={handlePayment}
+                                                    value="cash"
+                                                    type="radio"
+                                                    checked={paymentMethod === 'cash'}
+                                                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                                />
+                                                <label
+                                                    htmlFor="cash"
+                                                    className="block text-sm font-medium leading-6 text-gray-900"
+                                                >
+                                                    Cash
+                                                </label>
+                                            </div>
+                                            <div className="flex items-center gap-x-3">
+                                                <input
+                                                    id="card"
+                                                    // name="payments"
+                                                    onChange={handlePayment}
+                                                    checked={paymentMethod === 'card'}
+                                                    value="card"
+                                                    type="radio"
+                                                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                                />
+                                                <label
+                                                    htmlFor="card"
+                                                    className="block text-sm font-medium leading-6 text-gray-900"
+                                                >
+                                                    Card Payment
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -282,15 +329,14 @@ function Checkout() {
                                                             <h3>
                                                                 <a href={product.href}>{product.title}</a>
                                                             </h3>
-                                                            <p className="ml-4">₹{product.price}</p>
+                                                            <p className="ml-4">${(discountedPrice(product) * (product.quantity))}</p>
                                                         </div>
                                                         <p className="mt-1 text-sm text-gray-500">{product.color}</p>
                                                     </div>
-
                                                     <div className="flex flex-1 items-end justify-between text-sm">
                                                         <div>
                                                             <label className="text-gray-500">Qty </label>
-                                                            <select onClick={(e) => handleQuantity(e, product)} >
+                                                            <select onChange={(e) => handleQuantity(e, product)} value={product.quantity}>
                                                                 <option value="1">1</option>
                                                                 <option value="2">2</option>
                                                                 <option value="3">3</option>
@@ -317,7 +363,7 @@ function Checkout() {
                             <div className="border-t border-gray-200   py-6 sm:px-6 mt-5">
                                 <div className="flex justify-between text-base font-medium text-gray-900">
                                     <p>Subtotal</p>
-                                    <p >₹{totalPrice}</p>
+                                    <p >${totalPrice}</p>
                                 </div>
                                 <div className="flex justify-between text-base font-medium text-gray-900">
                                     <p>Total Items</p>
@@ -336,20 +382,6 @@ function Checkout() {
                                         </Link>
                                     </div>
                                 </Link>
-                                <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-                                    <p>
-                                        or{' '}
-                                        <Link to='/'>
-                                            <button
-                                                type="button"
-                                                className="font-medium text-indigo-600 hover:text-indigo-500"
-                                            >
-                                                Continue Shopping
-                                                <span aria-hidden="true"> &rarr;</span>
-                                            </button>
-                                        </Link>
-                                    </p>
-                                </div>
                             </div>
                         </div>
                     }
@@ -358,6 +390,5 @@ function Checkout() {
         </>
     )
 }
-
 
 export default Checkout

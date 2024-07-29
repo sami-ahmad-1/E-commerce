@@ -5,8 +5,8 @@ import UserProfile from '../features/user/Component/userProfile'
 function UserProfilePage() {
     return (
         <>
-        <Navbar/>
-        <UserProfile/>
+            <Navbar />
+            <UserProfile />
         </>
     )
 }

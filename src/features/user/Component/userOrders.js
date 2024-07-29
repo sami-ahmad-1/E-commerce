@@ -1,20 +1,25 @@
-import React, { Profiler, useEffect } from 'react'
+import React, {  useEffect } from 'react'
 import { selectLoggedInUser } from '../../auth/authSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchuserOrdersAsync, selectUserOrders } from '../userSlice'
+import { Link } from 'react-router-dom'
 
 export default function UserOrders() {
   const dispatch = useDispatch()
   const user = useSelector(selectLoggedInUser)
   const orders = useSelector(selectUserOrders)
-
+  
+  
+  
   useEffect(() => {
-    dispatch(fetchuserOrdersAsync(user.id))
+    if(user != null){
+      dispatch(fetchuserOrdersAsync(user.id))
+    }
   }, [])
 
   return (
-    <div className='bg-slate-100'>      
-      {orders && (
+    <>      
+      {orders ? (
         <div>
           {orders.map((prod, index) => (
             <div className='px-60 ' key={index}>            
@@ -65,6 +70,10 @@ export default function UserOrders() {
                   <p>Payment Method</p>
                   <p >{prod.paymentMethod}</p>
                 </div>
+                <div className="flex justify-between text-base font-medium text-gray-900">
+                  <p>Order Status</p>
+                  <p >{prod.status}</p>
+                </div>
                 <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                 </div>
               </div>
@@ -72,8 +81,26 @@ export default function UserOrders() {
           ))}
         </div>
 
-      )}
-    </div>
+      )
+    :
+    (
+      <div>
+        <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+          <div className="text-center">
+            <h1 className="mt-4 text-3xl tracking-tight text-gray-900 sm:text-5xl">Please Login to view your Orders</h1>
+            <div className="mt-10 flex items-center justify-center gap-x-6">
+              <Link to='/login'>
+                <div className="rounded-md px-14 bg-indigo-600 text-2xl py-2.5 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                  Login
+                </div>
+              </Link>
+            </div>
+          </div>
+        </main>
+      </div>
+    )}
+    </>
+
 
   )
 }

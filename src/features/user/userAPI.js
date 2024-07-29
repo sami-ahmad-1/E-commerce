@@ -17,7 +17,7 @@ export function fetchLoggedInUser(userId) {
 }
 
 export function updateUserInfoAPI(userInfo) {  
-  return new Promise(async (resolve) => {
+  return new Promise(async (resolve) => {    
     const response = await fetch(`http://localhost:8080/users/${userInfo.id}`, {
       method: 'PATCH',
       body: JSON.stringify(userInfo),
@@ -25,8 +25,9 @@ export function updateUserInfoAPI(userInfo) {
         'Content-Type': 'application/json; charset=utf-8'
       },
     })
-    const dataResponse = response.json()
-    resolve({ dataResponse })
+    const data = response.json()
+    resolve({ data })
   }
   )
 }
+
