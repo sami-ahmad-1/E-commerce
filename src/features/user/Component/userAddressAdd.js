@@ -2,18 +2,19 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { selectLoggedInUser, userAddress } from '../../auth/authSlice'
-import {updateUserInfoAsync} from  '../userSlice'
 
-function UserAddressAdd() {
+function UserAddressAdd(props) {
   const dispatch = useDispatch()  
   const user = useSelector(selectLoggedInUser)
   const { register, reset, handleSubmit, formState: { errors } } = useForm()
+
 
   return (
     <div >
       <form className='lg:px-25  px-10 bg-gray-100 ' onSubmit={handleSubmit((data) => {
         dispatch(userAddress({ ...user, addresses: [...user.addresses, data] })) 
         console.log(data)
+
         reset()
       })}>
         <div className="  mt-10" >
