@@ -26,9 +26,9 @@ export const checkLoginUser = createAsyncThunk(
 
 export const userAddress = createAsyncThunk(
   'user/userAddress',
-  async (data) => {
-    const response = await userAddressAPI(data);
-    return response.data;        
+  async (userId) => {
+    const response = await userAddressAPI(userId);
+    return response.data;       
   }
 )
 export const SignOutAsync = createAsyncThunk(
@@ -71,7 +71,7 @@ export const counterSlice = createSlice({
       })
       .addCase(userAddress.fulfilled, (state, action) => {
         state.status = 'idle';        
-        state.loggedInUser.addresses.push(action.payload)
+        state.loggedInUser = action.payload
       })
       .addCase(SignOutAsync.pending, (state) => {
         state.status = 'loading';

@@ -41,20 +41,43 @@ export function checkUser(LoginInfo) {
 }
 
 
-export function userAddressAPI(data) {  
-  return new Promise(async (resolve) => {
-    const response = await fetch(`http://localhost:8080/users/1`, {
-    // const response = await fetch(`http://localhost:8080/users/${data.id}`, {
-      method: 'PATCH',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8'
-      },
-    })
-    const dataResponse = response.json()
-    resolve({ dataResponse })
-  }
-  )
+// export function userAddressAPI(user) {  
+//   return new Promise(async (resolve) => {    
+//     const response = await fetch(`http://localhost:8080/users/${user.id}`, {
+//       method: 'PATCH',
+//       body: JSON.stringify(user),
+//       headers: {
+//         'Content-Type': 'application/json; charset=utf-8'
+//       },
+//     })
+//     const data = response.json()
+//     resolve({ data })
+//   }
+//   )
+// }
+
+
+export function userAddressAPI(user) {  
+  return new Promise(async (resolve, reject) => {    
+    try {
+      const response = await fetch(`http://localhost:8080/users/${user.id}`, {
+        method: 'PATCH',
+        body: JSON.stringify(user),
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8'
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      resolve({ data });
+    } catch (error) {
+      reject(error);
+    }
+  });
 }
 
 export function DeleteUserAddress(userId) {  

@@ -96,6 +96,14 @@ function Login() {
                 </a>
               </p>
             </Link>
+            <Link to="/">
+              <p className="mt-4 text-center text-sm text-gray-500">
+                Skip Login?{' '}
+                <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                  Home Page
+                </a>
+              </p>
+            </Link>
           </div>
         </div>
       </div>

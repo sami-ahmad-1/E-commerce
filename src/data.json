@@ -6061,6 +6061,24 @@
         ""
       ],
       "id": 103
+    },
+    {
+      "title": "asfs",
+      "description": "asda",
+      "price": "345",
+      "discountPercentage": "345",
+      "rating": "4",
+      "stock": "45",
+      "brand": "45",
+      "Category": "45",
+      "thumbnail": "45",
+      "images": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "id": 104
     }
   ],
   "users": [
@@ -6069,41 +6087,67 @@
       "password": "1",
       "addresses": [
         {
-          "name": "tttttttttttt",
-          "address": "tttttttttttt",
-          "city": "tttttttttttt",
-          "State": "tttttttttttt",
-          "pincode": "tttttttttttt",
-          "phone": "tttttttttttt"
+          "name": "John Doe",
+          "address": "Hazaribagh",
+          "city": "Hazaribagh",
+          "State": "jharkhand",
+          "pincode": "825301",
+          "phone": "9595959595"
         },
         {
-          "name": "fsgdg",
-          "address": "sdfsf",
-          "city": "sdfsdf",
-          "State": "fsdfsdf",
-          "pincode": "sdfsdf",
-          "phone": "sdf"
+          "name": "rtttttttttttttt",
+          "address": "rtttttttttttttt",
+          "city": "rtttttttttttttt",
+          "State": "rtttttttttttttt",
+          "pincode": "rtttttttttttttt",
+          "phone": "rtttttttttttttt"
+        },
+        {
+          "name": "rrrrrrrrrrrrrrrrr",
+          "address": "rrrrrrrrrrrrrrrrr",
+          "city": "rrrrrrrrrrrrrrrrr",
+          "State": "rrrrrrrrrrrrrrrrr",
+          "pincode": "rrrrrrrrrrrrrrrrr",
+          "phone": "rrrrrrrrrrrrrrrrr"
+        },
+        {
+          "name": "ttttttttttttttttttt",
+          "address": "ttttttttttttttttttt",
+          "city": "ttttttttttttttttttt",
+          "State": "ttttttttttttttttttt",
+          "pincode": "ttttttttttttttttttt",
+          "phone": "ttttttttttttttttttt"
+        },
+        {
+          "name": "MD SAMI AHMAD",
+          "address": "f",
+          "city": "f",
+          "State": "f",
+          "pincode": "f",
+          "phone": "f"
+        },
+        {
+          "name": "मो",
+          "address": "NEAR NIDAN NURSING HOME LOHSINGHNA HAZARIBAGH JHARKHAND",
+          "city": "HAZARIBAGH",
+          "State": "Jharkhand",
+          "pincode": "825301",
+          "phone": "HAZARIBAGH"
         }
       ],
-      "id": 1,
-      "name": "sdfdf",
-      "address": "sdfs",
-      "city": "sdfs",
-      "State": "sdf",
-      "pincode": "sdf",
-      "phone": "dsf"
+      "id": 1
     },
     {
       "email": "Sid@gmail.com",
       "password": "1",
       "addresses": [
         {
-          "name": "oooo",
-          "address": "ooo",
-          "city": "o",
-          "State": "o",
-          "pincode": "o",
-          "phone": "o"
+          "name": "John Doe",
+          "address": "Hazaribagh",
+          "city": "Hazaribagh",
+          "State": "jharkhand",
+          "pincode": "825301",
+          "phone": "9595959595"
         }
       ],
       "id": 2
@@ -6119,6 +6163,14 @@
           "State": "jharkhand",
           "pincode": "825301",
           "phone": "9595959595"
+        },
+        {
+          "name": "Tony",
+          "address": "Andheri East GoreGao",
+          "city": "Mumbai",
+          "State": "Maharashtra",
+          "pincode": "898943",
+          "phone": "9988776655"
         }
       ],
       "role": "admin",
@@ -6127,379 +6179,255 @@
   ],
   "cart": [
     {
-      "title": "Powder Canister",
-      "description": "The Powder Canister is a finely milled setting powder designed to set makeup and control shine. With a lightweight and translucent formula, it provides a smooth and matte finish.",
+      "title": "Eyeshadow Palette with Mirror",
+      "description": "The Eyeshadow Palette with Mirror offers a versatile range of eyeshadow shades for creating stunning eye looks. With a built-in mirror, it's convenient for on-the-go makeup application.",
       "category": "beauty",
-      "price": 14.99,
-      "discountPercentage": 18.14,
-      "rating": 3.82,
-      "stock": 59,
+      "price": 19.99,
+      "discountPercentage": 5.5,
+      "rating": 3.28,
+      "stock": 44,
       "tags": [
         "beauty",
-        "face powder"
+        "eyeshadow"
       ],
-      "brand": "Velvet Touch",
-      "sku": "9EN8WLT2",
-      "weight": 8,
+      "brand": "Glamour Beauty",
+      "sku": "MVCFH27F",
+      "weight": 3,
       "dimensions": {
-        "width": 24.16,
-        "height": 10.7,
-        "depth": 11.07
+        "width": 12.42,
+        "height": 8.63,
+        "depth": 29.13
       },
-      "warrantyInformation": "2 year warranty",
-      "shippingInformation": "Ships in 1-2 business days",
+      "warrantyInformation": "1 year warranty",
+      "shippingInformation": "Ships in 2 weeks",
       "availabilityStatus": "In Stock",
       "reviews": [
         {
-          "rating": 5,
-          "comment": "Very happy with my purchase!",
+          "rating": 4,
+          "comment": "Very satisfied!",
           "date": "2024-05-23T08:56:21.618Z",
-          "reviewerName": "Ethan Thompson",
-          "reviewerEmail": "ethan.thompson@x.dummyjson.com"
+          "reviewerName": "Liam Garcia",
+          "reviewerEmail": "liam.garcia@x.dummyjson.com"
         },
         {
-          "rating": 4,
-          "comment": "Great value for money!",
+          "rating": 1,
+          "comment": "Very disappointed!",
           "date": "2024-05-23T08:56:21.618Z",
-          "reviewerName": "Levi Hicks",
-          "reviewerEmail": "levi.hicks@x.dummyjson.com"
+          "reviewerName": "Nora Russell",
+          "reviewerEmail": "nora.russell@x.dummyjson.com"
         },
         {
           "rating": 5,
           "comment": "Highly impressed!",
           "date": "2024-05-23T08:56:21.618Z",
-          "reviewerName": "Hazel Gardner",
-          "reviewerEmail": "hazel.gardner@x.dummyjson.com"
+          "reviewerName": "Elena Baker",
+          "reviewerEmail": "elena.baker@x.dummyjson.com"
         }
       ],
-      "returnPolicy": "60 days return policy",
-      "minimumOrderQuantity": 25,
+      "returnPolicy": "30 days return policy",
+      "minimumOrderQuantity": 32,
       "meta": {
         "createdAt": "2024-05-23T08:56:21.618Z",
         "updatedAt": "2024-05-23T08:56:21.618Z",
-        "barcode": "0516267971277",
+        "barcode": "2817839095220",
         "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
       },
       "images": [
-        "https://cdn.dummyjson.com/products/images/beauty/Powder%20Canister/1.png"
+        "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/1.png"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Powder%20Canister/thumbnail.png",
-      "quantity": 5,
-      "userId": 3,
-      "id": 5
+      "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png",
+      "quantity": 1,
+      "userId": 1,
+      "id": 1
     },
     {
-      "title": "Red Lipstick",
-      "description": "The Red Lipstick is a classic and bold choice for adding a pop of color to your lips. With a creamy and pigmented formula, it provides a vibrant and long-lasting finish.",
-      "category": "beauty",
-      "price": 12.99,
-      "discountPercentage": 19.03,
-      "rating": 2.51,
-      "stock": 68,
+      "title": "Chanel Coco Noir Eau De",
+      "description": "Coco Noir by Chanel is an elegant and mysterious fragrance, featuring notes of grapefruit, rose, and sandalwood. Perfect for evening occasions.",
+      "category": "fragrances",
+      "price": 129.99,
+      "discountPercentage": 18.64,
+      "rating": 2.76,
+      "stock": 41,
       "tags": [
-        "beauty",
-        "lipstick"
+        "fragrances",
+        "perfumes"
       ],
-      "brand": "Chic Cosmetics",
-      "sku": "O5IF1NTA",
-      "weight": 5,
+      "brand": "Chanel",
+      "sku": "K71HBCGS",
+      "weight": 4,
       "dimensions": {
-        "width": 14.37,
-        "height": 13.94,
-        "depth": 14.6
+        "width": 21.27,
+        "height": 28,
+        "depth": 11.89
       },
-      "warrantyInformation": "Lifetime warranty",
+      "warrantyInformation": "1 week warranty",
+      "shippingInformation": "Ships in 1 month",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "rating": 1,
+          "comment": "Disappointing product!",
+          "date": "2024-05-23T08:56:21.619Z",
+          "reviewerName": "Lincoln Kelly",
+          "reviewerEmail": "lincoln.kelly@x.dummyjson.com"
+        },
+        {
+          "rating": 4,
+          "comment": "Great product!",
+          "date": "2024-05-23T08:56:21.619Z",
+          "reviewerName": "Lincoln Kelly",
+          "reviewerEmail": "lincoln.kelly@x.dummyjson.com"
+        },
+        {
+          "rating": 4,
+          "comment": "Excellent quality!",
+          "date": "2024-05-23T08:56:21.619Z",
+          "reviewerName": "Lucas Allen",
+          "reviewerEmail": "lucas.allen@x.dummyjson.com"
+        }
+      ],
+      "returnPolicy": "60 days return policy",
+      "minimumOrderQuantity": 5,
+      "meta": {
+        "createdAt": "2024-05-23T08:56:21.619Z",
+        "updatedAt": "2024-05-23T08:56:21.619Z",
+        "barcode": "1435582999795",
+        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+      },
+      "images": [
+        "https://cdn.dummyjson.com/products/images/fragrances/Chanel%20Coco%20Noir%20Eau%20De/1.png",
+        "https://cdn.dummyjson.com/products/images/fragrances/Chanel%20Coco%20Noir%20Eau%20De/2.png",
+        "https://cdn.dummyjson.com/products/images/fragrances/Chanel%20Coco%20Noir%20Eau%20De/3.png"
+      ],
+      "thumbnail": "https://cdn.dummyjson.com/products/images/fragrances/Chanel%20Coco%20Noir%20Eau%20De/thumbnail.png",
+      "quantity": 1,
+      "userId": 2,
+      "id": 2
+    },
+    {
+      "title": "Gucci Bloom Eau de",
+      "description": "Gucci Bloom by Gucci is a floral and captivating fragrance, with notes of tuberose, jasmine, and Rangoon creeper. It's a modern and romantic scent.",
+      "category": "fragrances",
+      "price": 79.99,
+      "discountPercentage": 8.9,
+      "rating": 2.69,
+      "stock": 93,
+      "tags": [
+        "fragrances",
+        "perfumes"
+      ],
+      "brand": "Gucci",
+      "sku": "FFKZ6HOF",
+      "weight": 10,
+      "dimensions": {
+        "width": 22.28,
+        "height": 17.81,
+        "depth": 27.18
+      },
+      "warrantyInformation": "No warranty",
       "shippingInformation": "Ships in 2 weeks",
       "availabilityStatus": "In Stock",
       "reviews": [
         {
           "rating": 5,
-          "comment": "Great product!",
-          "date": "2024-05-23T08:56:21.619Z",
-          "reviewerName": "Leo Rivera",
-          "reviewerEmail": "leo.rivera@x.dummyjson.com"
-        },
-        {
-          "rating": 4,
-          "comment": "Very pleased!",
-          "date": "2024-05-23T08:56:21.619Z",
-          "reviewerName": "Oscar Powers",
-          "reviewerEmail": "oscar.powers@x.dummyjson.com"
-        },
-        {
-          "rating": 5,
-          "comment": "Very pleased!",
-          "date": "2024-05-23T08:56:21.619Z",
-          "reviewerName": "Carter Rivera",
-          "reviewerEmail": "carter.rivera@x.dummyjson.com"
-        }
-      ],
-      "returnPolicy": "90 days return policy",
-      "minimumOrderQuantity": 6,
-      "meta": {
-        "createdAt": "2024-05-23T08:56:21.619Z",
-        "updatedAt": "2024-05-23T08:56:21.619Z",
-        "barcode": "9444582199406",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
-      },
-      "images": [
-        "https://cdn.dummyjson.com/products/images/beauty/Red%20Lipstick/1.png"
-      ],
-      "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Red%20Lipstick/thumbnail.png",
-      "quantity": 2,
-      "userId": 1,
-      "id": 6
-    },
-    {
-      "title": "Rice",
-      "description": "High-quality rice, a staple for various cuisines and a versatile base for many dishes.",
-      "category": "groceries",
-      "price": 5.99,
-      "discountPercentage": 12.02,
-      "rating": 3.94,
-      "stock": 49,
-      "tags": [
-        "grains"
-      ],
-      "sku": "905JXMXM",
-      "weight": 1,
-      "dimensions": {
-        "width": 28.86,
-        "height": 6.26,
-        "depth": 11.04
-      },
-      "warrantyInformation": "2 year warranty",
-      "shippingInformation": "Ships in 1 month",
-      "availabilityStatus": "In Stock",
-      "reviews": [
-        {
-          "rating": 5,
-          "comment": "Highly impressed!",
-          "date": "2024-05-23T08:56:21.621Z",
-          "reviewerName": "Hazel Gardner",
-          "reviewerEmail": "hazel.gardner@x.dummyjson.com"
-        },
-        {
-          "rating": 4,
           "comment": "Great value for money!",
-          "date": "2024-05-23T08:56:21.621Z",
-          "reviewerName": "Gabriel Adams",
-          "reviewerEmail": "gabriel.adams@x.dummyjson.com"
+          "date": "2024-05-23T08:56:21.620Z",
+          "reviewerName": "Aria Parker",
+          "reviewerEmail": "aria.parker@x.dummyjson.com"
         },
         {
           "rating": 4,
-          "comment": "Awesome product!",
-          "date": "2024-05-23T08:56:21.621Z",
-          "reviewerName": "Jack Ward",
-          "reviewerEmail": "jack.ward@x.dummyjson.com"
-        }
-      ],
-      "returnPolicy": "60 days return policy",
-      "minimumOrderQuantity": 18,
-      "meta": {
-        "createdAt": "2024-05-23T08:56:21.621Z",
-        "updatedAt": "2024-05-23T08:56:21.621Z",
-        "barcode": "0027455825200",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
-      },
-      "images": [
-        "https://cdn.dummyjson.com/products/images/groceries/Rice/1.png"
-      ],
-      "thumbnail": "https://cdn.dummyjson.com/products/images/groceries/Rice/thumbnail.png",
-      "quantity": 1,
-      "userId": 1,
-      "id": 11
-    },
-    {
-      "title": "Nike Air Jordan 1 Red And Black",
-      "description": "The Nike Air Jordan 1 in Red and Black is an iconic basketball sneaker known for its stylish design and high-performance features, making it a favorite among sneaker enthusiasts and athletes.",
-      "category": "mens-shoes",
-      "price": 149.99,
-      "discountPercentage": 15.82,
-      "rating": 2.77,
-      "stock": 15,
-      "tags": [
-        "footwear",
-        "athletic shoes"
-      ],
-      "brand": "Nike",
-      "sku": "84YC5J67",
-      "weight": 5,
-      "dimensions": {
-        "width": 19.29,
-        "height": 13.2,
-        "depth": 29.13
-      },
-      "warrantyInformation": "1 year warranty",
-      "shippingInformation": "Ships in 1 month",
-      "availabilityStatus": "In Stock",
-      "reviews": [
-        {
-          "rating": 2,
-          "comment": "Very unhappy with my purchase!",
-          "date": "2024-05-23T08:56:21.623Z",
-          "reviewerName": "Victoria McDonald",
-          "reviewerEmail": "victoria.mcdonald@x.dummyjson.com"
+          "comment": "Excellent quality!",
+          "date": "2024-05-23T08:56:21.620Z",
+          "reviewerName": "Natalie Harris",
+          "reviewerEmail": "natalie.harris@x.dummyjson.com"
         },
         {
           "rating": 4,
-          "comment": "Great product!",
-          "date": "2024-05-23T08:56:21.623Z",
-          "reviewerName": "Mason Parker",
-          "reviewerEmail": "mason.parker@x.dummyjson.com"
-        },
-        {
-          "rating": 5,
           "comment": "Fast shipping!",
-          "date": "2024-05-23T08:56:21.623Z",
-          "reviewerName": "Avery Perez",
-          "reviewerEmail": "avery.perez@x.dummyjson.com"
-        }
-      ],
-      "returnPolicy": "7 days return policy",
-      "minimumOrderQuantity": 2,
-      "meta": {
-        "createdAt": "2024-05-23T08:56:21.623Z",
-        "updatedAt": "2024-05-23T08:56:21.623Z",
-        "barcode": "0098559139691",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
-      },
-      "images": [
-        "https://cdn.dummyjson.com/products/images/mens-shoes/Nike%20Air%20Jordan%201%20Red%20And%20Black/1.png",
-        "https://cdn.dummyjson.com/products/images/mens-shoes/Nike%20Air%20Jordan%201%20Red%20And%20Black/2.png",
-        "https://cdn.dummyjson.com/products/images/mens-shoes/Nike%20Air%20Jordan%201%20Red%20And%20Black/3.png",
-        "https://cdn.dummyjson.com/products/images/mens-shoes/Nike%20Air%20Jordan%201%20Red%20And%20Black/4.png"
-      ],
-      "thumbnail": "https://cdn.dummyjson.com/products/images/mens-shoes/Nike%20Air%20Jordan%201%20Red%20And%20Black/thumbnail.png",
-      "quantity": 1,
-      "userId": 3,
-      "id": 12
-    },
-    {
-      "title": "Red Nail Polish",
-      "description": "The Red Nail Polish offers a rich and glossy red hue for vibrant and polished nails. With a quick-drying formula, it provides a salon-quality finish at home.",
-      "category": "beauty",
-      "price": 8.99,
-      "discountPercentage": 2.46,
-      "rating": 3.91,
-      "stock": 71,
-      "tags": [
-        "beauty",
-        "nail polish"
-      ],
-      "brand": "Nail Couture",
-      "sku": "YUIIIP4W",
-      "weight": 9,
-      "dimensions": {
-        "width": 8.11,
-        "height": 10.89,
-        "depth": 29.06
-      },
-      "warrantyInformation": "1 year warranty",
-      "shippingInformation": "Ships in 1 week",
-      "availabilityStatus": "In Stock",
-      "reviews": [
-        {
-          "rating": 5,
-          "comment": "Very pleased!",
-          "date": "2024-05-23T08:56:21.619Z",
-          "reviewerName": "Leo Rivera",
-          "reviewerEmail": "leo.rivera@x.dummyjson.com"
-        },
-        {
-          "rating": 5,
-          "comment": "Great product!",
-          "date": "2024-05-23T08:56:21.619Z",
-          "reviewerName": "Evan Reed",
-          "reviewerEmail": "evan.reed@x.dummyjson.com"
-        },
-        {
-          "rating": 4,
-          "comment": "Highly recommended!",
-          "date": "2024-05-23T08:56:21.619Z",
-          "reviewerName": "Evelyn Sanchez",
-          "reviewerEmail": "evelyn.sanchez@x.dummyjson.com"
+          "date": "2024-05-23T08:56:21.620Z",
+          "reviewerName": "Ava Harris",
+          "reviewerEmail": "ava.harris@x.dummyjson.com"
         }
       ],
       "returnPolicy": "No return policy",
-      "minimumOrderQuantity": 46,
+      "minimumOrderQuantity": 10,
       "meta": {
-        "createdAt": "2024-05-23T08:56:21.619Z",
-        "updatedAt": "2024-05-23T08:56:21.619Z",
-        "barcode": "3212847902461",
+        "createdAt": "2024-05-23T08:56:21.620Z",
+        "updatedAt": "2024-05-23T08:56:21.620Z",
+        "barcode": "8232190382069",
         "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
       },
       "images": [
-        "https://cdn.dummyjson.com/products/images/beauty/Red%20Nail%20Polish/1.png"
+        "https://cdn.dummyjson.com/products/images/fragrances/Gucci%20Bloom%20Eau%20de/1.png",
+        "https://cdn.dummyjson.com/products/images/fragrances/Gucci%20Bloom%20Eau%20de/2.png",
+        "https://cdn.dummyjson.com/products/images/fragrances/Gucci%20Bloom%20Eau%20de/3.png"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/products/images/beauty/Red%20Nail%20Polish/thumbnail.png",
-      "quantity": 3,
-      "userId": 1,
-      "id": 13
+      "thumbnail": "https://cdn.dummyjson.com/products/images/fragrances/Gucci%20Bloom%20Eau%20de/thumbnail.png",
+      "quantity": 1,
+      "userId": 2,
+      "id": 3
     },
     {
-      "title": "Rolex Datejust",
-      "description": "The Rolex Datejust is an iconic and versatile timepiece with a date window. Known for its timeless design and reliability, it's a symbol of Rolex's watchmaking excellence.",
-      "category": "mens-watches",
-      "price": 10999.99,
-      "discountPercentage": 9.69,
-      "rating": 4.94,
-      "stock": 11,
+      "title": "Ice Cube Tray",
+      "description": "The Ice Cube Tray is a practical accessory for making ice cubes in various shapes. Perfect for keeping your drinks cool and adding a fun element to your beverages.",
+      "category": "kitchen-accessories",
+      "price": 5.99,
+      "discountPercentage": 0.95,
+      "rating": 3.27,
+      "stock": 81,
       "tags": [
-        "watches",
-        "luxury watches"
+        "kitchen tools",
+        "ice cube trays"
       ],
-      "brand": "Rolex",
-      "sku": "86V20NWJ",
-      "weight": 5,
+      "sku": "K0UE7U34",
+      "weight": 8,
       "dimensions": {
-        "width": 9.68,
-        "height": 7.29,
-        "depth": 5.67
+        "width": 27.19,
+        "height": 20.42,
+        "depth": 17.45
       },
-      "warrantyInformation": "6 months warranty",
-      "shippingInformation": "Ships in 3-5 business days",
+      "warrantyInformation": "No warranty",
+      "shippingInformation": "Ships in 1 month",
       "availabilityStatus": "In Stock",
       "reviews": [
         {
           "rating": 5,
+          "comment": "Excellent quality!",
+          "date": "2024-05-23T08:56:21.622Z",
+          "reviewerName": "Mia Miller",
+          "reviewerEmail": "mia.miller@x.dummyjson.com"
+        },
+        {
+          "rating": 4,
+          "comment": "Very happy with my purchase!",
+          "date": "2024-05-23T08:56:21.622Z",
+          "reviewerName": "Emma Miller",
+          "reviewerEmail": "emma.miller@x.dummyjson.com"
+        },
+        {
+          "rating": 4,
           "comment": "Highly impressed!",
-          "date": "2024-05-23T08:56:21.624Z",
-          "reviewerName": "Max Russell",
-          "reviewerEmail": "max.russell@x.dummyjson.com"
-        },
-        {
-          "rating": 4,
-          "comment": "Would buy again!",
-          "date": "2024-05-23T08:56:21.624Z",
-          "reviewerName": "Jonathan Pierce",
-          "reviewerEmail": "jonathan.pierce@x.dummyjson.com"
-        },
-        {
-          "rating": 4,
-          "comment": "Awesome product!",
-          "date": "2024-05-23T08:56:21.624Z",
-          "reviewerName": "Asher Scott",
-          "reviewerEmail": "asher.scott@x.dummyjson.com"
+          "date": "2024-05-23T08:56:21.622Z",
+          "reviewerName": "Isabella Anderson",
+          "reviewerEmail": "isabella.anderson@x.dummyjson.com"
         }
       ],
-      "returnPolicy": "90 days return policy",
-      "minimumOrderQuantity": 1,
+      "returnPolicy": "30 days return policy",
+      "minimumOrderQuantity": 11,
       "meta": {
-        "createdAt": "2024-05-23T08:56:21.624Z",
-        "updatedAt": "2024-05-23T08:56:21.624Z",
-        "barcode": "4957618378388",
+        "createdAt": "2024-05-23T08:56:21.622Z",
+        "updatedAt": "2024-05-23T08:56:21.622Z",
+        "barcode": "7685066283284",
         "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
       },
       "images": [
-        "https://cdn.dummyjson.com/products/images/mens-watches/Rolex%20Datejust/1.png",
-        "https://cdn.dummyjson.com/products/images/mens-watches/Rolex%20Datejust/2.png",
-        "https://cdn.dummyjson.com/products/images/mens-watches/Rolex%20Datejust/3.png"
+        "https://cdn.dummyjson.com/products/images/kitchen-accessories/Ice%20Cube%20Tray/1.png"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/products/images/mens-watches/Rolex%20Datejust/thumbnail.png",
+      "thumbnail": "https://cdn.dummyjson.com/products/images/kitchen-accessories/Ice%20Cube%20Tray/thumbnail.png",
       "quantity": 1,
-      "userId": 1,
-      "id": 15
+      "userId": 3,
+      "id": 4
     }
   ],
   "orders": [
@@ -7164,8 +7092,110 @@
         "phone": "sdf"
       },
       "paymentMethod": "card",
-      "status": "pending",
+      "status": "Assigned",
       "id": 2
+    },
+    {
+      "cartItems": [
+        {
+          "title": "Ice Cube Tray",
+          "description": "The Ice Cube Tray is a practical accessory for making ice cubes in various shapes. Perfect for keeping your drinks cool and adding a fun element to your beverages.",
+          "category": "kitchen-accessories",
+          "price": 5.99,
+          "discountPercentage": 0.95,
+          "rating": 3.27,
+          "stock": 81,
+          "tags": [
+            "kitchen tools",
+            "ice cube trays"
+          ],
+          "sku": "K0UE7U34",
+          "weight": 8,
+          "dimensions": {
+            "width": 27.19,
+            "height": 20.42,
+            "depth": 17.45
+          },
+          "warrantyInformation": "No warranty",
+          "shippingInformation": "Ships in 1 month",
+          "availabilityStatus": "In Stock",
+          "reviews": [
+            {
+              "rating": 5,
+              "comment": "Excellent quality!",
+              "date": "2024-05-23T08:56:21.622Z",
+              "reviewerName": "Mia Miller",
+              "reviewerEmail": "mia.miller@x.dummyjson.com"
+            },
+            {
+              "rating": 4,
+              "comment": "Very happy with my purchase!",
+              "date": "2024-05-23T08:56:21.622Z",
+              "reviewerName": "Emma Miller",
+              "reviewerEmail": "emma.miller@x.dummyjson.com"
+            },
+            {
+              "rating": 4,
+              "comment": "Highly impressed!",
+              "date": "2024-05-23T08:56:21.622Z",
+              "reviewerName": "Isabella Anderson",
+              "reviewerEmail": "isabella.anderson@x.dummyjson.com"
+            }
+          ],
+          "returnPolicy": "30 days return policy",
+          "minimumOrderQuantity": 11,
+          "meta": {
+            "createdAt": "2024-05-23T08:56:21.622Z",
+            "updatedAt": "2024-05-23T08:56:21.622Z",
+            "barcode": "7685066283284",
+            "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+          },
+          "images": [
+            "https://cdn.dummyjson.com/products/images/kitchen-accessories/Ice%20Cube%20Tray/1.png"
+          ],
+          "thumbnail": "https://cdn.dummyjson.com/products/images/kitchen-accessories/Ice%20Cube%20Tray/thumbnail.png",
+          "quantity": 1,
+          "userId": 3,
+          "id": 4
+        }
+      ],
+      "user": {
+        "email": "ahmad@gmail.com",
+        "password": "1",
+        "addresses": [
+          {
+            "name": "John Doe",
+            "address": "Hazaribagh",
+            "city": "Hazaribagh",
+            "State": "jharkhand",
+            "pincode": "825301",
+            "phone": "9595959595"
+          },
+          {
+            "name": "Tony",
+            "address": "Andheri East GoreGao",
+            "city": "Mumbai",
+            "State": "Maharashtra",
+            "pincode": "898943",
+            "phone": "9988776655"
+          }
+        ],
+        "role": "admin",
+        "id": 3
+      },
+      "totalPrice": 6,
+      "totalItems": 1,
+      "deliveryAddress": {
+        "name": "Tony",
+        "address": "Andheri East GoreGao",
+        "city": "Mumbai",
+        "State": "Maharashtra",
+        "pincode": "898943",
+        "phone": "9988776655"
+      },
+      "paymentMethod": "cash",
+      "status": "Assigned",
+      "id": 3
     }
   ]
 }

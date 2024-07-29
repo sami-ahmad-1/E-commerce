@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,7 +8,6 @@ import { AddToCart } from '../../cart/cartSlice'
 import { selectLoggedInUser } from '../../auth/authSlice'
 import { discountedPrice } from '../../../app/Constants'
 import { cartItemsSlice } from '../../cart/cartSlice'
-
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
 import Swal from 'sweetalert2'
@@ -23,28 +22,37 @@ export default function ProductDetail() {
 
   const prod = useSelector(selectProductDetail)
 
-  console.log('Product' , prod)
+  console.log('Product', prod)
   const user = useSelector(selectLoggedInUser)
-  console.log('Logged in User :',user)
+  console.log('Logged in User :', user)
   const cartItems = useSelector(cartItemsSlice)
-  console.log('Cart Items are : ',cartItems)  
-  
-  const handleClick = (e) => {
+  console.log('Cart Items are : ', cartItems)
+
+  const handleClick = async (e) => {
     e.preventDefault()
     if (user != null) {
       const newItem = { ...prod, quantity: 1, userId: user.id }
       delete newItem['id']
-      console.log('newItem',newItem)
-      const newCartList = [cartItems , newItem]
+      console.log('newItem', newItem)
+      const newCartList = [cartItems, newItem]
       console.log(newCartList)
-      dispatch(AddToCart(newItem))
+      dispatch(AddToCart(newItem)).then(() => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `${newItem.title} Added To Cart`,
+          showConfirmButton: false,
+          timer: 1500
+        });
+
+      })
     } else {
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Please Login to Add Product to Cart",
       });
-    }    
+    }
   }
 
   const spanStyle = {
@@ -69,7 +77,7 @@ export default function ProductDetail() {
   return (
     <>
       {prod &&
-        <div >
+        <div >          
           <div>
             <div className="pt-6">
               <div className=" ] mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8 max-sm:hidden  " >

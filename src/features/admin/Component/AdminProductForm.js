@@ -8,7 +8,7 @@ export default function AdminProductForm() {
 
 
   return (
-    <div className='px-5  md:py-10  '>    
+    <div className='px-5  md:py-10  '>
       <div className=' md:px-20 lg:px-36'>
         <form onSubmit={handleSubmit((data) => {
           const prodData = { ...data }
@@ -23,7 +23,7 @@ export default function AdminProductForm() {
         })}>
           <div>
             <div className="border-b border-gray-900/10 pb-12">
-              <h2 className="text-3xl font-semibold leading-7 text-gray-900">Add Product Page</h2>
+              <h2 className="text-3xl font-semibold leading-7 text-gray-900">Add New Product</h2>
               <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div className="sm:col-span-4">
                   <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
@@ -38,7 +38,8 @@ export default function AdminProductForm() {
                         autoComplete="username"
                         className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                       />
-                    </div>
+                    </div>                    
+                      {errors.name && <p className='text-red-500'>{errors.name.message}</p>}                    
                   </div>
                 </div>
 
@@ -48,7 +49,7 @@ export default function AdminProductForm() {
                   </label>
                   <div className="mt-2">
                     <textarea
-                    placeholder='Product description...'
+                      placeholder='Product description...'
                       id="about"
                       {...register('description', { required: 'Product Title is required' })}
                       rows={3}
@@ -56,6 +57,8 @@ export default function AdminProductForm() {
                       defaultValue={''}
                     />
                   </div>
+                  {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
+
                 </div>
               </div>
             </div>
@@ -240,12 +243,12 @@ export default function AdminProductForm() {
           </div>
 
           <div className="mt-6 flex items-center  gap-x-6">
-            <button  className="w-32 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick = { () => reset()}>
+            <button className="w-32 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={() => reset()}>
               Reset
             </button>
-            <button className="w-32 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
-           >
-            {/* <button> */}
+            <button className="w-32 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              {/* <button> */}
               Save
             </button>
           </div>
