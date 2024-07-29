@@ -1,9 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { CartAPI , fetchProductDetailAPI, RemoveProductAPI , updateCart} from './cartAPI';
+import { CartAPI , fetchUserCartItemsAPI, RemoveProductAPI , updateCart} from './cartAPI';
 
 const initialState = {
   value: 0,  
-  productDetail:null,
   items : []
 };
 
@@ -17,9 +16,9 @@ export const AddToCart = createAsyncThunk(
 )
 
 export const fetchProductByUserId = createAsyncThunk(
-  'products/fetchProductDetail',
+  'products/fetchUserCartItems',
   async (UserId) => {
-    const response = await fetchProductDetailAPI(UserId);  
+    const response = await fetchUserCartItemsAPI(UserId);  
     return response.data;
   }
 );
@@ -58,15 +57,14 @@ export const CartSlice = createSlice({
       })
       .addCase(AddToCart.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.cartItems.push(action.payload)
+        state.items.push(action.payload)
       })
       .addCase(fetchProductByUserId.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(fetchProductByUserId.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.items = action.payload;            
-        // state.items.push(action.payload) 
+        state.items = action.payload;                    
       })
       .addCase(RemoveProductAsync.pending, (state) => {
         state.status = 'loading';
@@ -87,6 +85,6 @@ export const CartSlice = createSlice({
 });
 
 export const cartItemsSlice = (state) => state.cart.items;
-export const productDetailSlice = (state) => state.cart.productDetail;
 export default CartSlice.reducer;
+
 

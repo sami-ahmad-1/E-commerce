@@ -11,7 +11,6 @@ import { cartItemsSlice } from '../../cart/cartSlice'
 
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
-
 import Swal from 'sweetalert2'
 
 function classNames(...classes) {
@@ -167,7 +166,7 @@ export default function ProductDetail() {
                       <p className='text-xl'><strong> Return Policy </strong> : {prod.returnPolicy}</p>
                     </div>
                     <div className="mt-5">
-                      {prod && prod.reviews.map((data, index) => (
+                      {prod.reviewa && prod.reviews.map((data, index) => (
                         <div key={index} className="border-2 border-gray-300 rounded-lg p-4 mb-3 shadow-sm">
                           <div className="flex items-center mb-2 justify-between">
                             <div className='flex '>
@@ -202,6 +201,4 @@ export default function ProductDetail() {
     </>
   )
 }
-
-
 

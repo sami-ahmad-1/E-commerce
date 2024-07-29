@@ -32,7 +32,7 @@ export default function ProductDetail() {
     if(user != null){  
       const newItem = { ...prod, quantity: 1, userId: user.id }
       delete newItem['id']
-      dispatch(AddToCart(newItem))
+      // dispatch(AddToCart(newItem))
     }else{
       Swal.fire({
         icon: "error",
@@ -221,7 +221,7 @@ export default function ProductDetail() {
                     <button
                       type="submit"
                       className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                      onClick={handleClick}
+                      // onClick={handleClick}
                     >
                       Add to bag
                     </button>

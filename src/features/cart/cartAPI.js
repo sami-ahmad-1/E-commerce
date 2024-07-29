@@ -14,9 +14,9 @@ export function CartAPI(CartData) {
 }
 
 
-export function fetchProductDetailAPI(userId) {
+export function fetchUserCartItemsAPI(userId) {
   return new Promise(async (resolve, reject) => {
-    const response = await fetch(`http://localhost:8080/cart?userId=${userId}`)
+    const response = await fetch(`http://localhost:8080/cart?userId=${userId}`)    
     const data = response.json()
     resolve({ data })
   })

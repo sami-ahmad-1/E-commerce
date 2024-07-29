@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { selectUserInfo, updateUserInfoAsync } from '../userSlice'
+import {selectLoggedInUser} from '../../auth/authSlice';
+import { selectUserInfo, updateUserInfoAsync,fetchLoggedInUserAsync } from '../userSlice'
 import UserAddressAdd from './userAddressAdd'
 import { useDispatch } from 'react-redux'
 import { MdDelete } from 'react-icons/md'
@@ -9,6 +10,7 @@ import Swal from 'sweetalert2'
 function UserProfile() {
   const dispatch = useDispatch()
   const user = useSelector(selectUserInfo)
+  const user2 = useSelector(selectLoggedInUser)  
   const [showAddressForm, setShowAddressForm] = useState(false)
   console.log(user)
 
@@ -16,6 +18,7 @@ function UserProfile() {
     setShowAddressForm(!showAddressForm)
   }
 
+  console.log('Logged in user', user)
   const handleDelete = (e, index) => {
     e.preventDefault()
     const newUser = { ...user[0], addresses: [...user[0].addresses] };
@@ -41,6 +44,11 @@ function UserProfile() {
     });
   }
 
+  useEffect(() => {
+    if(user2 !== null){
+      dispatch(fetchLoggedInUserAsync(user2.id))
+    }
+  }, [])
   return (
     <div className='px-44 mt-10'>
       {

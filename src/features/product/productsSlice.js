@@ -3,7 +3,7 @@ import { fetchAllProducts, fetchAllProductsbyFilterAPI, fetchProductDetailAPI , 
 
 const initialState = {
   products: [],
-  productDetail: null,
+  productDetail: [],
   status: 'idle'  
 }
 
