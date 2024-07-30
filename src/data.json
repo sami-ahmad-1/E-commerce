@@ -6087,7 +6087,7 @@
       "password": "1",
       "addresses": [
         {
-          "name": "Tony1",
+          "name": "Tony4",
           "address": "Andheri East GoreGao",
           "city": "Mumbai",
           "State": "Maharashtra",
@@ -6095,12 +6095,12 @@
           "phone": "9988776655"
         },
         {
-          "name": "Tony4",
-          "address": "Andheri East GoreGao",
-          "city": "Mumbai",
-          "State": "Maharashtra",
-          "pincode": "898943",
-          "phone": "9988776655"
+          "name": "gfsd",
+          "address": "ff",
+          "city": "sdfsdf",
+          "State": "JHARKHAND",
+          "pincode": "825301",
+          "phone": "sdfsdf"
         }
       ],
       "id": 1
@@ -6396,6 +6396,70 @@
       "quantity": 1,
       "userId": 3,
       "id": 4
+    },
+    {
+      "title": "Rolex Submariner Watch",
+      "description": "The Rolex Submariner is a legendary dive watch with a rich history. Known for its durability and water resistance, it's a symbol of adventure and exploration.",
+      "category": "mens-watches",
+      "price": 13999.99,
+      "discountPercentage": 0.82,
+      "rating": 2.97,
+      "stock": 35,
+      "tags": [
+        "watches",
+        "luxury watches"
+      ],
+      "brand": "Rolex",
+      "sku": "XFGRO0O5",
+      "weight": 5,
+      "dimensions": {
+        "width": 5.22,
+        "height": 27.59,
+        "depth": 16.93
+      },
+      "warrantyInformation": "No warranty",
+      "shippingInformation": "Ships in 1-2 business days",
+      "availabilityStatus": "In Stock",
+      "reviews": [
+        {
+          "rating": 2,
+          "comment": "Very dissatisfied!",
+          "date": "2024-05-23T08:56:21.624Z",
+          "reviewerName": "Emily Brown",
+          "reviewerEmail": "emily.brown@x.dummyjson.com"
+        },
+        {
+          "rating": 5,
+          "comment": "Highly impressed!",
+          "date": "2024-05-23T08:56:21.624Z",
+          "reviewerName": "Nova Cooper",
+          "reviewerEmail": "nova.cooper@x.dummyjson.com"
+        },
+        {
+          "rating": 2,
+          "comment": "Would not recommend!",
+          "date": "2024-05-23T08:56:21.624Z",
+          "reviewerName": "Julian James",
+          "reviewerEmail": "julian.james@x.dummyjson.com"
+        }
+      ],
+      "returnPolicy": "90 days return policy",
+      "minimumOrderQuantity": 1,
+      "meta": {
+        "createdAt": "2024-05-23T08:56:21.624Z",
+        "updatedAt": "2024-05-23T08:56:21.624Z",
+        "barcode": "6567997358364",
+        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+      },
+      "images": [
+        "https://cdn.dummyjson.com/products/images/mens-watches/Rolex%20Submariner%20Watch/1.png",
+        "https://cdn.dummyjson.com/products/images/mens-watches/Rolex%20Submariner%20Watch/2.png",
+        "https://cdn.dummyjson.com/products/images/mens-watches/Rolex%20Submariner%20Watch/3.png"
+      ],
+      "thumbnail": "https://cdn.dummyjson.com/products/images/mens-watches/Rolex%20Submariner%20Watch/thumbnail.png",
+      "quantity": 1,
+      "userId": 1,
+      "id": 5
     }
   ],
   "orders": [

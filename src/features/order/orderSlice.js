@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { OrderAPI , fetchAllOrder , updateOrderAPI } from './orderAPI';
+import {AddToCart} from '../cart/cartSlice'
+import { useDispatch } from 'react-redux';
 
 const initialState = {
   order: [],
@@ -9,7 +11,7 @@ const initialState = {
 
 export const OrderAsync = createAsyncThunk(
   'order/OrderAsync',
-  async (order) => {
+  async (order) => {    
     const response = await OrderAPI(order)
     return response.data;
   }
@@ -43,7 +45,7 @@ export const orderSlice = createSlice({
       })
       .addCase(OrderAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.order.push( action.payload)
+        state.order.push( action.payload)        
         state.currentOrderPlaces = true
       })
       .addCase(fetchAllOrderAsync.pending, (state) => {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { selectLoggedInUser } from '../../auth/authSlice';
+import PleaseLoginCom from '../../Loading/PleaseLoginCom'
 import { selectUserInfo, updateUserInfoAsync, fetchLoggedInUserAsync } from '../userSlice'
 import {userAddress} from '../../auth/authSlice'
 import UserAddressAdd from './userAddressAdd'
@@ -94,7 +95,7 @@ function UserProfile() {
             }
           </div>
           :
-          <div> Lon, totam praesentiumtia facere corrupti consequuntur.</div>
+          <PleaseLoginCom></PleaseLoginCom>
       }
     </div>
   )
