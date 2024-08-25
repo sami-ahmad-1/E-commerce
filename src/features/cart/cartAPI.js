@@ -16,18 +16,18 @@ export function CartAPI(CartData) {
 
 export function fetchUserCartItemsAPI(userId) {
   return new Promise(async (resolve, reject) => {
-    const response = await fetch(`http://localhost:8080/cart?userId=${userId}`)    
+    const response = await fetch(`http://localhost:8080/cart?user=${userId}`)    
     const data = response.json()
     resolve({ data })
   })
 }
 
 
-export function updateCart(update) {
-  return new Promise(async (resolve) => {
-    const response = await fetch(`http://localhost:8080/cart/${update.id}`, {
+export function updateCart(prod) {
+  return new Promise(async (resolve) => {    
+    const response = await fetch(`http://localhost:8080/cart/${prod.id}`, {
       method: 'PATCH',
-      body: JSON.stringify(update),
+      body: JSON.stringify(prod),
       headers: {
         'Content-Type': 'application/json; charset=utf-8'
       },

@@ -2,19 +2,19 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { selectLoggedInUser, userAddress } from '../../auth/authSlice'
+import {selectUserInfo} from '../userSlice'
 
 function UserAddressAdd(props) {
   const dispatch = useDispatch()  
-  const user = useSelector(selectLoggedInUser)
+  const user = useSelector(selectUserInfo)
   const { register, reset, handleSubmit, formState: { errors } } = useForm()
 
 
   return (
     <div >
-      <form className='lg:px-25  px-10 bg-gray-100 ' onSubmit={handleSubmit((data) => {
-        dispatch(userAddress({ ...user, addresses: [...user.addresses, data] })) 
-        console.log(data)
-
+      <form className='lg:px-25  px-10 bg-gray-100 ' onSubmit={handleSubmit((data) => {        
+        const newUser  =  { ...user[0], addresses: [...user[0].addresses , data] }        
+         dispatch(userAddress(newUser))                
         reset()
       })}>
         <div className="  mt-10" >

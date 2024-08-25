@@ -1,6 +1,6 @@
 export function OrderAPI(order) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8080/orders', {
+    const response = await fetch('http://localhost:8080/order', {
       method: 'POST',
       body: JSON.stringify(order),
       headers: {
@@ -16,7 +16,7 @@ export function OrderAPI(order) {
 
 export function fetchAllOrder() {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8080/orders')
+    const response = await fetch('http://localhost:8080/order')
     const data = response.json()
     resolve({ data })
   }

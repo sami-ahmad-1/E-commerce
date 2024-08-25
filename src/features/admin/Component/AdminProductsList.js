@@ -8,7 +8,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllProductsAsync, selectAllProducts, fetchAllProductsbyFilter } from '../../product/productsSlice';
 import { Link } from 'react-router-dom';
-import { discountedPrice } from '../../../app/Constants';
+import { ProductListDiscountedPrice } from '../../../app/Constants';
 import { selectLoggedInUser } from '../../auth/authSlice';
 import { fetchProductByUserId } from '../../cart/cartSlice'
 const sortOptions = [
@@ -444,7 +444,7 @@ function Pagination(props) {
 
 function Card(props) {
   return (
-    <div className="bg-white">
+    <div className="bg-white ">
       <div className="mx-auto max-w-2xl lg:max-w-7xl lg:px-8">
         <div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8 ">
           {props.products.slice(props.page * 10, (props.page + 1) * 10).map((product) => (
@@ -483,7 +483,7 @@ function Card(props) {
                       </div>
                     </div>
                     <div>
-                      <p className="text-sm font-medium  text-gray-900">${discountedPrice(product)}</p>
+                      <p className="text-sm font-medium  text-gray-900">${ProductListDiscountedPrice(product)}</p>
                       {/* <p className="text-sm font-medium  text-gray-900">${Math.round(product.price - (product.price * (product.discountPercentage / 100)))}</p> */}
                       <p className="text-sm font-medium line-through text-gray-400">${product.price}</p>
                     </div>
@@ -571,7 +571,7 @@ export default function AdminProducts() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const [filter, setFilter] = useState({})
   const products = useSelector(selectAllProducts)
-  console.log('Products in Home Page', products)
+  // console.log('Products in Home Page', products)
   const [page, setPage] = useState(0)    // 3
   const totalProduct = products.length    //100
   const totalPage = (Math.floor(totalProduct / 10)) + 1     // 10

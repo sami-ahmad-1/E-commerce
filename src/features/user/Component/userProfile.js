@@ -10,20 +10,20 @@ import { MdDelete } from 'react-icons/md'
 import Swal from 'sweetalert2'
 
 function UserProfile() {
-  const dispatch = useDispatch()
-  const user = useSelector(selectLoggedInUser)
-  const [showAddressForm, setShowAddressForm] = useState(false)
-  console.log(user)
+  const dispatch = useDispatch()  
+  const user = useSelector(selectUserInfo)
+  const userEmail = useSelector(selectLoggedInUser)
+  const [showAddressForm, setShowAddressForm] = useState(false)  
 
+  console.log("User from -------",user)
   const handleFormShow = () => {
     setShowAddressForm(!showAddressForm)
   }
-
-  // console.log('Logged in user', user)
+  
 
   const handleDelete = (e, index) => {
     e.preventDefault()
-    const newUser = { ...user ,addresses:[...user.addresses]};
+    const newUser = { ...user[0] ,addresses:[...user[0].addresses]};
     newUser.addresses.splice(index, 1);
     console.log('Modified ',newUser)
     Swal.fire({
@@ -55,7 +55,7 @@ function UserProfile() {
             {
               <div>
                 <div className='flex flex-row justify-between mb-5'>
-                  <p className='text-2xl '>Email : {user.email}</p>
+                  <p className='text-2xl '>Email : {userEmail.email}</p>
                   <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleFormShow()}>
                     Add Address
                   </button>
@@ -69,10 +69,11 @@ function UserProfile() {
                   {user.role === 'admin' && <p className='text-2xl mt-2 text-green-700'>User : {user.role}</p>}
                 </div>
 
-                <div className='px-24 bg-gray-100 py-5'>
+                {/* {user.map((userData , index) => { */}
+                  <div className='px-24 bg-gray-100 py-5'>
                   <div className='mt-5 text-3xl'> Address</div>
-                  <ul role="list" className="divide-y divide-gray-100 mt-5">
-                    {user.addresses.map((data2, index2) => (
+                  <ul role="list" className="divide-y divide-gray-100 mt-5">                    
+                     {user[0].addresses.map((data2, index2) => (
                       <li key={index2} className="flex justify-between gap-x-6 px-10 py-5 mt-4 bg-gray-200  ">
                         <div className="flex min-w-0 gap-x-4 ">
                           <div className="min-w-0 flex-auto">
@@ -88,12 +89,15 @@ function UserProfile() {
                           <MdDelete className='text-2xl cursor-pointer' onClick={(e) => handleDelete(e, index2)} />
                         </div>
                       </li>
-                    ))}
+                    ))}                 
                   </ul>
                 </div>
+                {/* })} */}
+                
               </div>
             }
           </div>
+          
           :
           <PleaseLoginCom></PleaseLoginCom>
       }

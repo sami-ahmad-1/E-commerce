@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { createUser,checkUser,userAddressAPI,SignOut } from './authAPI';
+import { createUser, checkUser, userAddressAPI, SignOut } from './authAPI';
 
 const initialState = {
-  loggedInUser:null,
-  status :null,
-  error:''
+  loggedInUserToken: null,
+  status: null,
+  error: ''
 };
 
 export const createUserAsync = createAsyncThunk(
@@ -18,9 +18,15 @@ export const createUserAsync = createAsyncThunk(
 
 export const checkLoginUser = createAsyncThunk(
   'user/checkLoginUser',
-  async (LoginInfo) => {
-    const response2 = await checkUser(LoginInfo);        
-    return response2.data;
+  async (LoginInfo,{rejectWithValue}) => {
+    try {
+      const response2 = await checkUser(LoginInfo);
+      return response2.data;
+    } catch (err) {
+      console.log(err)
+      return rejectWithValue(err.message)
+    }
+
   }
 );
 
@@ -28,14 +34,14 @@ export const userAddress = createAsyncThunk(
   'user/userAddress',
   async (userId) => {
     const response = await userAddressAPI(userId);
-    return response.data;       
+    return response.data;
   }
 )
 export const SignOutAsync = createAsyncThunk(
   'user/SignOut',
   async (LoggedInInfo) => {
-    const response = await SignOut(LoggedInInfo);    
-    return response.data;        
+    const response = await SignOut(LoggedInInfo);
+    return response.data;
   }
 )
 
@@ -43,7 +49,7 @@ export const SignOutAsync = createAsyncThunk(
 export const counterSlice = createSlice({
   name: 'signUp',
   initialState,
-  reducers: {  },
+  reducers: {},
 
   extraReducers: (builder) => {
     builder
@@ -52,40 +58,41 @@ export const counterSlice = createSlice({
       })
       .addCase(createUserAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.loggedInUser += action.payload;
+        state.loggedInUserToken += action.payload;
       })
       .addCase(checkLoginUser.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(checkLoginUser.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.loggedInUser = action.payload;
+        state.loggedInUserToken = action.payload;
         localStorage.setItem("replace", "true");
       })
       .addCase(checkLoginUser.rejected, (state, action) => {
         state.status = 'idle';
-        state.error = action.error.message;
+        // state.error = action.error.message;
+        state.error = action.payload;
       })
       .addCase(userAddress.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(userAddress.fulfilled, (state, action) => {
-        state.status = 'idle';        
-        state.loggedInUser = action.payload
+        state.status = 'idle';
+        state.loggedInUserToken = action.payload
       })
       .addCase(SignOutAsync.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(SignOutAsync.fulfilled, (state, action) => {
-        state.status = 'idle';        
-        state.loggedInUser = null
+        state.status = 'idle';
+        state.loggedInUserToken = null
       })
   },
 });
 
 
-export const selectLoggedInUser = (state) => state.auth.loggedInUser;
-export const selectError  = (state) => state.auth.error
+export const selectloggedInUser = (state) => state.auth.loggedInUserToken;
+export const selectError = (state) => state.auth.error
 
 export default counterSlice.reducer;
 

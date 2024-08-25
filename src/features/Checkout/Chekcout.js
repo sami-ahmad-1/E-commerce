@@ -1,10 +1,12 @@
-import React, { useState , useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RemoveProductAsync, updateItemAsync, cartItemsSlice } from '../cart/cartSlice'
 import { useForm } from 'react-hook-form'
 import { selectLoggedInUser, userAddress } from '../auth/authSlice'
-import { OrderAsync } from '../order/orderSlice'
+import { updateUserInfoAsync } from '../user/userSlice'
+import { selectUserInfo } from '../user/userSlice'
+import { createOrderAsync } from '../order/orderSlice'
 import { discountedPrice } from '../../app/Constants'
 import Swal from 'sweetalert2'
 
@@ -12,43 +14,46 @@ import Swal from 'sweetalert2'
 function Checkout() {
     const dispatch = useDispatch()
     const cartItems = useSelector(cartItemsSlice)
-    const user = useSelector(selectLoggedInUser)
+    // const user = useSelector(selectLoggedInUser)
+    const user = useSelector(selectUserInfo)
     const [deliveryAddress, setdeliveryAddress] = useState('')
     const [paymentMethod, setPaymentMethod] = useState('')
     const { register, reset, handleSubmit, formState: { errors } } = useForm()
-     
+
     const totalPrice = cartItems.reduce((acc, obj) => { return acc + discountedPrice(obj) * obj.quantity }, 0)
     const totalItems = cartItems.length
 
+
     const handleQuantity = (e, product) => {
         e.preventDefault()
-        dispatch(updateItemAsync({ ...product, quantity: +e.target.value }))
+        console.log("From Handle Qunatity: **********  : ", product.id)
+        dispatch(updateItemAsync({ id: product.id, quantity: +e.target.value }))
     }
 
     const handleRemove = (e, product) => {
         Swal.fire({
-          title: "Are you sure?",
-          text: "You won't be able to revert this!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes, delete it!"
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
         }).then((result) => {
-          if (result.isConfirmed) {
-            dispatch(RemoveProductAsync(product))
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success"
-            });
-          }
+            if (result.isConfirmed) {
+                dispatch(RemoveProductAsync(product))
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+            }
         });
         e.preventDefault()
-      }
+    }
 
     const handleAddress = (e) => {
-        setdeliveryAddress(user.addresses[e.target.value])
+        setdeliveryAddress(user[0].addresses[e.target.value])
     }
 
     const handlePayment = (e) => {
@@ -57,31 +62,31 @@ function Checkout() {
 
     const handleOrder = (e) => {
         e.preventDefault()
-        const order = { cartItems, user, totalPrice, totalItems, deliveryAddress, paymentMethod, status: 'pending' }
-        console.log(cartItems , deliveryAddress , paymentMethod)
-        
-        if( !cartItems){
+        const order = { cartItems, user: user.id, totalPrice, totalItems, deliveryAddress, paymentMethod, status: 'pending' }
+        console.log(order)
+
+        if (!cartItems) {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Your Cart is Empty",                
-              });
-              
-        }else if( !deliveryAddress){
+                text: "Your Cart is Empty",
+            });
+
+        } else if (!deliveryAddress) {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Please select delivery address",                
-              });
-        }else if( !paymentMethod){
+                text: "Please select delivery address",
+            });
+        } else if (!paymentMethod) {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Paease select payment method",                
-              });
+                text: "Paease select payment method",
+            });
         }
-        else{                    
-            dispatch(OrderAsync(order))
+        else {
+            // dispatch(createOrderAsync(order))
         }
     }
 
@@ -90,7 +95,8 @@ function Checkout() {
             <div className='grid grid-cols-1 lg:grid-cols-2 lg:px-40 '>
                 {/* INPUT FORM */}
                 <form className='lg:px-25  px-10 bg-gray-100 ' onSubmit={handleSubmit((data) => {
-                    dispatch(userAddress({ ...user, addresses: [...user.addresses, data] }))
+                    const newUser = { ...user[0], addresses: [...user[0].addresses, data] }
+                    dispatch(userAddress(newUser))
                     reset()
                 })}>
                     <div className="  mt-10" >
@@ -222,46 +228,48 @@ function Checkout() {
 
                         <div className="border-b border-gray-900/10 pb-12 lg:mt-7 lg:mb-7">
                             <h2 className=" font-semibold leading-7 text-2xl text-gray-900">Address</h2>
-                            <div className="mt-1 space-y-10">
-                                {user.addresses.map((address, index) => (
-                                    <li
-                                        key={index}
-                                        className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200"
-                                    >
-                                        <div className="flex gap-x-4">
-                                            <input
-                                                onChange={(e) => handleAddress(e)}
-                                                name="address"
-                                                type="radio"
-                                                value={index}
-                                                className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                                            />
-                                            <div className="min-w-0 flex-auto">
-                                                <p className="text-sm font-semibold leading-6 text-gray-900">
-                                                    {address.name}
-                                                </p>
-                                                <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                                                    {address.street}
-                                                </p>
-                                                <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                                                    {address.pinCode}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className="hidden sm:flex sm:flex-col sm:items-end">
-                                            <p className="text-sm leading-6 text-gray-900">
-                                                Phone: {address.phone}
-                                            </p>
-                                            <p className="text-sm leading-6 text-gray-500">
-                                                {address.city}
-                                            </p>
-                                        </div>
-                                    </li>
-                                ))}
+                            <div className="mt-1 space-y-10">                                
+                                    {
+                                        user[0].addresses.map((address, index) => (
+                                            <li
+                                                key={index}
+                                                className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200"
+                                            >
+                                                <div className="flex gap-x-4">
+                                                    <input
+                                                        onChange={(e) => handleAddress(e)}
+                                                        name="address"
+                                                        type="radio"
+                                                        value={index}
+                                                        className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                                    />
+                                                    <div className="min-w-0 flex-auto">
+                                                        <p className="text-sm font-semibold leading-6 text-gray-900">
+                                                            {address.name}
+                                                        </p>
+                                                        <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                                                            {address.street}
+                                                        </p>
+                                                        <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                                                            {address.pinCode}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div className="hidden sm:flex sm:flex-col sm:items-end">
+                                                    <p className="text-sm leading-6 text-gray-900">
+                                                        Phone: {address.phone}
+                                                    </p>
+                                                    <p className="text-sm leading-6 text-gray-500">
+                                                        {address.city}
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        ))
+                                    }                                
 
                                 <div className="mt-10 space-y-10">
                                     <fieldset>
-                                        <h2 className=" font-semibold leading-7 text-2xl text-gray-900">   Payment Methods</h2>                          
+                                        <h2 className=" font-semibold leading-7 text-2xl text-gray-900">   Payment Methods</h2>
                                         <div className="mt-6 space-y-6">
                                             <div className="flex items-center gap-x-3">
                                                 <input
@@ -317,7 +325,7 @@ function Checkout() {
                                             <li key={product.id} className="flex py-6">
                                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                                     <img
-                                                        src={product.thumbnail}
+                                                        src={product.product.thumbnail}
                                                         // alt={product.imageAlt}
                                                         className="h-full w-full object-cover object-center"
                                                     />
@@ -327,7 +335,7 @@ function Checkout() {
                                                     <div>
                                                         <div className="flex justify-between text-base font-medium text-gray-900">
                                                             <h3>
-                                                                <a href={product.href}>{product.title}</a>
+                                                                <a href={product.href}>{product.product.title}</a>
                                                             </h3>
                                                             <p className="ml-4">${(discountedPrice(product) * (product.quantity))}</p>
                                                         </div>

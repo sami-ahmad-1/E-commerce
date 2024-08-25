@@ -11,8 +11,8 @@ function Login() {
   const dispatch = useDispatch()
   const user = useSelector(selectLoggedInUser)
   const error = useSelector(selectError)
-  console.log(user)
-  console.log(error)
+  // console.log(user)
+  // console.log(error)
 
   const onSubmit = (data) => {
     dispatch(checkLoginUser(data))

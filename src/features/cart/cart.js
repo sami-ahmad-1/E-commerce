@@ -10,12 +10,12 @@ import Swal from 'sweetalert2'
 
 export default function Cart() {
   const dispatch = useDispatch()
-  const cartItems = useSelector(cartItemsSlice)
+  const cartItems = useSelector(cartItemsSlice)  
   const user = useSelector(selectLoggedInUser)
-
+  
   const handleQuantity = (e, product) => {
-    e.preventDefault()
-    dispatch(updateItemAsync({ ...product, quantity: +e.target.value }))
+    e.preventDefault()    
+    dispatch(updateItemAsync({id:product.id , quantity: +e.target.value }))
   }
 
   const handleRemove = (e, product) => {
@@ -64,7 +64,7 @@ export default function Cart() {
                   <li key={product.id} className="flex py-6 flex-col sm:flex-row">
                     <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                       <img
-                        src={product.thumbnail}
+                        src={product.product.thumbnail}
                         className="h-full w-full object-cover object-center"
                       />
                     </div>
@@ -73,11 +73,11 @@ export default function Cart() {
                       <div>
                         <div className="flex justify-between text-base font-medium text-gray-900">
                           <h3>
-                            <a href={product.href}>{product.title}</a>
-                          </h3>
-                          <p className="ml-4">${(discountedPrice(product) * product.quantity).toFixed(2)}</p>
+                            <a href={product.href}>{product.product.title}</a>
+                          </h3>                          
+                          <p className="ml-4">${(discountedPrice(product)) }</p>                                                                            
                         </div>
-                        <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                        <p className="mt-1 text-sm text-gray-500">{product.product.color}</p>
                       </div>
 
                       <div className="flex flex-1 items-end justify-between text-sm mt-4 sm:mt-0">
@@ -114,7 +114,7 @@ export default function Cart() {
             </div>
             <div className="flex justify-between text-base font-medium text-gray-900">
               <p>Total Items</p>
-              <p>{cartItems.length}</p>
+              <p>{cartItems.length} items</p>
             </div>
             <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
             {/* <Link to='/Checkoutpage'> */}

@@ -104,14 +104,16 @@ const router = createBrowserRouter([
 function App() {
   const dispatch = useDispatch()
   const user = useSelector(selectLoggedInUser)
-  console.log('Logged in user is  : ', user)
+  // console.log('Logged in user is ****************** : ', user)
 
   useEffect(() => {
     if (user) {
       dispatch(fetchLoggedInUserAsync(user.id))
-      // dispatch(fetchProductByUserId(user.id))      
+      // console.log("Use Effect of App is Running")
+    }else{
+      // console.log("Use Effect of App Not is Running")
     }
-  },[])
+  })
 
   return (
     <>

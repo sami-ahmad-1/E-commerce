@@ -68,7 +68,7 @@ export default function ProductDetail() {
       {prod &&
         <div >
           <div>
-            <div className="pt-6">
+            <div className="pt-6 ">
               <div className=" ] mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8 max-sm:hidden  " >              
                     {prod.images && prod.images.map((val, index) =>
                       <div key={index} className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">

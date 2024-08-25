@@ -6,7 +6,7 @@ import { fetchProductDetail } from '../../product/productsSlice'
 import { selectProductDetail } from '../../product/productsSlice'
 import { AddToCart } from '../../cart/cartSlice'
 import { selectLoggedInUser } from '../../auth/authSlice'
-import { discountedPrice } from '../../../app/Constants'
+import { ProductListDiscountedPrice } from '../../../app/Constants'
 import { cartItemsSlice } from '../../cart/cartSlice'
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
@@ -21,10 +21,9 @@ export default function ProductDetail() {
   const dispatch = useDispatch()
 
   const prod = useSelector(selectProductDetail)
-
-  console.log('Product', prod)
   const user = useSelector(selectLoggedInUser)
-  console.log('Logged in User :', user)
+  console.log('Product', prod.id)
+  // console.log('Logged in User :', user.id)
   const cartItems = useSelector(cartItemsSlice)
   console.log('Cart Items are : ', cartItems)
 
@@ -35,8 +34,14 @@ export default function ProductDetail() {
       delete newItem['id']
       console.log('newItem', newItem)
       const newCartList = [cartItems, newItem]
-      console.log(newCartList)
-      dispatch(AddToCart(newItem)).then(() => {
+      console.log("New Cart List : ",newCartList)
+      console.log("New Item : " , newItem)
+      const newCartItem = {
+        product:prod.id , 
+        user: user.id,
+        quantity:1
+       }
+      dispatch(AddToCart(newCartItem)).then(() => {
         Swal.fire({
           position: "center",
           icon: "success",
@@ -44,9 +49,9 @@ export default function ProductDetail() {
           showConfirmButton: false,
           timer: 1500
         });
-
       })
-    } else {
+    } 
+    else {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -79,7 +84,7 @@ export default function ProductDetail() {
       {prod &&
         <div >          
           <div>
-            <div className="pt-6">
+            <div className="pt-6 ">
               <div className=" ] mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8 max-sm:hidden  " >
                 {prod.images && prod.images.map((val, index) =>( 
                   <div key={index} className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
@@ -108,7 +113,7 @@ export default function ProductDetail() {
                 {/* Options */}
                 <div className="mt-4 lg:row-span-3 lg:mt-0">
                   <h2 className="sr-only">Product information</h2>
-                  <p className="text-3xl tracking-tight text-gray-900"> ${discountedPrice(prod)}</p>
+                  <p className="text-3xl tracking-tight text-gray-900"> ${ProductListDiscountedPrice(prod)}</p>
 
                   {/* Reviews */}
                   <div className="mt-6">

@@ -9,7 +9,7 @@ const initialState = {
   currentOrderPlaces: false
 };
 
-export const OrderAsync = createAsyncThunk(
+export const createOrderAsync = createAsyncThunk(
   'order/OrderAsync',
   async (order) => {    
     const response = await OrderAPI(order)
@@ -40,10 +40,10 @@ export const orderSlice = createSlice({
   reducers: {  },
   extraReducers: (builder) => {
     builder
-      .addCase(OrderAsync.pending, (state) => {
+      .addCase(createOrderAsync.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(OrderAsync.fulfilled, (state, action) => {
+      .addCase(createOrderAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.order.push( action.payload)        
         state.currentOrderPlaces = true
