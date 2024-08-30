@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { cartItemsSlice } from '../cart/cartSlice'
 import { selectLoggedInUser } from '../auth/authSlice'
+import { selectUserInfo } from '../user/userSlice'
 
 
 const user = {
@@ -37,7 +38,7 @@ function classNames(...classes) {
 }
 
 function Navbar() {
-    const LoggedInuser = useSelector(selectLoggedInUser)
+    const LoggedInuser = useSelector(selectUserInfo)
     const cartItems = useSelector(cartItemsSlice)
     const [cartItemsLength, setCartItemsLength] = useState('')
 

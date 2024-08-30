@@ -47,3 +47,33 @@ export function addNewProductAsync(prodInfo) {
   }
   )
 }
+
+
+
+export function updateExixtingProductAPI(prod) {  
+  return new Promise(async (resolve) => {        
+    const response = await fetch(`http://localhost:8080/products/${prod.id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(prod),
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      },
+    })
+    const data = response.json()
+    resolve({ data })
+  }
+  )
+}
+
+
+
+export function RemoveProductFromListAsyncAPI(ProdId) {
+  return new Promise(async (resolve, reject) => {
+    const response = await fetch(`http://localhost:8080/products/${ProdId}`, {method: 'DELETE'})
+    const data = response.json()
+    resolve({ data:{id:ProdId} })
+  }
+  )
+}
+
+

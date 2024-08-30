@@ -14,12 +14,18 @@ export function CartAPI(CartData) {
 }
 
 
-export function fetchUserCartItemsAPI(userId) {
+
+
+export function fetchUserCartItemsAPI() {
   return new Promise(async (resolve, reject) => {
-    const response = await fetch(`http://localhost:8080/cart?user=${userId}`)    
-    const data = response.json()
-    resolve({ data })
-  })
+    try {
+      const response = await fetch(`http://localhost:8080/cart/own`); 
+      const data = await response.json(); 
+      resolve({ data });
+    } catch (error) {
+      reject(error);
+    }
+  });
 }
 
 

@@ -10,12 +10,13 @@ import Swal from 'sweetalert2'
 
 export default function Cart() {
   const dispatch = useDispatch()
-  const cartItems = useSelector(cartItemsSlice)  
+  const cartItems = useSelector(cartItemsSlice)
   const user = useSelector(selectLoggedInUser)
-  
+
+  console.log('CartItems are' , cartItems)
   const handleQuantity = (e, product) => {
-    e.preventDefault()    
-    dispatch(updateItemAsync({id:product.id , quantity: +e.target.value }))
+    e.preventDefault()
+    dispatch(updateItemAsync({ id: product.id, quantity: +e.target.value }))
   }
 
   const handleRemove = (e, product) => {
@@ -42,9 +43,9 @@ export default function Cart() {
 
   const navigate = useNavigate();
   const handleCheckout = () => {
-    if(cartItems.length != 0){
+    if (cartItems.length != 0) {
       navigate("/Checkoutpage")
-    }else{
+    } else {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -74,8 +75,8 @@ export default function Cart() {
                         <div className="flex justify-between text-base font-medium text-gray-900">
                           <h3>
                             <a href={product.href}>{product.product.title}</a>
-                          </h3>                          
-                          <p className="ml-4">${(discountedPrice(product)) }</p>                                                                            
+                          </h3>
+                          <p className="ml-4">${(discountedPrice(product))}</p>
                         </div>
                         <p className="mt-1 text-sm text-gray-500">{product.product.color}</p>
                       </div>
@@ -118,13 +119,13 @@ export default function Cart() {
             </div>
             <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
             {/* <Link to='/Checkoutpage'> */}
-              <div className="mt-6 cursor-pointer"  onClick={handleCheckout}> 
-                <p
-                  className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 lg:w-1/5 w-full"
-                >
-                  Checkout
-                </p>
-              </div>
+            <div className="mt-6 cursor-pointer" onClick={handleCheckout}>
+              <p
+                className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 lg:w-1/5 w-full"
+              >
+                Checkout
+              </p>
+            </div>
             {/* </Link> */}
             <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
               <p>
@@ -141,9 +142,9 @@ export default function Cart() {
               </p>
             </div>
           </div>
-        </div>
+        </div>        
       ) : (
-        <PleaseLoginCom></PleaseLoginCom>        
+        <PleaseLoginCom></PleaseLoginCom>
       )}
     </>
   )

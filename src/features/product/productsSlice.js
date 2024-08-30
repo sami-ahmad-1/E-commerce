@@ -1,5 +1,20 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchAllProducts, fetchAllProductsbyFilterAPI, fetchProductDetailAPI , addNewProductAsync} from './productsAPI';
+import { fetchAllProducts, fetchAllProductsbyFilterAPI, fetchProductDetailAPI , addNewProductAsync , updateExixtingProductAPI , RemoveProductFromListAsyncAPI} from './productsAPI';
+import Swal from 'sweetalert2';
+
+
+const ProductAddedSuccess = () => {
+  Swal.fire({
+    position: "center",
+    icon: "success",
+    title: "Product Added Successfully",
+    showConfirmButton: false,
+    timer: 1500
+  });
+}
+
+
+
 
 const initialState = {
   products: [],
@@ -40,6 +55,25 @@ export const addNewProduct = createAsyncThunk(
   }
 );
 
+export const updateExixtingProduct = createAsyncThunk(
+  'product/updateUserInfoAsync',
+  async (prod) => {
+    const response = await updateExixtingProductAPI(prod);
+    return response.data;    
+  }
+);
+
+export const RemoveProductFromListAsync = createAsyncThunk(
+  'products/RemoveProductAsync',
+  async (product) => {
+    const response = await RemoveProductFromListAsyncAPI(product);  
+    return response.data;
+  }
+)
+
+
+
+
 //SLICE
 export const productSlice = createSlice({
   name: 'products',
@@ -74,6 +108,21 @@ export const productSlice = createSlice({
       .addCase(addNewProduct.fulfilled, (state, action) => {
         state.status = 'idle';
         state.products.push(action.payload)  
+        ProductAddedSuccess()
+      })
+      .addCase(updateExixtingProduct.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateExixtingProduct.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.productDetail = action.payload 
+      })
+      .addCase(RemoveProductFromListAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(RemoveProductFromListAsync.fulfilled, (state, action) => {
+        const index = state.products.findIndex( el => el.id===action.payload.id)
+        state.products.splice(index,1)
       })
   },
 });

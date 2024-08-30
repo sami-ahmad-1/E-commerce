@@ -9,11 +9,14 @@ import { selectUserInfo } from '../user/userSlice'
 import { createOrderAsync } from '../order/orderSlice'
 import { discountedPrice } from '../../app/Constants'
 import Swal from 'sweetalert2'
+import { Navigate } from 'react-router-dom';
+import { selectCurrentOrder } from '../order/orderSlice'
 
 
 function Checkout() {
     const dispatch = useDispatch()
     const cartItems = useSelector(cartItemsSlice)
+    const currentOrder = useSelector(selectCurrentOrder)
     // const user = useSelector(selectLoggedInUser)
     const user = useSelector(selectUserInfo)
     const [deliveryAddress, setdeliveryAddress] = useState('')
@@ -53,7 +56,7 @@ function Checkout() {
     }
 
     const handleAddress = (e) => {
-        setdeliveryAddress(user[0].addresses[e.target.value])
+        setdeliveryAddress(user.addresses[e.target.value])
     }
 
     const handlePayment = (e) => {
@@ -62,6 +65,7 @@ function Checkout() {
 
     const handleOrder = (e) => {
         e.preventDefault()
+        console.log("user o", user)
         const order = { cartItems, user: user.id, totalPrice, totalItems, deliveryAddress, paymentMethod, status: 'pending' }
         console.log(order)
 
@@ -86,16 +90,30 @@ function Checkout() {
             });
         }
         else {
-            // dispatch(createOrderAsync(order))
+            console.log(order)
+            dispatch(createOrderAsync(order))
         }
     }
 
+    // useEffect(() => {
+
+    // } , [currentOrder])
     return (
         <>
+            <>
+                {currentOrder && currentOrder.paymentMethod === 'cash' && (
+                    <Navigate
+                        to={`/orderplaced/${currentOrder.id}`}
+                    replace={true}
+                    ></Navigate>
+
+                )}
+            </>
+
             <div className='grid grid-cols-1 lg:grid-cols-2 lg:px-40 '>
                 {/* INPUT FORM */}
                 <form className='lg:px-25  px-10 bg-gray-100 ' onSubmit={handleSubmit((data) => {
-                    const newUser = { ...user[0], addresses: [...user[0].addresses, data] }
+                    const newUser = { ...user, addresses: [...user.addresses, data] }
                     dispatch(userAddress(newUser))
                     reset()
                 })}>
@@ -228,44 +246,44 @@ function Checkout() {
 
                         <div className="border-b border-gray-900/10 pb-12 lg:mt-7 lg:mb-7">
                             <h2 className=" font-semibold leading-7 text-2xl text-gray-900">Address</h2>
-                            <div className="mt-1 space-y-10">                                
-                                    {
-                                        user[0].addresses.map((address, index) => (
-                                            <li
-                                                key={index}
-                                                className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200"
-                                            >
-                                                <div className="flex gap-x-4">
-                                                    <input
-                                                        onChange={(e) => handleAddress(e)}
-                                                        name="address"
-                                                        type="radio"
-                                                        value={index}
-                                                        className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                                                    />
-                                                    <div className="min-w-0 flex-auto">
-                                                        <p className="text-sm font-semibold leading-6 text-gray-900">
-                                                            {address.name}
-                                                        </p>
-                                                        <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                                                            {address.street}
-                                                        </p>
-                                                        <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                                                            {address.pinCode}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div className="hidden sm:flex sm:flex-col sm:items-end">
-                                                    <p className="text-sm leading-6 text-gray-900">
-                                                        Phone: {address.phone}
+                            <div className="mt-1 space-y-10">
+                                {
+                                    user.addresses.map((address, index) => (
+                                        <li
+                                            key={index}
+                                            className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200"
+                                        >
+                                            <div className="flex gap-x-4">
+                                                <input
+                                                    onChange={(e) => handleAddress(e)}
+                                                    name="address"
+                                                    type="radio"
+                                                    value={index}
+                                                    className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                                />
+                                                <div className="min-w-0 flex-auto">
+                                                    <p className="text-sm font-semibold leading-6 text-gray-900">
+                                                        {address.name}
                                                     </p>
-                                                    <p className="text-sm leading-6 text-gray-500">
-                                                        {address.city}
+                                                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                                                        {address.street}
+                                                    </p>
+                                                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                                                        {address.pinCode}
                                                     </p>
                                                 </div>
-                                            </li>
-                                        ))
-                                    }                                
+                                            </div>
+                                            <div className="hidden sm:flex sm:flex-col sm:items-end">
+                                                <p className="text-sm leading-6 text-gray-900">
+                                                    Phone: {address.phone}
+                                                </p>
+                                                <p className="text-sm leading-6 text-gray-500">
+                                                    {address.city}
+                                                </p>
+                                            </div>
+                                        </li>
+                                    ))
+                                }
 
                                 <div className="mt-10 space-y-10">
                                     <fieldset>

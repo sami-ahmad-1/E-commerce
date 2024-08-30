@@ -16,17 +16,16 @@ export function OrderAPI(order) {
 
 export function fetchAllOrder() {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8080/order')
-    const data = response.json()
+    const response = await fetch('http://localhost:8080/order/allOrders')
+    const data = await response.json()
     resolve({ data })
   }
   )
 }
 
-
 export function updateOrderAPI(order) {
   return new Promise(async (resolve) => {
-    const response = await fetch(`http://localhost:8080/orders/${order.id}`, {
+    const response = await fetch(`http://localhost:8080/order/${order.id}`, {
       method: 'PATCH',
       body: JSON.stringify(order),
       headers: {

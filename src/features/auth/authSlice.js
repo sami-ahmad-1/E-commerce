@@ -69,8 +69,7 @@ export const counterSlice = createSlice({
         localStorage.setItem("replace", "true");
       })
       .addCase(checkLoginUser.rejected, (state, action) => {
-        state.status = 'idle';
-        // state.error = action.error.message;
+        state.status = 'idle';        
         state.error = action.payload;
       })
       .addCase(userAddress.pending, (state) => {
@@ -91,7 +90,7 @@ export const counterSlice = createSlice({
 });
 
 
-export const selectloggedInUser = (state) => state.auth.loggedInUserToken;
+export const selectLoggedInUser = (state) => state.auth.loggedInUserToken;
 export const selectError = (state) => state.auth.error
 
 export default counterSlice.reducer;

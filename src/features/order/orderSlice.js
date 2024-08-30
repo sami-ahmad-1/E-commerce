@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 const initialState = {
   order: [],
   status: 'idle',
-  currentOrderPlaces: false
+  currentOrderPlaced: false
 };
 
 export const createOrderAsync = createAsyncThunk(
@@ -37,7 +37,11 @@ export const updateOrderStatueAsync = createAsyncThunk(
 export const orderSlice = createSlice({
   name: 'order',
   initialState,
-  reducers: {  },
+  reducers: {
+    resetOrder: (state) => {
+      state.currentOrderPlaced = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createOrderAsync.pending, (state) => {
@@ -46,7 +50,7 @@ export const orderSlice = createSlice({
       .addCase(createOrderAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.order.push( action.payload)        
-        state.currentOrderPlaces = true
+        state.currentOrderPlaced = action.payload
       })
       .addCase(fetchAllOrderAsync.pending, (state) => {
         state.status = 'loading';
@@ -68,6 +72,9 @@ export const orderSlice = createSlice({
   },
 });
 
+export const { resetOrder } = orderSlice.actions;
+
+export const selectCurrentOrder = (state) => state.orders.currentOrderPlaced;
 export const orderItems = (state) => state.orders.order;
 export const AllOrders = (state) => state.orders.order;
 

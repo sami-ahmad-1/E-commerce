@@ -1,15 +1,28 @@
-export function fetchLoggedInUserOrders(userId) {
-  return new Promise(async(resolve) =>{  
-    const response = await fetch(`http://localhost:8080/orders?user.id=${userId}`)
-    const data = response.json()
-    resolve({data})    
-  }
-  )
+// export function fetchLoggedInUserOrders() {
+//   return new Promise(async(resolve) =>{  
+//     const response = await fetch(`http://localhost:8080/order/own`)
+//     const data = response.json()
+//     resolve({data})    
+//   }
+//   )
+// }
+
+export function fetchLoggedInUserOrders() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await fetch(`http://localhost:8080/order/own`)
+      const data = await response.json(); 
+      resolve({ data });
+    } catch (error) {
+      reject(error);
+    }
+  });
 }
 
-export function fetchLoggedInUser(userId) {
+
+export function fetchLoggedInUser() {
   return new Promise(async(resolve) =>{  
-    const response = await fetch(`http://localhost:8080/users/${userId}`)
+    const response = await fetch(`http://localhost:8080/users/own`)
     const data = response.json()
     resolve({data})    
   }
@@ -17,8 +30,7 @@ export function fetchLoggedInUser(userId) {
 }
 
 export function updateUserInfoAPI(userInfo) {  
-  return new Promise(async (resolve) => {    
-    console.log("req body  of Address ------------" , userInfo)
+  return new Promise(async (resolve) => {        
     const response = await fetch(`http://localhost:8080/users/${userInfo.id}`, {
       method: 'PATCH',
       body: JSON.stringify(userInfo),

@@ -6,7 +6,7 @@ import SignUp from './features/auth/components/signup';
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import ProductDetail from '../src/features/product/Component/productDetail'
-import OrderSuccessPage from './pages/orderSuccessPage';
+import OrderSuccessPage from './pages/OrderSuccessPage';
 import Order from './features/order/order';
 import PageNotFound from './pages/404';
 import Protected from './features/auth/components/Protected';
@@ -15,6 +15,7 @@ import AdminHomePage from './pages/AdminHomePage'
 import AdminProductDetailPage from './pages/AdminProductDetailPage'
 import AdminProductFormPage from './pages/AdminProductFormPage';
 import AdminOrdersPage from './pages/AdminOrdersPage';
+import AdminProductEditForm from '../src/features/admin/Component/AdminProductEditForm'
 import ProtectedAdmin from './features/auth/components/ProtectedAdmin'
 
 import UserProfilePage from './pages/UserProfilePage';
@@ -26,7 +27,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductByUserId } from './features/cart/cartSlice';
 import { selectLoggedInUser } from './features/auth/authSlice';
 import { fetchLoggedInUserAsync } from './features/user/userSlice';
-
+import { fetchProductDetail } from './features/product/productsSlice'
 
 
 import {
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
     element: <AdminOrdersPage />
   },
   {
+    path: "/admin/adminProductEditForm/:id",
+    element: <AdminProductEditForm />
+  },
+  {
     path: "/order",
     element: <Order></Order>
   },
@@ -84,7 +89,7 @@ const router = createBrowserRouter([
     element: <CheckoutPage></CheckoutPage>
   },
   {
-    path: "/orderplaced",
+    path: "/orderplaced/:id",
     element: <OrderSuccessPage></OrderSuccessPage>
   },
   {
@@ -103,15 +108,15 @@ const router = createBrowserRouter([
 
 function App() {
   const dispatch = useDispatch()
-  const user = useSelector(selectLoggedInUser)
-  // console.log('Logged in user is ****************** : ', user)
+  const user = useSelector(selectLoggedInUser)  
 
   useEffect(() => {
     if (user) {
-      dispatch(fetchLoggedInUserAsync(user.id))
-      // console.log("Use Effect of App is Running")
-    }else{
-      // console.log("Use Effect of App Not is Running")
+      dispatch(fetchLoggedInUserAsync())      
+      dispatch(fetchProductByUserId())     
+      dispatch(fetchProductDetail('66c44a23c282608e91981e9b'))     
+    }else{      
+      dispatch(fetchProductDetail('66c44a23c282608e91981e9b'))          
     }
   })
 

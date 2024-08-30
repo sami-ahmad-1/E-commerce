@@ -21,28 +21,23 @@ export default function ProductDetail() {
   const dispatch = useDispatch()
 
   const prod = useSelector(selectProductDetail)
-  const user = useSelector(selectLoggedInUser)
-  console.log('Product', prod.id)
-  // console.log('Logged in User :', user.id)
-  const cartItems = useSelector(cartItemsSlice)
-  console.log('Cart Items are : ', cartItems)
-
+  const user = useSelector(selectLoggedInUser)    
+  const cartItems = useSelector(cartItemsSlice)  
+  
   const handleClick = async (e) => {
     e.preventDefault()
     if (user != null) {
-      const newItem = { ...prod, quantity: 1, userId: user.id }
+      const newItem = { ...prod, quantity: 1}
       delete newItem['id']
-      console.log('newItem', newItem)
-      const newCartList = [cartItems, newItem]
-      console.log("New Cart List : ",newCartList)
-      console.log("New Item : " , newItem)
+      // const newCartList = [cartItems, newItem]
       const newCartItem = {
-        product:prod.id , 
-        user: user.id,
+        product:prod.id ,         
         quantity:1
        }
+              
+       
       dispatch(AddToCart(newCartItem)).then(() => {
-        Swal.fire({
+        Swal.fire({ 
           position: "center",
           icon: "success",
           title: `${newItem.title} Added To Cart`,

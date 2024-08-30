@@ -13,7 +13,7 @@ function UserAddressAdd(props) {
   return (
     <div >
       <form className='lg:px-25  px-10 bg-gray-100 ' onSubmit={handleSubmit((data) => {        
-        const newUser  =  { ...user[0], addresses: [...user[0].addresses , data] }        
+        const newUser  =  { ...user, addresses: [...user.addresses , data] }        
          dispatch(userAddress(newUser))                
         reset()
       })}>
