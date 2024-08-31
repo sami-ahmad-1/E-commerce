@@ -104,8 +104,15 @@ function Checkout() {
                 {currentOrder && currentOrder.paymentMethod === 'cash' && (
                     <Navigate
                         to={`/orderplaced/${currentOrder.id}`}
-                    replace={true}
-                    ></Navigate>
+                       replace={true}
+                     ></Navigate>
+
+                )}
+                {currentOrder && currentOrder.paymentMethod === 'card' && (
+                    <Navigate
+                        to={`/stripe/checkout`}
+                       replace={true}
+                     ></Navigate>
 
                 )}
             </>

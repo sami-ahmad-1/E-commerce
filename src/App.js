@@ -20,6 +20,7 @@ import ProtectedAdmin from './features/auth/components/ProtectedAdmin'
 
 import UserProfilePage from './pages/UserProfilePage';
 import UserOrderPage from './pages/UserOrderPage';
+import StripeCheckout from './pages/StripeCheckout';
 
 import { useEffect } from 'react';
 
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
   {
     path: "/Checkoutpage",
     element: <CheckoutPage></CheckoutPage>
+  },
+  {
+    path: '/stripe/checkout',
+    element: <StripeCheckout></StripeCheckout>
   },
   {
     path: "/orderplaced/:id",
