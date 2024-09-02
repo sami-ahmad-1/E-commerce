@@ -95,9 +95,7 @@ function Checkout() {
         }
     }
 
-    // useEffect(() => {
 
-    // } , [currentOrder])
     return (
         <>
             <>
@@ -254,8 +252,8 @@ function Checkout() {
                         <div className="border-b border-gray-900/10 pb-12 lg:mt-7 lg:mb-7">
                             <h2 className=" font-semibold leading-7 text-2xl text-gray-900">Address</h2>
                             <div className="mt-1 space-y-10">
-                                {
-                                    user.addresses.map((address, index) => (
+                                {  user && user.addresses ? 
+                                    (user.addresses.map((address, index) => (
                                         <li
                                             key={index}
                                             className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200"
@@ -289,7 +287,8 @@ function Checkout() {
                                                 </p>
                                             </div>
                                         </li>
-                                    ))
+                                    )) ) :
+                                    <p>Loading Address...</p>
                                 }
 
                                 <div className="mt-10 space-y-10">
