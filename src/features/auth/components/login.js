@@ -1,27 +1,37 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, Navigate,useNavigate } from 'react-router-dom'
 import { checkLoginUser } from '../authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectLoggedInUser, selectError } from '../authSlice'
 
 function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm()
-
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const user = useSelector(selectLoggedInUser)
   const error = useSelector(selectError)
-  // console.log(user)
-  // console.log(error)
+  console.log(user)
+  console.log(error)
 
   const onSubmit = (data) => {
     dispatch(checkLoginUser(data))
   }
 
+  React.useEffect(() => {
+    if (user) {
+      if (user.role == "admin") {
+      navigate('/admin/homepage', { replace: true })      
+      } else if(user.role == "user") {
+        navigate('/', { replace: true })
+      } else {
+      navigate('*', { replace: true })
+      }
+    }
+  }, [user, navigate])
   return (
     <>      
-      <div>
-        {user && <Navigate to='/' replace={true}></Navigate>}
+      <div>        
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <img

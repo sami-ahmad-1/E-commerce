@@ -6,8 +6,12 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAllProductsAsync, selectAllProducts, fetchAllProductsbyFilter } from '../productsSlice';
-import { Link } from 'react-router-dom';
+import { fetchAllProductsAsync, selectAllProducts, fetchAllProductsbyFilter, RemoveProductFromListAsync } from '../productsSlice';
+import { Link, Routes, Route, useNavigate } from 'react-router-dom';
+import { ProductListDiscountedPrice } from '../../../app/Constants';
+import { selectLoggedInUser } from '../../auth/authSlice';
+import { fetchProductByUserId } from '../../cart/cartSlice'
+import Swal from 'sweetalert2';
 
 const sortOptions = [
   { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
@@ -15,211 +19,65 @@ const sortOptions = [
   { name: 'Price: High to Low', sort: 'price', order: 'desc', current: false },
 ]
 
+
+
 const filters = [
   {
     id: 'category',
     name: 'Category',
     options: [
-      { value: 'smartphones', label: 'smartphones', checked: false },
-      { value: 'laptops', label: 'laptops', checked: false },
+      { value: 'beauty', label: 'beauty', checked: false },
       { value: 'fragrances', label: 'fragrances', checked: false },
-      { value: 'skincare', label: 'skincare', checked: false },
+      { value: 'furniture', label: 'furniture', checked: false },
       { value: 'groceries', label: 'groceries', checked: false },
-      {
-        value: 'home-decoration',
-        label: 'home decoration',
-        checked: false
-      },
+      { value: 'home-decoration', label: 'home-decoration', checked: false },
       { value: 'furniture', label: 'furniture', checked: false },
       { value: 'tops', label: 'tops', checked: false },
-      { value: 'womens-dresses', label: 'womens dresses', checked: false },
-      { value: 'womens-shoes', label: 'womens shoes', checked: false },
+      { value: 'kitchen-accessories', label: 'kitchen-accessories', checked: false },
+      { value: 'laptops', label: 'laptops', checked: false },
       { value: 'mens-shirts', label: 'mens shirts', checked: false },
       { value: 'mens-shoes', label: 'mens shoes', checked: false },
       { value: 'mens-watches', label: 'mens watches', checked: false },
       { value: 'womens-watches', label: 'womens watches', checked: false },
-      { value: 'womens-bags', label: 'womens bags', checked: false },
-      {
-        value: 'womens-jewellery',
-        label: 'womens jewellery',
-        checked: false
-      },
-      { value: 'sunglasses', label: 'sunglasses', checked: false },
-      { value: 'automotive', label: 'automotive', checked: false },
-      { value: 'motorcycle', label: 'motorcycle', checked: false },
-      { value: 'lighting', label: 'lighting', checked: false }
+      { value: 'mobile-accessories', label: 'mobile-accessories', checked: false },
+      { value: 'electronics', label: 'electronics', checked: false },
     ]
   },
   {
     id: 'brand',
     name: 'Brand',
     options: [
+      { value: 'Essence', label: 'Essence', checked: false },
+      { value: 'Glamour Beauty', label: 'Glamour Beauty', checked: false },
+      { value: 'Velvet Touch', label: 'Velvet Touch', checked: false },
+      { value: 'Chic Cosmetics', label: 'Chic Cosmetics', checked: false },
+      { value: 'Nail Couture', label: 'Nail Couture', checked: false },
+      { value: 'Calvin Klein', label: 'Calvin Klein', checked: false },
+      { value: 'Chanel', label: 'Chanel', checked: false },
+      { value: 'Dior', label: 'Dior', checked: false },
+      { value: 'Dolce & Gabbana', label: 'Dolce & Gabbana', checked: false },
+      { value: 'Gucci', label: 'Gucci', checked: false },
+      { value: 'Annibale Colombo', label: 'Annibale Colombo', checked: false },
+      { value: 'Furniture Co.', label: 'Furniture Co.', checked: false },
+      { value: 'Knoll', label: 'Knoll', checked: false },
+      { value: 'Bath Trends', label: 'Bath Trends', checked: false },
       { value: 'Apple', label: 'Apple', checked: false },
-      { value: 'Samsung', label: 'Samsung', checked: false },
-      { value: 'OPPO', label: 'OPPO', checked: false },
+      { value: 'Asus', label: 'Asus', checked: false },
       { value: 'Huawei', label: 'Huawei', checked: false },
-      {
-        value: 'Microsoft Surface',
-        label: 'Microsoft Surface',
-        checked: false
-      },
-      { value: 'Infinix', label: 'Infinix', checked: false },
-      { value: 'HP Pavilion', label: 'HP Pavilion', checked: false },
-      {
-        value: 'Impression of Acqua Di Gio',
-        label: 'Impression of Acqua Di Gio',
-        checked: false
-      },
-      { value: 'Royal_Mirage', label: 'Royal_Mirage', checked: false },
-      {
-        value: 'Fog Scent Xpressio',
-        label: 'Fog Scent Xpressio',
-        checked: false
-      },
-      { value: 'Al Munakh', label: 'Al Munakh', checked: false },
-      {
-        value: 'Lord - Al-Rehab',
-        label: 'Lord - Al-Rehab',
-        checked: false
-      },
-      { value: 'L\'Oreal Paris', label: 'L\'Oreal Paris', checked: false },
-      { value: 'Hemani Tea', label: 'Hemani Tea', checked: false },
-      { value: 'Dermive', label: 'Dermive', checked: false },
-      {
-        value: 'ROREC White Rice',
-        label: 'ROREC White Rice',
-        checked: false
-      },
-      { value: 'Fair & Clear', label: 'Fair & Clear', checked: false },
-      { value: 'Saaf & Khaas', label: 'Saaf & Khaas', checked: false },
-      {
-        value: 'Bake Parlor Big',
-        label: 'Bake Parlor Big',
-        checked: false
-      },
-      {
-        value: 'Baking Food Items',
-        label: 'Baking Food Items',
-        checked: false
-      },
-      { value: 'fauji', label: 'fauji', checked: false },
-      { value: 'Dry Rose', label: 'Dry Rose', checked: false },
-      { value: 'Boho Decor', label: 'Boho Decor', checked: false },
-      { value: 'Flying Wooden', label: 'Flying Wooden', checked: false },
-      { value: 'LED Lights', label: 'LED Lights', checked: false },
-      { value: 'luxury palace', label: 'luxury palace', checked: false },
-      { value: 'Golden', label: 'Golden', checked: false },
-      {
-        value: 'Furniture Bed Set',
-        label: 'Furniture Bed Set',
-        checked: false
-      },
-      {
-        value: 'Ratttan Outdoor',
-        label: 'Ratttan Outdoor',
-        checked: false
-      },
-      { value: 'Kitchen Shelf', label: 'Kitchen Shelf', checked: false },
-      { value: 'Multi Purpose', label: 'Multi Purpose', checked: false },
-      { value: 'AmnaMart', label: 'AmnaMart', checked: false },
-      {
-        value: 'Professional Wear',
-        label: 'Professional Wear',
-        checked: false
-      },
-      { value: 'Soft Cotton', label: 'Soft Cotton', checked: false },
-      { value: 'Top Sweater', label: 'Top Sweater', checked: false },
-      {
-        value: 'RED MICKY MOUSE..',
-        label: 'RED MICKY MOUSE..',
-        checked: false
-      },
-      {
-        value: 'Digital Printed',
-        label: 'Digital Printed',
-        checked: false
-      },
-      { value: 'Ghazi Fabric', label: 'Ghazi Fabric', checked: false },
-      { value: 'IELGY', label: 'IELGY', checked: false },
-      { value: 'IELGY fashion', label: 'IELGY fashion', checked: false },
-      {
-        value: 'Synthetic Leather',
-        label: 'Synthetic Leather',
-        checked: false
-      },
-      {
-        value: 'Sandals Flip Flops',
-        label: 'Sandals Flip Flops',
-        checked: false
-      },
-      { value: 'Maasai Sandals', label: 'Maasai Sandals', checked: false },
-      {
-        value: 'Arrivals Genuine',
-        label: 'Arrivals Genuine',
-        checked: false
-      },
-      {
-        value: 'Vintage Apparel',
-        label: 'Vintage Apparel',
-        checked: false
-      },
-      { value: 'FREE FIRE', label: 'FREE FIRE', checked: false },
-      { value: 'The Warehouse', label: 'The Warehouse', checked: false },
-      { value: 'Sneakers', label: 'Sneakers', checked: false },
-      { value: 'Rubber', label: 'Rubber', checked: false },
-      { value: 'Naviforce', label: 'Naviforce', checked: false },
-      { value: 'SKMEI 9117', label: 'SKMEI 9117', checked: false },
-      { value: 'Strap Skeleton', label: 'Strap Skeleton', checked: false },
-      { value: 'Stainless', label: 'Stainless', checked: false },
-      {
-        value: 'Eastern Watches',
-        label: 'Eastern Watches',
-        checked: false
-      },
-      { value: 'Luxury Digital', label: 'Luxury Digital', checked: false },
-      { value: 'Watch Pearls', label: 'Watch Pearls', checked: false },
-      { value: 'Bracelet', label: 'Bracelet', checked: false },
-      { value: 'LouisWill', label: 'LouisWill', checked: false },
-      {
-        value: 'Copenhagen Luxe',
-        label: 'Copenhagen Luxe',
-        checked: false
-      },
-      { value: 'Steal Frame', label: 'Steal Frame', checked: false },
-      { value: 'Darojay', label: 'Darojay', checked: false },
-      {
-        value: 'Fashion Jewellery',
-        label: 'Fashion Jewellery',
-        checked: false
-      },
-      { value: 'Cuff Butterfly', label: 'Cuff Butterfly', checked: false },
-      {
-        value: 'Designer Sun Glasses',
-        label: 'Designer Sun Glasses',
-        checked: false
-      },
-      { value: 'mastar watch', label: 'mastar watch', checked: false },
-      { value: 'Car Aux', label: 'Car Aux', checked: false },
-      { value: 'W1209 DC12V', label: 'W1209 DC12V', checked: false },
-      { value: 'TC Reusable', label: 'TC Reusable', checked: false },
-      { value: 'Neon LED Light', label: 'Neon LED Light', checked: false },
-      {
-        value: 'METRO 70cc Motorcycle - MR70',
-        label: 'METRO 70cc Motorcycle - MR70',
-        checked: false
-      },
-      { value: 'BRAVE BULL', label: 'BRAVE BULL', checked: false },
-      { value: 'shock absorber', label: 'shock absorber', checked: false },
-      { value: 'JIEPOLLY', label: 'JIEPOLLY', checked: false },
-      { value: 'Xiangle', label: 'Xiangle', checked: false },
-      {
-        value: 'lightingbrilliance',
-        label: 'lightingbrilliance',
-        checked: false
-      },
-      { value: 'Ifei Home', label: 'Ifei Home', checked: false },
-      { value: 'DADAWU', label: 'DADAWU', checked: false },
-      { value: 'YIOSI', label: 'YIOSI', checked: false }
+      { value: 'Lenovo', label: 'Lenovo', checked: false },
+      { value: 'Dell', label: 'Dell', checked: false },
+      { value: 'Fashion Trends', label: 'Fashion Trends', checked: false },
+      { value: 'Gigabyte', label: 'Gigabyte', checked: false },
+      { value: 'Classic Wear', label: 'Classic Wear', checked: false },
+      { value: 'Casual Comfort', label: 'Casual Comfort', checked: false },
+      { value: 'Urban Chic', label: 'Urban Chic', checked: false },
+      { value: 'Nike', label: 'Nike', checked: false },
+      { value: 'Puma', label: 'Puma', checked: false },
+      { value: 'Off White', label: 'Off White', checked: false },
+      { value: 'Fashion Timepieces', label: 'Fashion Timepieces', checked: false },
+      { value: 'Longines', label: 'Longines', checked: false },
+      { value: 'Rolex', label: 'Rolex', checked: false },
+      { value: 'Amazon', label: 'Amazon', checked: false }
     ]
   },
 ]
@@ -393,7 +251,7 @@ function DesktopFilter(props) {
 
 function Pagination(props) {
   return (
-    <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+    <div className="mt-5 flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
       <div className="flex flex-1 justify-between sm:hidden">
       </div>
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
@@ -417,7 +275,7 @@ function Pagination(props) {
               return (
                 <span
                   key={i}
-                  className={`relative z-10 inline-flex items-center  ${props.page === i ? 'bg-indigo-600' : 'bg-white text-black'} bg-indigo-600 px-4 py-2 text-sm font-semibold  focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer`}
+                  className={`relative z-10 inline-flex items-center  ${props.page == i ? 'bg-indigo-600' : 'bg-white text-black'} bg-indigo-600 px-4 py-2 text-sm font-semibold  focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer`}
                   onClick={() => props.handlePagination(i)}
                 >
                   {i + 1}
@@ -441,139 +299,95 @@ function Pagination(props) {
 }
 
 function Card(props) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+
+  const handleRemove = (e, product) => {
+    e.preventDefault()
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(RemoveProductFromListAsync(product))
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      }
+    });
+  }
+
+
   return (
-    <div className="bg-white">
+    <div className="bg-white ">
       <div className="mx-auto max-w-2xl lg:max-w-7xl lg:px-8">
-        <div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+        <div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8 ">
           {props.products.slice(props.page * 10, (props.page + 1) * 10).map((product) => (
-            <Link to={`/productdetail/${product.id}`} key={product.id}>
-              <div key={product.id} className="group relative">
-                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                  <img
-                    src={product.thumbnail}
-                    alt={product.imageAlt}
-                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                  />
-                </div>
-                <div className="mt-4 flex justify-between">
-                  <div>
-                    <h3 className="text-sm text-gray-700">
-                      <a href={product.href}>
-                        <span aria-hidden="true" className="absolute inset-0 " />
-                       <p className='text-base font-medium  text-gray-900'>{product.title}</p> 
-                      </a>
-                    </h3>
-                    <div className='flex'>
-                      <p className="mt-1 text-sm text-gray-500">{product.rating}</p>
-                      <div className="flex items-center ml-4">
-                        {[0, 1, 2, 3, 4].map((rating) => (
-                          <StarIcon
-                            key={rating}
-                            className={classNames(        
-                              `${product.rating}` > rating ? 'text-yellow-500' : 'text-gray-200',
-                              'h-5 w-5 flex-shrink-0'
-                            )}
-                            aria-hidden="true"
-                          />
-                        ))}
+            <div >
+              <Link to={`/productdetail/${product.id}`} >
+                <div key={product.id} className="group relative ">
+                  <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 ">
+                    {product.thumbnail ?
+                      <img
+                        src={product.thumbnail}
+                        alt={product.imageAlt}
+                        className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                      />
+                      :
+                      <div class="flex items-center justify-center w-full h-48 bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
+                        <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                          <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
+                        </svg>
+                      </div>
+                    }
+                  </div>
+                  <div className="mt-4 flex justify-between">
+                    <div>
+                      <h3 className="text-sm text-gray-700">
+                        <a href={product.href}>
+                          <span aria-hidden="true" className="absolute inset-0 " />
+                          <p className='text-base font-medium  text-gray-900'>{product.title}</p>
+                        </a>
+                      </h3>
+                      <div className='flex'>
+                        <p className="mt-1 text-sm text-gray-500">{product.rating}</p>
+                        <div className="flex items-center ml-4">
+                          {[0, 1, 2, 3, 4].map((rating) => (
+                            <StarIcon
+                              key={rating}
+                              className={classNames(
+                                `${product.rating}` > rating ? 'text-yellow-500' : 'text-gray-200',
+                                'h-5 w-5 flex-shrink-0'
+                              )}
+                              aria-hidden="true"
+                            />
+                          ))}
+                        </div>
                       </div>
                     </div>
+                    <div>
+                      <p className="text-sm font-medium  text-gray-900">${ProductListDiscountedPrice(product)}</p>
+                      <p className="text-sm font-medium line-through text-gray-400">${product.price}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm font-medium  text-gray-900">${Math.round(product.price - (product.price * (product.discountPercentage / 100)))}</p>
-                    <p className="text-sm font-medium line-through text-gray-400">${product.price}</p>
-                  </div>
-                </div>
-              </div>
-            </Link>
+                </div >
+              </Link>
+
+            </div>
           ))}
+
         </div>
       </div>
-    </div>
+    </div >
   )
 }
-
-
-
-
-function Products() {
-  const dispatch = useDispatch();
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-  const [filter, setFilter] = useState({})
-  const products = useSelector(selectAllProducts)
-  const [page, setPage] = useState(0)
-  const totalProduct = products.length
-  const totalPage = Math.floor((totalProduct / 10) + 1)
-
-  const handleFilter = (e, section, option) => {
-    const newFilter = { ...filter, [section.id]: option.value }
-    setFilter(newFilter)
-    dispatch(fetchAllProductsbyFilter(newFilter))
-  };
-
-  const handleSort = (e, option) => {
-    const newFilter = { ...filter, _sort: option.sort, _order: option.order }
-    setFilter(newFilter)
-    dispatch(fetchAllProductsbyFilter(newFilter))
-  }
-
-  const handlePagination = (selectedPage) => {
-    if (selectedPage >= 0 && selectedPage <= totalPage) {
-      setPage(selectedPage)
-    }
-  }
-
-
-  useEffect(() => {
-    dispatch(fetchAllProductsAsync())
-  }, [])
-
-  return (
-    <div>
-
-      <div className="bg-white">
-        <div>
-          <MobileFilter setMobileFiltersOpen={setMobileFiltersOpen} handleFilter={handleFilter} mobileFiltersOpen={mobileFiltersOpen} />
-          <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 ">
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
-              <SortButton handleSort={handleSort} setMobileFiltersOpen={setMobileFiltersOpen} />
-            </div>
-
-            <section aria-labelledby="products-heading" className="pb-24 pt-6">
-              <h2 id="products-heading" className="sr-only">
-                Products
-              </h2>
-
-              <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-                {/* Filters */}
-                <form className="hidden lg:block">
-                  <h3 className="sr-only">Categories</h3>
-                  <DesktopFilter setMobileFiltersOpen={setMobileFiltersOpen} handleFilter={handleFilter} setPage={setPage} />
-                </form>
-
-                {/* Product grid */}
-                <div className="lg:col-span-3">
-                  <Card products={products} page={page} />
-                  <Pagination handlePagination={handlePagination} page={page} totalPage={totalPage} totalProduct={totalProduct} />
-                </div>
-
-              </div>
-            </section>
-          </main>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default Products
-
-
-
-
-
-
 
 
 function SortButton(props) {
@@ -638,3 +452,81 @@ function SortButton(props) {
     </div>
   )
 }
+
+
+
+
+export default function ProductList() {
+  const dispatch = useDispatch();
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const [filter, setFilter] = useState({})
+  const products = useSelector(selectAllProducts)
+  // console.log('Products in Home Page', products)
+  const [page, setPage] = useState(0)    // 3
+  const totalProduct = products.length    //100
+  const totalPage = (Math.floor(totalProduct / 10)) + 1     // 10
+
+  const handleFilter = (e, section, option) => {
+    const newFilter = { ...filter, [section.id]: option.value }
+    setFilter(newFilter)
+    dispatch(fetchAllProductsbyFilter(newFilter))
+  };
+
+  const handleSort = (e, option) => {
+    const newFilter = { ...filter, _sort: option.sort, _order: option.order }
+    setFilter(newFilter)
+    dispatch(fetchAllProductsbyFilter(newFilter))
+  }
+  const handlePagination = (selectedPage) => {
+    if (selectedPage >= 0 && selectedPage <= totalPage) {
+      setPage(selectedPage)
+    }
+  }
+
+  const user = useSelector(selectLoggedInUser)
+
+  useEffect(() => {
+    dispatch(fetchAllProductsAsync())
+    if (user !== null) {
+      dispatch(fetchProductByUserId(user.id))
+    }
+  }, [])
+
+  return (
+    <div>
+      <div className="bg-white py-14">
+        <div>
+          <MobileFilter setMobileFiltersOpen={setMobileFiltersOpen} handleFilter={handleFilter} mobileFiltersOpen={mobileFiltersOpen} />
+          <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 ">
+              <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
+              <SortButton handleSort={handleSort} setMobileFiltersOpen={setMobileFiltersOpen} />
+            </div>
+            <section aria-labelledby="products-heading" className="pb-24 pt-6">
+              <h2 id="products-heading" className="sr-only">
+                Products
+              </h2>
+              <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+                {/* Filters */}
+                <form className="hidden lg:block">
+                  <h3 className="sr-only">Categories</h3>
+                  <DesktopFilter setMobileFiltersOpen={setMobileFiltersOpen} handleFilter={handleFilter} setPage={setPage} />
+                </form>
+
+                {/* Product grid */}
+                <div className="lg:col-span-3">
+                  <Card products={products} page={page} />
+                  <Pagination handlePagination={handlePagination} page={page} totalPage={totalPage} totalProduct={totalProduct} />
+                </div>
+              </div>
+            </section>
+          </main>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+
+

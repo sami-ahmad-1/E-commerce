@@ -2,7 +2,10 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { createUser, checkUser, userAddressAPI, SignOut } from './authAPI';
 
 const initialState = {
-  loggedInUserToken: null,
+  // loggedInUserToken: null,
+  // status: null,
+  // error: ''
+  loggedInUserToken: localStorage.getItem('userToken') || null, // Load token from localStorage
   status: null,
   error: ''
 };
@@ -18,7 +21,7 @@ export const createUserAsync = createAsyncThunk(
 
 export const checkLoginUser = createAsyncThunk(
   'user/checkLoginUser',
-  async (LoginInfo,{rejectWithValue}) => {
+  async (LoginInfo, { rejectWithValue }) => {
     try {
       const response2 = await checkUser(LoginInfo);
       return response2.data;
@@ -63,13 +66,18 @@ export const counterSlice = createSlice({
       .addCase(checkLoginUser.pending, (state) => {
         state.status = 'loading';
       })
+      // .addCase(checkLoginUser.fulfilled, (state, action) => {
+      //   state.status = 'idle';
+      //   state.loggedInUserToken = action.payload;
+      //   localStorage.setItem("replace", "true");
+      // })
       .addCase(checkLoginUser.fulfilled, (state, action) => {
         state.status = 'idle';
         state.loggedInUserToken = action.payload;
-        localStorage.setItem("replace", "true");
+        localStorage.setItem('userToken', action.payload); // Save token to localStorage
       })
       .addCase(checkLoginUser.rejected, (state, action) => {
-        state.status = 'idle';        
+        state.status = 'idle';
         state.error = action.payload;
       })
       .addCase(userAddress.pending, (state) => {
@@ -82,10 +90,15 @@ export const counterSlice = createSlice({
       .addCase(SignOutAsync.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(SignOutAsync.fulfilled, (state, action) => {
+      // .addCase(SignOutAsync.fulfilled, (state, action) => {
+      //   state.status = 'idle';
+      //   state.loggedInUserToken = null
+      // })
+      .addCase(SignOutAsync.fulfilled, (state) => {
         state.status = 'idle';
-        state.loggedInUserToken = null
-      })
+        state.loggedInUserToken = null;
+        localStorage.removeItem('userToken'); // Remove token from localStorage on logout
+      });
   },
 });
 

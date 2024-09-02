@@ -7,6 +7,7 @@ import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import ProductDetail from '../src/features/product/Component/productDetail'
 import OrderSuccessPage from './pages/OrderSuccessPage';
+import CardOrderSuccessPage from './pages/CardOrderSuccessPage';
 import Order from './features/order/order';
 import PageNotFound from './pages/404';
 import Protected from './features/auth/components/Protected';
@@ -18,6 +19,7 @@ import AdminOrdersPage from './pages/AdminOrdersPage';
 import AdminProductEditForm from '../src/features/admin/Component/AdminProductEditForm'
 import ProtectedAdmin from './features/auth/components/ProtectedAdmin'
 
+import UserHomePage from './pages/UserHomePage';
 import UserProfilePage from './pages/UserProfilePage';
 import UserOrderPage from './pages/UserOrderPage';
 import StripeCheckout from './pages/StripeCheckout';
@@ -51,7 +53,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <><AdminHomePage /></>
+    element: <><UserHomePage /></>
   },
   {
     path: `/productdetail/:id`,
@@ -96,6 +98,10 @@ const router = createBrowserRouter([
   {
     path: "/orderplaced/:id",
     element: <OrderSuccessPage></OrderSuccessPage>
+  },
+  {
+    path: "/cardOrderSuccess",
+    element: <CardOrderSuccessPage></CardOrderSuccessPage>
   },
   {
     path: "/profile",

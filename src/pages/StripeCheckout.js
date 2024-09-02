@@ -19,7 +19,7 @@ export default function StripeCheckout() {
     fetch("http://localhost:8080/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ totalAmount: currentOrder.totalAmount, orderId:currentOrder.id }),
+      body: JSON.stringify({ totalPrice: currentOrder.totalPrice, orderId:currentOrder.id }),
     
     })
       .then((res) => res.json())
