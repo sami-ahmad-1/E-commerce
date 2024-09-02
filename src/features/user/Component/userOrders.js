@@ -45,7 +45,7 @@
 //                               <h3>
 //                                 <a href={product.href}>{product.product.title}</a>
 //                               </h3>
-//                               <p className="ml-4">₹{product.price * product.quantity}</p>
+//                               <p className="ml-4">${product.price * product.quantity}</p>
 //                             </div>
 //                             <p className="mt-1 text-sm text-gray-500">{product.color}</p>
 //                           </div>
@@ -62,7 +62,7 @@
 //               <div className="border-t border-gray-200   py-6 sm:px-6 mt-5">
 //                 <div className="flex justify-between text-base font-medium text-gray-900">
 //                   <p>Subtotal</p>
-//                   <p>₹{prod.totalPrice}</p>
+//                   <p>${prod.totalPrice}</p>
 //                 </div>
 //                 <div className="flex justify-between text-base font-medium text-gray-900">
 //                   <p>Total Items</p>
@@ -142,7 +142,7 @@ export default function UserOrders() {
                               <h3>
                                 <a href={product.href}>{product.product.title}</a>
                               </h3>
-                              <p className="ml-4">₹{product.product.price * product.quantity}</p>
+                              <p className="ml-4">${product.product.price * product.quantity}</p>
                             </div>
                             <p className="mt-1 text-sm text-gray-500">{product.color}</p>
                           </div>
@@ -159,7 +159,7 @@ export default function UserOrders() {
               <div className="border-t border-gray-200   py-6 sm:px-6 mt-5">
                 <div className="flex justify-between text-base font-medium text-gray-900">
                   <p>Subtotal</p>
-                  <p>₹{prod.totalPrice}</p>
+                  <p>${prod.totalPrice}</p>
                   {console.log('prod',prod)}
                 </div>
                 <div className="flex justify-between text-base font-medium text-gray-900">

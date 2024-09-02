@@ -249,7 +249,7 @@ function DesktopFilter(props) {
 
 function Pagination(props) {
   return (
-    <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+    <div className="flex mt-7 items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
       <div className="flex flex-1 justify-between sm:hidden">
       </div>
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
@@ -329,7 +329,7 @@ function Card(props) {
         <div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8 ">
           {props.products.slice(props.page * 10, (props.page + 1) * 10).map((product) => (
             <div >
-              <Link to={`/productdetail/${product.id}`} >
+              <Link to={`/admin/productdetail/${product.id}`} >
                 <div key={product.id} className="group relative ">
                   <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 ">
                     <img

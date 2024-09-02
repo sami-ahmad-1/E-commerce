@@ -1,11 +1,13 @@
 import React from 'react'
 import Navbar from '../features/navbar/navbar'
-import ProductDetail from '../features/product-list/Component/productDetail'
+import AdminProductDetail from '../features/admin/Component/AdminProductDetail'
+
+
 function ProductDetailPage() {
   return (
     <>
       <Navbar />
-      <ProductDetail />
+      <AdminProductDetail />
     </>
   )
 }

@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from '../features/navbar/navbar'
+import AdminNavabar from '../features/navbar/AdminNavabar'
 import AdminProductForm from '../features/admin/Component/AdminProductForm'
 function AdminProductFormPage() {
     return (
         <>
-            <Navbar />
+            <AdminNavabar />
             <AdminProductForm />
         </>
     )

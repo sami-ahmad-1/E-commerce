@@ -1,11 +1,13 @@
 import React from 'react'
-import Navbar from '../features/navbar/navbar'
+import AdminNavabar from '../features/navbar/AdminNavabar'
 import AdminProductsList from '../features/admin/Component/AdminProductsList'
+import Footer from '../features/Footer/Footer'
 function Home() {
   return (
     <div>
-      <Navbar/>
+      <AdminNavabar/>
       <AdminProductsList/>
+      <Footer/>
     </div>
   )
 }

@@ -3,6 +3,11 @@ export const discountedPrice = (item) => {
 }
 
 
+export const discountedPriceAdmin = (item) => {          
+    return Math.round(item.price*(1-item.discountPercentage/100),2)    
+}
+
+
 export const ProductListDiscountedPrice = (item) => {              
     return Math.round(item.price*(1-item.discountPercentage/100),2)
 }

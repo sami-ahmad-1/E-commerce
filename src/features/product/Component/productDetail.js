@@ -6,7 +6,8 @@ import { fetchProductDetail } from '../productsSlice'
 import { selectProductDetail } from '../productsSlice'
 import { AddToCart } from '../../cart/cartSlice'
 import { selectLoggedInUser } from '../../auth/authSlice'
-import { discountedPrice } from '../../../app/Constants'
+import { ProductListDiscountedPrice } from '../../../app/Constants'
+// import { discountedPrice } from '../../../app/Constants'
 
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
@@ -97,7 +98,7 @@ export default function ProductDetail() {
                 {/* Options */}
                 <div className="mt-4 lg:row-span-3 lg:mt-0">
                   <h2 className="sr-only">Product information</h2>
-                  <p className="text-3xl tracking-tight text-gray-900"> ${discountedPrice(prod)}</p>
+                  <p className="text-3xl tracking-tight text-gray-900"> ${ProductListDiscountedPrice(prod)}</p>
 
                   {/* Reviews */}
                   <div className="mt-6">

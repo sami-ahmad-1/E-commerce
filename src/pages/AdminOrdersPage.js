@@ -1,11 +1,11 @@
 import React from 'react'
-import Navbar from '../features/navbar/navbar'
+import AdminNavabar from '../features/navbar/AdminNavabar'
 import AdminOrders from '../features/admin/AdminOrders'
 
 export default function AdminOrdersPage() {
     return (
         <>
-            <Navbar />
+            <AdminNavabar />
             <AdminOrders />
         </>
     )
