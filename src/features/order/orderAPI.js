@@ -1,6 +1,6 @@
 export function OrderAPI(order) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8080/order', {
+    const response = await fetch('/order', {
       method: 'POST',
       body: JSON.stringify(order),
       headers: {
@@ -16,7 +16,7 @@ export function OrderAPI(order) {
 
 export function fetchAllOrder() {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8080/order/allOrders')
+    const response = await fetch('/order/allOrders')
     const data = await response.json()
     resolve({ data })
   }
@@ -25,7 +25,7 @@ export function fetchAllOrder() {
 
 export function updateOrderAPI(order) {
   return new Promise(async (resolve) => {
-    const response = await fetch(`http://localhost:8080/order/${order.id}`, {
+    const response = await fetch(`/order/${order.id}`, {
       method: 'PATCH',
       body: JSON.stringify(order),
       headers: {

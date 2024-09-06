@@ -1,6 +1,6 @@
 export function CartAPI(CartData) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8080/cart', {
+    const response = await fetch('/cart', {
       method: 'POST',
       body: JSON.stringify(CartData),
       headers: {
@@ -19,7 +19,7 @@ export function CartAPI(CartData) {
 export function fetchUserCartItemsAPI() {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch(`http://localhost:8080/cart/own`); 
+      const response = await fetch(`/cart/own`); 
       const data = await response.json(); 
       resolve({ data });
     } catch (error) {
@@ -31,7 +31,7 @@ export function fetchUserCartItemsAPI() {
 
 export function updateCart(prod) {
   return new Promise(async (resolve) => {    
-    const response = await fetch(`http://localhost:8080/cart/${prod.id}`, {
+    const response = await fetch(`/cart/${prod.id}`, {
       method: 'PATCH',
       body: JSON.stringify(prod),
       headers: {
@@ -47,7 +47,7 @@ export function updateCart(prod) {
 
 export function RemoveProductAPI(ProdId) {
   return new Promise(async (resolve, reject) => {
-    const response = await fetch(`http://localhost:8080/cart/${ProdId}`, {method: 'DELETE'})
+    const response = await fetch(`/cart/${ProdId}`, {method: 'DELETE'})
     const data = response.json()
     resolve({ data:{id:ProdId} })
   }

@@ -37,6 +37,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import AdminProfilePage from './pages/AdminProfilePage';
 
 const router = createBrowserRouter([
   {
@@ -53,11 +54,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <><UserHomePage /></>
+    element: <Protected><UserHomePage /></Protected>
   },
   {
     path: `/productdetail/:id`,
-    element: < ProductDetailPage/>
+    element: <Protected>< ProductDetailPage /></Protected>
   },
   {
     path: "/admin/homepage",
@@ -65,51 +66,77 @@ const router = createBrowserRouter([
   },
   {
     path: `/admin/productdetail/:id`,
-    element: <AdminProductDetailPage/>
+    element: <ProtectedAdmin><AdminProductDetailPage /></ProtectedAdmin>
+  },
+  {
+    path: `/admin/profile`,
+    element: <ProtectedAdmin><AdminProfilePage /></ProtectedAdmin>
   },
   {
     path: "/admin/productform",
-    element: <AdminProductFormPage />
+    element: <ProtectedAdmin>
+      <AdminProductFormPage />
+    </ProtectedAdmin>
   },
   {
     path: "/admin/adminorderpage",
-    element: <AdminOrdersPage />
+    element: <ProtectedAdmin>
+      <AdminOrdersPage />
+    </ProtectedAdmin>
   },
   {
     path: "/admin/adminProductEditForm/:id",
-    element: <AdminProductEditForm />
+    element: <ProtectedAdmin>
+      <AdminProductEditForm />
+    </ProtectedAdmin>
   },
   {
     path: "/order",
-    element: <Order></Order>
+    element: <Protected>
+      <Order />
+    </Protected>
   },
   {
     path: "/cartpage",
-    element: <CartPage></CartPage>
+    element: <Protected>
+      <CartPage></CartPage>
+    </Protected>
   },
   {
     path: "/Checkoutpage",
-    element: <CheckoutPage></CheckoutPage>
+    element: <Protected>
+      <CheckoutPage></CheckoutPage>
+    </Protected>
   },
   {
     path: '/stripe/checkout',
-    element: <StripeCheckout></StripeCheckout>
+    element: <Protected>
+      <StripeCheckout></StripeCheckout>
+    </Protected>
   },
   {
     path: "/orderplaced/:id",
-    element: <OrderSuccessPage></OrderSuccessPage>
+    element: <Protected>
+      <OrderSuccessPage></OrderSuccessPage>
+    </Protected>
   },
   {
     path: "/cardOrderSuccess",
-    element: <CardOrderSuccessPage></CardOrderSuccessPage>
+    element: <Protected>
+      <CardOrderSuccessPage></CardOrderSuccessPage>
+    </Protected>
   },
   {
     path: "/profile",
-    element: <UserProfilePage />
+    element: <Protected>
+      <UserProfilePage />
+    </Protected>
   },
   {
     path: "/userorder",
-    element: <UserOrderPage></UserOrderPage>
+    element: <Protected>
+      <UserOrderPage></UserOrderPage>
+    </Protected>
   },
   {
     path: "*",
@@ -119,15 +146,15 @@ const router = createBrowserRouter([
 
 function App() {
   const dispatch = useDispatch()
-  const user = useSelector(selectLoggedInUser)  
+  const user = useSelector(selectLoggedInUser)
 
   useEffect(() => {
     if (user) {
-      dispatch(fetchLoggedInUserAsync())      
-      dispatch(fetchProductByUserId())     
-      dispatch(fetchProductDetail('66c44a23c282608e91981e9b'))     
-    }else{      
-      dispatch(fetchProductDetail('66c44a23c282608e91981e9b'))          
+      dispatch(fetchLoggedInUserAsync())
+      dispatch(fetchProductByUserId())
+      dispatch(fetchProductDetail('66c44a23c282608e91981e9b'))
+    } else {
+      dispatch(fetchProductDetail('66c44a23c282608e91981e9b'))
     }
   })
 

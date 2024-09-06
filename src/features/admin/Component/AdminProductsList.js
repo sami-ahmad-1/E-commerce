@@ -248,6 +248,9 @@ function DesktopFilter(props) {
 
 
 function Pagination(props) {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  })
   return (
     <div className="flex mt-7 items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
       <div className="flex flex-1 justify-between sm:hidden">

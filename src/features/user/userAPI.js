@@ -1,6 +1,6 @@
 // export function fetchLoggedInUserOrders() {
 //   return new Promise(async(resolve) =>{  
-//     const response = await fetch(`http://localhost:8080/order/own`)
+//     const response = await fetch(`/order/own`)
 //     const data = response.json()
 //     resolve({data})    
 //   }
@@ -10,7 +10,7 @@
 export function fetchLoggedInUserOrders() {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch(`http://localhost:8080/order/own`)
+      const response = await fetch(`/order/own`)
       const data = await response.json(); 
       resolve({ data });
     } catch (error) {
@@ -22,7 +22,7 @@ export function fetchLoggedInUserOrders() {
 
 export function fetchLoggedInUser() {
   return new Promise(async(resolve) =>{  
-    const response = await fetch(`http://localhost:8080/users/own`)
+    const response = await fetch(`/users/own`)
     const data = response.json()
     resolve({data})    
   }
@@ -31,7 +31,7 @@ export function fetchLoggedInUser() {
 
 export function updateUserInfoAPI(userInfo) {  
   return new Promise(async (resolve) => {        
-    const response = await fetch(`http://localhost:8080/users/${userInfo.id}`, {
+    const response = await fetch(`/users/${userInfo.id}`, {
       method: 'PATCH',
       body: JSON.stringify(userInfo),
       headers: {

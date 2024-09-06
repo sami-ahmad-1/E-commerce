@@ -13,20 +13,15 @@ const user = {
     name: 'Tom Cook',
     email: 'tom@example.com',
     imageUrl:
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        'https://p7.hiclipart.com/preview/782/114/405/5bbc3519d674c.jpg',
 }
 const navigation = [
-    { name: 'Dashboard', href: '#', current: true },
-    { name: 'Team', href: '#', current: false },
-    { name: 'Projects', href: '#', current: false },
-    { name: 'Calendar', href: '#', current: false },
-    { name: 'Reports', href: '#', current: false },
+    { name: 'Profile', href: '/profile', current: true },
+    { name: 'Order', href: '/userorder', current: false },
+    { name: 'Login', href: '/login', current: false },
+    { name: 'Sign Out', href: '/logout', current: false }    
 ]
-// const userNavigation = [
-//     { name: 'Your Profile', Link: '/profile' },
-//     { name: 'Settings', href: '' },
-//     { name: 'Sign out', href: '#' },
-// ]
+
 
 const items = [
     { id: 1, title: 'Back End Developer', department: 'Engineering', type: 'Full-time', location: 'Remote' },
@@ -175,40 +170,6 @@ function Navbar() {
                                             {item.name}
                                         </Disclosure.Button>
                                     ))}
-                                </div>
-                                <div className="border-t border-gray-700 pb-3 pt-4">
-                                    <div className="flex items-center px-5">
-                                        <div className="flex-shrink-0">
-                                            <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
-                                        </div>
-                                        <div className="ml-3">
-                                            <div className="text-base font-medium leading-none text-white">{user.name}</div>
-                                            <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
-                                        </div>
-                                        <button
-                                            type="button"
-                                            className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                        >
-                                            <span className="absolute -inset-1.5" />
-                                            <span className="sr-only">View notifications</span>
-                                            <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-                                            <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
-                                                3
-                                            </span>
-                                        </button>
-                                    </div>
-                                    {/* <div className="mt-3 space-y-1 px-2">
-                                        {userNavigation.map((item) => (
-                                            <Disclosure.Button
-                                                key={item.name}
-                                                as="a"
-                                                href={item.href}
-                                                className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                                            >
-                                                {item.name}
-                                            </Disclosure.Button>
-                                        ))}
-                                    </div> */}
                                 </div>
                             </Disclosure.Panel>
                         </>
