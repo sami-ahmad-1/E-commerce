@@ -6,7 +6,6 @@ import { Link, Navigate } from 'react-router-dom'
 
 function SignUp() {
     const { register, handleSubmit, required, watch, formState: { errors } } = useForm()
-    console.log('errors', errors)
     const dispatch = useDispatch()
     const user = useSelector(selectLoggedInUser)
     return (
@@ -25,8 +24,7 @@ function SignUp() {
                 </div>
 
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form className="space-y-6" onSubmit={handleSubmit((data) => {
-                        console.log('data' , data)                        
+                    <form className="space-y-6" onSubmit={handleSubmit((data) => {                    
                         dispatch(createUserAsync({email:data.email , password: data.password , addresses:[] }))
                     })}>
                         <div>

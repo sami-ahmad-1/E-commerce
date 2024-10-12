@@ -29,7 +29,6 @@ function Checkout() {
 
     const handleQuantity = (e, product) => {
         e.preventDefault()
-        console.log("From Handle Qunatity: **********  : ", product.id)
         dispatch(updateItemAsync({ id: product.id, quantity: +e.target.value }))
     }
 
@@ -65,9 +64,7 @@ function Checkout() {
 
     const handleOrder = (e) => {
         e.preventDefault()
-        console.log("user o", user)
         const order = { cartItems, user: user.id, totalPrice, totalItems, deliveryAddress, paymentMethod, status: 'pending' }
-        console.log(order)
 
         if (!cartItems) {
             Swal.fire({
@@ -90,14 +87,13 @@ function Checkout() {
             });
         }
         else {
-            console.log(order)
             dispatch(createOrderAsync(order))
         }
     }
 
 
     return (
-        <>
+        <div className="bg-gray-100 ">
             <>
                 {currentOrder && currentOrder.paymentMethod === 'cash' && (
                     <Navigate
@@ -117,7 +113,8 @@ function Checkout() {
 
             <div className='grid grid-cols-1 lg:grid-cols-2 lg:px-40 '>
                 {/* INPUT FORM */}
-                <form className='lg:px-25  px-10 bg-gray-100 ' onSubmit={handleSubmit((data) => {
+                {/* <form className='lg:px-25  px-10 bg-gray-100 ' onSubmit={handleSubmit((data) => { */}
+                <form className='px-10 py-5  sm:w-full bg-gray-100 ' onSubmit={handleSubmit((data) => {
                     const newUser = { ...user, addresses: [...user.addresses, data] }
                     dispatch(userAddress(newUser))
                     reset()
@@ -340,7 +337,7 @@ function Checkout() {
                 {/* CART  */}
                 <div>
                     {cartItems &&
-                        <div className='px-10 py-5 bg-gray-100'>
+                        <div className='px-10 py-5  sm:w-full bg-gray-100'>
 
                             <div className="mt-8">
                                 <div className="flow-root">
@@ -419,7 +416,7 @@ function Checkout() {
                     }
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

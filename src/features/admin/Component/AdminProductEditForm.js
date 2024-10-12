@@ -32,12 +32,6 @@ export default function AdminProductEditForm() {
         }
       });
     };    
-
-
-
-
-  console.log(prod)
-
   
   useEffect(() => {
     dispatch(fetchProductDetail(params.id));

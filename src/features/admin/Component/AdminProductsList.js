@@ -463,7 +463,6 @@ export default function AdminProducts() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const [filter, setFilter] = useState({})
   const products = useSelector(selectAllProducts)
-  // console.log('Products in Home Page', products)
   const [page, setPage] = useState(0)    // 3
   const totalProduct = products.length    //100
   const totalPage = (Math.floor(totalProduct / 10)) + 1     // 10

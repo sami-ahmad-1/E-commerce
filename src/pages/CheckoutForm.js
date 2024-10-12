@@ -27,7 +27,7 @@ export default function CheckoutForm({ dpmCheckerLink }) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `/orderplaced/${currentOrder.id}`,              
+        return_url: `https://mern-ecommerce-trvh.onrender.com/orderplaced/${currentOrder.id}`,              
       },
     });
 
@@ -58,7 +58,7 @@ export default function CheckoutForm({ dpmCheckerLink }) {
       </form>
       <div id="dpm-annotation">
         <p>
-          Payment methods are dynamically displayed based on customer location, order amount, and currency.&nbsp;
+          {/* Payment methods are dynamically displayed based on customer location, order amount, and currency.&nbsp; */}
           <a href={dpmCheckerLink} target="_blank" rel="noopener noreferrer" id="dpm-integration-checker">Preview payment methods by transaction</a>
         </p>
         <p>Card Number : 4242 4242 4242 4242</p>

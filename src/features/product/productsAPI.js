@@ -41,8 +41,6 @@ export function addNewProductAsync(prodInfo) {
       body: JSON.stringify(prodInfo)
     })
     const data = response.json()
-    console.log('Promise data',data)
-  
     resolve({data})    
   }
   )

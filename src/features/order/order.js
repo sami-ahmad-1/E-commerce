@@ -7,8 +7,6 @@ import { selectLoggedInUser } from '../auth/authSlice'
 function Order() {
   const order = useSelector(orderItems)
   const user = useSelector(selectLoggedInUser)  
-  console.log(user)
-  console.log(order)
   return (
     <div>order</div>
   )

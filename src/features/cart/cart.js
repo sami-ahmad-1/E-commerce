@@ -13,7 +13,6 @@ export default function Cart() {
   const cartItems = useSelector(cartItemsSlice)
   const user = useSelector(selectLoggedInUser)
 
-  console.log('CartItems are' , cartItems)
   const handleQuantity = (e, product) => {
     e.preventDefault()
     dispatch(updateItemAsync({ id: product.id, quantity: +e.target.value }))

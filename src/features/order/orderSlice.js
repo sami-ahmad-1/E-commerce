@@ -29,7 +29,6 @@ export const updateOrderStatueAsync = createAsyncThunk(
   'order/updateOrderStatue',
   async (order) => {
     const response = await updateOrderAPI(order)
-    console.log("Order" , order)
     return response.data;
   }
 );

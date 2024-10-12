@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { selectLoggedInUser, userAddress } from '../../auth/authSlice'
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUserInfo, updateUserInfoAsync } from '../userSlice';
 import { MdDelete } from 'react-icons/md';
@@ -45,19 +45,15 @@ function UserProfile() {
     });
   };
 
-  console.log("INITIAL USER" ,  user)
-  
+
   const handleEdit = (addressUpdate, index) => {
     const newUser = { ...user, addresses: [...user.addresses] };
-    console.log("NEW USER" ,  {newUser})
     newUser.addresses.splice(index, 1, addressUpdate);
     dispatch(userAddress(newUser));
-    // dispatch(updateUserInfoAsync(newUser));
     setSelectedEditIndex(-1);
   };
 
   const handleEditForm = (e, index) => {
-    // showAddressUpdateForm()
     setSelectedEditIndex(index);
     const address = user.addresses[index];
     setValue('name', address.name);
@@ -68,10 +64,18 @@ function UserProfile() {
     setValue('phone', address.phone);
   };
 
-  console.log("User", user)
+
 
   if (!user) {
-    return <PleaseLoginCom />;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="relative">
+          <div className="h-24 w-24 rounded-full border-t-8 border-b-8 border-gray-200"></div>
+          <div className="absolute top-0 left-0 h-24 w-24 rounded-full border-t-8 border-b-8 border-blue-500 animate-spin">
+          </div>
+        </div>
+      </div>
+    )
   }
 
 
@@ -217,7 +221,7 @@ function UserProfile() {
                   </button>
                   <button
                     type="submit"
-                    className="rounded-md lg:w-36 bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm min-w-fit hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"                    
+                    className="rounded-md lg:w-36 bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm min-w-fit hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     Save
                   </button>
@@ -244,7 +248,6 @@ function UserProfile() {
                   className="bg-white px-5 py-12 mt-12"
                   noValidate
                   onSubmit={handleSubmit((data) => {
-                    console.log(data);
                     handleEdit(data, index);
                     reset();
                   })}
@@ -369,7 +372,7 @@ function UserProfile() {
                         className="rounded-md bg-red-600 hover:bg-red-400 text-white px-3 py-2 text-sm font-semibold text-grey shadow-sm hover:bg-grey-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       >
                         Cancel
-                      </button>                    
+                      </button>
                       <button
                         type="submit"
                         className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

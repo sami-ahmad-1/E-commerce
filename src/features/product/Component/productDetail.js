@@ -27,7 +27,6 @@ export default function ProductDetail() {
   const arr = []
   arr.push(prod)
   const user = useSelector(selectLoggedInUser)
-  console.log(user)
 
   const handleClick = (e) => {
     if(user != null){  
